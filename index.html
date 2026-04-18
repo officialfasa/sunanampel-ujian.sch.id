@@ -1292,11 +1292,13 @@
   ];
 
   const daftarKompetisi = [
-    { mapel: "Bahasa Arab", soal: soalBahasaArab, icon: "📘", tanggal: "Min, 19 Apr 2026", waktu: "10:00 - 11:00" },
-    { mapel: "Fisika Terintegrasi", soal: soalFisika, icon: "⚛️", tanggal: "Min, 19 Apr 2026", waktu: "11:15 - 12:15" },
-    { mapel: "Kimia Terintegrasi", soal: soalKimia, icon: "🧪", tanggal: "Min, 19 Apr 2026", waktu: "13:00 - 14:00" },
-    { mapel: "Biologi Terintegrasi", soal: soalBiologi, icon: "🔬", tanggal: "Min, 19 Apr 2026", waktu: "14:15 - 15:15" },
-    { mapel: "Matematika Terintegrasi", soal: soalMatematika, icon: "📐", tanggal: "Min, 19 Apr 2026", waktu: "15:30 - 16:30" }
+    { mapel: "Bahasa Arab", soal: soalBahasaArab, icon: "📘", tanggal: "Sab, 18 Apr 2026", waktu: "10:00 - 11:00" },
+    { mapel: "Fisika Terintegrasi", soal: soalFisika, icon: "⚛️", tanggal: "Sab, 18 Apr 2026", waktu: "11:15 - 12:15" },
+    { mapel: "Kimia Terintegrasi", soal: soalKimia, icon: "🧪", tanggal: "Sab, 18 Apr 2026", waktu: "13:00 - 14:00" },
+    { mapel: "Biologi Terintegrasi", soal: soalBiologi, icon: "🔬", tanggal: "Sab, 18 Apr 2026", waktu: "14:15 - 15:15" },
+    { mapel: "Matematika Terintegrasi", soal: soalMatematika, icon: "📐", tanggal: "Sab, 18 Apr 2026", waktu: "15:30 - 16:30" },
+    { mapel: "Bahasa Inggris",icon: "📘", tanggal: "Sab, 18 Apr 2026", waktu: "15:30 - 16:30" }
+
   ];
 
   let currentUser = null;
@@ -1385,7 +1387,7 @@
       return `
         <div class="kompetisi-card">
           <div class="card-title">Ujian Akhir Semester(UAS) Tahun Ajaran 2025/2026</div>
-          <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓 Mahasiswa</span></div>
+          <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓SMP/MTs</span></div>
           <div class="card-date"><span><i class="far fa-calendar-alt"></i> ${k.tanggal}</span><span><i class="far fa-clock"></i> ${k.waktu}</span></div>
           <div class="countdown-box">
             <i class="fas fa-hourglass-half"></i> 
