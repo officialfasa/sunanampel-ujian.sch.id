@@ -241,33 +241,6 @@
       color: #058d4e;
     }
 
-    .nav-menu {
-      display: flex;
-      gap: 0.5rem;
-      background: #f0f2f5;
-      padding: 0.3rem;
-      border-radius: 2rem;
-    }
-
-    .nav-item {
-      padding: 0.5rem 1.2rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      transition: 0.2s;
-      font-weight: 500;
-      font-size: 0.85rem;
-      color: #4a627a;
-    }
-
-    .nav-item:hover {
-      background: #e0e5ec;
-    }
-
-    .nav-item.active {
-      background: #058d4e;
-      color: white;
-    }
-
     .user-area {
       display: flex;
       align-items: center;
@@ -311,6 +284,110 @@
       cursor: pointer;
       font-weight: 500;
       font-size: 0.8rem;
+    }
+
+    /* Hamburger Menu */
+    .hamburger-menu {
+      background: #eef2f5;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-left: 0.5rem;
+    }
+
+    .hamburger-menu:hover {
+      background: #e0e5ec;
+    }
+
+    .hamburger-menu i {
+      font-size: 1.2rem;
+      color: #1a4d5f;
+    }
+
+    /* Sidebar Navigasi */
+    .sidebar-nav {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 200;
+      transition: right 0.3s ease;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-nav.open {
+      right: 0;
+    }
+
+    .sidebar-nav .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e2edf2;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-nav .sidebar-header h4 {
+      color: #1a4d5f;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-nav .close-sidebar {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #6c7e91;
+    }
+
+    .sidebar-nav .nav-item-sidebar {
+      padding: 0.8rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #4a627a;
+    }
+
+    .sidebar-nav .nav-item-sidebar:hover {
+      background: #f0f4fa;
+      color: #058d4e;
+    }
+
+    .sidebar-nav .nav-item-sidebar.active {
+      background: #e8f5e9;
+      color: #058d4e;
+      font-weight: 600;
+    }
+
+    /* Overlay */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 199;
+      display: none;
+    }
+
+    .sidebar-overlay.show {
+      display: block;
     }
 
     /* Welcome Banner */
@@ -437,7 +514,12 @@
       width: 100%;
     }
 
-    .btn-mulai:hover {
+    .btn-mulai:disabled {
+      background: #c8e6d9;
+      cursor: not-allowed;
+    }
+
+    .btn-mulai:hover:not(:disabled) {
       background: #015331;
     }
 
@@ -519,14 +601,12 @@
       color: #058d4e;
     }
 
-    /* Layout Soal */
     .ujian-layout {
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
     }
 
-    /* Sidebar Nomor Soal */
     .soal-sidebar {
       width: 280px;
       background: white;
@@ -589,7 +669,6 @@
       border-color: #e53e3e;
     }
 
-    /* Konten Soal */
     .soal-konten {
       flex: 1;
       background: white;
@@ -698,6 +777,30 @@
       margin: 0.5rem 0;
     }
 
+    .doa-box {
+      background: #e8f5e9;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: #058d4e;
+    }
+
+    .persetujuan {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      padding: 0.5rem;
+      background: #f9fbfe;
+      border-radius: 0.5rem;
+    }
+
+    .persetujuan input {
+      width: 18px;
+      height: 18px;
+    }
+
     /* Hasil Ujian */
     .hasil-ujian-page {
       display: none;
@@ -750,29 +853,50 @@
       border: 1px solid #e2edf2;
     }
 
-    .rekapan-nilai {
+    .rekapan-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .rekapan-item-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0.5rem;
+      border-bottom: 1px solid #e2edf2;
+    }
+
+    .rekapan-item-row .mapel {
+      font-weight: 600;
+    }
+
+    .rekapan-item-row .nilai {
+      font-weight: 700;
+      color: #058d4e;
+    }
+
+    .statistik-box {
+      background: #e8f5e9;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-around;
       flex-wrap: wrap;
       gap: 1rem;
-      margin: 1rem 0;
     }
 
-    .rekapan-item {
+    .stat-item {
       text-align: center;
-      flex: 1;
-      background: #f9fbfe;
-      padding: 0.8rem;
-      border-radius: 1rem;
     }
 
-    .rekapan-item .label {
+    .stat-item .label {
       font-size: 0.7rem;
       color: #6c7e91;
     }
 
-    .rekapan-item .value {
+    .stat-item .value {
       font-size: 1.5rem;
       font-weight: 700;
       color: #058d4e;
@@ -786,15 +910,63 @@
       display: block;
     }
 
+    /* Modal Profile */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 2rem;
+      max-width: 450px;
+      width: 90%;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .modal-content h3 {
+      color: #1a4d5f;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-content .info-row {
+      margin: 0.8rem 0;
+      text-align: left;
+      padding: 0.5rem;
+      border-bottom: 1px solid #e2edf2;
+    }
+
+    .modal-content .info-row strong {
+      display: inline-block;
+      width: 110px;
+      color: #058d4e;
+    }
+
+    .close-modal {
+      background: #058d4e;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
     @media (max-width: 768px) {
       .top-navbar {
         flex-direction: column;
         padding: 0.8rem 1rem;
-      }
-      .nav-menu {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
       }
       .welcome-banner {
         margin: 1rem;
@@ -859,14 +1031,6 @@
       <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA Logo" class="logo-img">
       <span class="logo-text">FASA Dashboard</span>
     </div>
-    <div class="nav-menu">
-      <div class="nav-item active" data-tab="kompetisi"><i class="fas fa-trophy"></i> Kompetisi</div>
-      <div class="nav-item" data-tab="riwayat"><i class="fas fa-history"></i> Riwayat Ujian</div>
-      <div class="nav-item" data-tab="rekapan"><i class="fas fa-chart-line"></i> Rekapan Nilai</div>
-      <div class="nav-item" data-tab="pengumuman"><i class="fas fa-bullhorn"></i> Pengumuman</div>
-      <div class="nav-item" data-tab="dokumen"><i class="fas fa-file-alt"></i> Dokumen</div>
-      <div class="nav-item" data-tab="profil"><i class="fas fa-user-circle"></i> Profil</div>
-    </div>
     <div class="user-area">
       <div class="user-info" onclick="showProfileModal()">
         <div class="user-avatar" id="userAvatar">AM</div>
@@ -874,12 +1038,15 @@
         <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
       </div>
       <button id="logoutBtnDashboard" class="logout-btn">LOGOUT</button>
+      <div class="hamburger-menu" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 
   <div class="welcome-banner">
     <h2>Hai, <span id="welcomeName">Achmad Muqorrobin</span>!</h2>
-    <p>Selamat datang kembali di dashboard FASA. Ikuti kompetisi dan pantau perkembangan belajarmu.</p>
+    <p>Selamat datang kembali di dashboard FASA. Ikuti ujian dan pantau perkembangan belajarmu.</p>
   </div>
 
   <div class="main-content">
@@ -889,13 +1056,7 @@
         <h3>📋 Kompetisi Terdaftar</h3>
         <span class="info-text">Diperbarui 12:36 | Menampilkan 1 - 5 dari 5 kompetisi</span>
       </div>
-      <div class="kompetisi-grid">
-        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">📘 Bahasa Arab</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 10:00 - 11:00</span></div><button class="btn-mulai" onclick="startUjian('Bahasa Arab', soalBahasaArab)">Mulai Ujian →</button></div>
-        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">⚛️ Fisika Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 11:15 - 12:15</span></div><button class="btn-mulai" onclick="startUjian('Fisika Terintegrasi', soalFisika)">Mulai Ujian →</button></div>
-        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">🧪 Kimia Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 13:00 - 14:00</span></div><button class="btn-mulai" onclick="startUjian('Kimia Terintegrasi', soalKimia)">Mulai Ujian →</button></div>
-        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">🔬 Biologi Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 14:15 - 15:15</span></div><button class="btn-mulai" onclick="startUjian('Biologi Terintegrasi', soalBiologi)">Mulai Ujian →</button></div>
-        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">📐 Matematika Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 15:30 - 16:30</span></div><button class="btn-mulai" onclick="startUjian('Matematika Terintegrasi', soalMatematika)">Mulai Ujian →</button></div>
-      </div>
+      <div class="kompetisi-grid" id="kompetisiGrid"></div>
     </div>
 
     <!-- Tab Riwayat Ujian -->
@@ -939,11 +1100,41 @@
   <div class="footer-note">© 2026 | FASA - Forum Alumni Sunan Ampel | FASA Official</div>
 </div>
 
+<!-- SIDEBAR OVERLAY & SIDEBAR -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div id="sidebarNav" class="sidebar-nav">
+  <div class="sidebar-header">
+    <h4><i class="fas fa-bars"></i> Menu Navigasi</h4>
+    <button class="close-sidebar" onclick="closeSidebar()">&times;</button>
+  </div>
+  <div class="nav-item-sidebar active" data-tab="kompetisi" onclick="selectSidebarTab('kompetisi')">
+    <i class="fas fa-trophy"></i> Kompetisi
+  </div>
+  <div class="nav-item-sidebar" data-tab="riwayat" onclick="selectSidebarTab('riwayat')">
+    <i class="fas fa-history"></i> Riwayat Ujian
+  </div>
+  <div class="nav-item-sidebar" data-tab="rekapan" onclick="selectSidebarTab('rekapan')">
+    <i class="fas fa-chart-line"></i> Rekapan Nilai
+  </div>
+  <div class="nav-item-sidebar" data-tab="pengumuman" onclick="selectSidebarTab('pengumuman')">
+    <i class="fas fa-bullhorn"></i> Pengumuman
+  </div>
+  <div class="nav-item-sidebar" data-tab="dokumen" onclick="selectSidebarTab('dokumen')">
+    <i class="fas fa-file-alt"></i> Dokumen
+  </div>
+  <div class="nav-item-sidebar" data-tab="profil" onclick="selectSidebarTab('profil')">
+    <i class="fas fa-user-circle"></i> Profil
+  </div>
+</div>
+
 <!-- HALAMAN PETUNJUK PENGERJAAN -->
 <div id="petunjukPage" class="page">
   <div class="petunjuk-page" style="display: flex;">
     <div class="petunjuk-card">
       <h2>📋 Petunjuk Pengerjaan</h2>
+      <div class="doa-box">
+        <i class="fas fa-hands-praying"></i> "Ya Allah, mudahkanlah aku dalam mengerjakan ujian ini dan berikanlah hasil terbaik. Aamiin."
+      </div>
       <p>Silakan baca petunjuk berikut sebelum mengerjakan ujian:</p>
       <ul>
         <li>Ujian terdiri dari 10 soal pilihan ganda</li>
@@ -952,9 +1143,12 @@
         <li>Soal yang sudah dijawab akan berwarna <span style="color:#058d4e;">hijau</span></li>
         <li>Soal yang diragukan bisa ditandai dengan tombol "Ragu"</li>
         <li>Pastikan semua soal terjawab sebelum mengirim</li>
-        <li>Nilai minimal kelulusan: <strong>70</strong></li>
       </ul>
-      <button class="btn-login" id="btnMulaiUjian" style="margin-top: 1rem;">✅ Mulai Ujian</button>
+      <div class="persetujuan">
+        <input type="checkbox" id="setujuJujur">
+        <label for="setujuJujur">Saya bersedia mengerjakan ujian dengan JUJUR dan tidak bekerja sama dengan siapapun.</label>
+      </div>
+      <button class="btn-login" id="btnMulaiUjian" style="margin-top: 1rem;" disabled>✅ Mulai Ujian</button>
     </div>
   </div>
 </div>
@@ -1011,12 +1205,12 @@
 
   // ========== DATABASE PESERTA ==========
   const dataPeserta = {
-    "achmad": { nama: "Achmad Muqorrobin", noPeserta: "2504030064", instansi: "Universitas Negeri Semarang", ttl: "2005-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {} },
-    "ahmad": { nama: "Ahmad Fadillah", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {} },
-    "admin": { nama: "Administrator", noPeserta: "ADMIN001", instansi: "FASA Official", ttl: "1990-01-01", password: "admin123", role: "admin", riwayatUjian: [], nilaiPerMapel: {} }
+    "achmad": { nama: "Achmad Muqorrobin", noPeserta: "2504030064", instansi: "Universitas Negeri Semarang", ttl: "2005-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmad": { nama: "Ahmad Fadillah", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "admin": { nama: "Administrator", noPeserta: "ADMIN001", instansi: "FASA Official", ttl: "1990-01-01", password: "admin123", role: "admin", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} }
   };
 
-  // SOAL UJIAN
+  // SOAL UJIAN (sama seperti sebelumnya)
   const soalMatematika = [
     { text: "Hasil dari 25 + 35 adalah...", options: ["50", "55", "60", "65"], jawaban: "60" },
     { text: "Akar kuadrat dari 144 adalah...", options: ["10", "11", "12", "13"], jawaban: "12" },
@@ -1078,33 +1272,65 @@
     { text: "Art dari 'باب' adalah...", options: ["Jendela", "Pintu", "Dinding", "Lantai"], jawaban: "Pintu" }
   ];
 
+  const daftarKompetisi = [
+    { mapel: "Bahasa Arab", soal: soalBahasaArab, icon: "📘", tanggal: "Min, 19 Apr 2026", waktu: "10:00 - 11:00" },
+    { mapel: "Fisika Terintegrasi", soal: soalFisika, icon: "⚛️", tanggal: "Min, 19 Apr 2026", waktu: "11:15 - 12:15" },
+    { mapel: "Kimia Terintegrasi", soal: soalKimia, icon: "🧪", tanggal: "Min, 19 Apr 2026", waktu: "13:00 - 14:00" },
+    { mapel: "Biologi Terintegrasi", soal: soalBiologi, icon: "🔬", tanggal: "Min, 19 Apr 2026", waktu: "14:15 - 15:15" },
+    { mapel: "Matematika Terintegrasi", soal: soalMatematika, icon: "📐", tanggal: "Min, 19 Apr 2026", waktu: "15:30 - 16:30" }
+  ];
+
   let currentUser = null;
   let currentUjian = { mapel: "", soal: [], jawabanUser: [], statusRagu: [], currentIndex: 0, timerInterval: null };
   let selectedSoalData = null;
 
   function showPage(pageId) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(pageId).classList.add('active'); }
 
-  // Tab Navigation
-  function initTabs() {
-    document.querySelectorAll('.nav-item').forEach(tab => {
-      tab.removeEventListener('click', tab._listener);
-      tab._listener = () => {
-        document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-        const tabName = tab.getAttribute('data-tab');
-        if (tabName === 'ujian') document.getElementById('tabKompetisi').style.display = 'block';
-        else if (tabName === 'riwayat') { document.getElementById('tabRiwayat').style.display = 'block'; renderRiwayat(); }
-        else if (tabName === 'rekapan') { document.getElementById('tabRekapan').style.display = 'block'; renderRekapan(); }
-        else if (tabName === 'pengumuman') document.getElementById('tabPengumuman').style.display = 'block';
-        else if (tabName === 'dokumen') document.getElementById('tabDokumen').style.display = 'block';
-        else if (tabName === 'profil') { document.getElementById('tabProfil').style.display = 'block'; updateProfileTab(); }
-      };
-      tab.addEventListener('click', tab._listener);
-    });
+  // ========== SIDEBAR FUNCTIONS ==========
+  function toggleSidebar() {
+    document.getElementById('sidebarNav').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('show');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebarNav').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+  }
+
+  function selectSidebarTab(tabName) {
+    document.querySelectorAll('.nav-item-sidebar').forEach(item => item.classList.remove('active'));
+    document.querySelector(`.nav-item-sidebar[data-tab="${tabName}"]`).classList.add('active');
+    
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    if (tabName === 'kompetisi') document.getElementById('tabKompetisi').style.display = 'block';
+    else if (tabName === 'riwayat') { document.getElementById('tabRiwayat').style.display = 'block'; renderRiwayat(); }
+    else if (tabName === 'rekapan') { document.getElementById('tabRekapan').style.display = 'block'; renderRekapan(); }
+    else if (tabName === 'pengumuman') document.getElementById('tabPengumuman').style.display = 'block';
+    else if (tabName === 'dokumen') document.getElementById('tabDokumen').style.display = 'block';
+    else if (tabName === 'profil') { document.getElementById('tabProfil').style.display = 'block'; updateProfileTab(); }
+    
+    closeSidebar();
+  }
+
+  function renderKompetisiGrid() {
+    const grid = document.getElementById('kompetisiGrid');
+    if (!grid) return;
+    const userData = dataPeserta[currentUser?.username];
+    grid.innerHTML = daftarKompetisi.map(k => {
+      const sudahSelesai = userData?.ujianSelesai?.[k.mapel] === true;
+      return `
+        <div class="kompetisi-card">
+          <div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div>
+          <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓 Mahasiswa</span></div>
+          <div class="card-date"><span><i class="far fa-calendar-alt"></i> ${k.tanggal}</span><span><i class="far fa-clock"></i> ${k.waktu}</span></div>
+          <button class="btn-mulai" onclick="startUjian('${k.mapel}')" ${sudahSelesai ? 'disabled' : ''}>${sudahSelesai ? '✓ Sudah Dikerjakan' : 'Mulai Ujian →'}</button>
+        </div>
+      `;
+    }).join('');
   }
 
   function updateProfileTab() { if (currentUser) { document.getElementById('profileNama').innerText = currentUser.nama; document.getElementById('profileUsername').innerText = currentUser.username; document.getElementById('profileNisn').innerText = currentUser.noPeserta; document.getElementById('profileInstansi').innerText = currentUser.instansi; document.getElementById('profileTtl').innerText = currentUser.ttl; } }
+  
   function showProfileModal() { if (currentUser) { document.getElementById('modalNama').innerText = currentUser.nama; document.getElementById('modalUsername').innerText = currentUser.username; document.getElementById('modalNisn').innerText = currentUser.noPeserta; document.getElementById('modalInstansi').innerText = currentUser.instansi; document.getElementById('modalTtl').innerText = currentUser.ttl; document.getElementById('modalRole').innerText = currentUser.role === 'admin' ? 'Administrator' : 'Peserta'; document.getElementById('profileModal').style.display = 'flex'; } }
   function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
 
@@ -1117,24 +1343,43 @@
 
   function renderRekapan() {
     const nilaiMapel = dataPeserta[currentUser.username]?.nilaiPerMapel || {};
-    const mapelList = ['Bahasa Arab', 'Fisika Terintegrasi', 'Kimia Terintegrasi', 'Biologi Terintegrasi', 'Matematika Terintegrasi'];
-    let totalNilai = 0, count = 0;
-    let html = '<div class="rekapan-card"><h4>📊 Rekapan Nilai Per Mata Pelajaran</h4><div class="rekapan-nilai">';
-    mapelList.forEach(m => {
-      const nilai = nilaiMapel[m];
+    let totalNilai = 0, count = 0, jumlahLulus = 0, jumlahTidakLulus = 0;
+    let listHtml = '';
+    daftarKompetisi.forEach(k => {
+      const nilai = nilaiMapel[k.mapel];
       if (nilai !== undefined) { totalNilai += nilai; count++; }
-      html += `<div class="rekapan-item"><div class="label">${m}</div><div class="value">${nilai !== undefined ? nilai : '-'}</div><div>${nilai !== undefined ? (nilai >= 70 ? '✅ Lulus' : '❌ Tidak') : 'Belum ujian'}</div></div>`;
+      const lulus = nilai !== undefined && nilai >= 70;
+      if (nilai !== undefined) { if (lulus) jumlahLulus++; else jumlahTidakLulus++; }
+      listHtml += `<div class="rekapan-item-row"><span class="mapel">${k.icon} ${k.mapel}</span><span class="nilai">${nilai !== undefined ? nilai : '-'}</span><span>${nilai !== undefined ? (lulus ? '✅ Lulus' : '❌ Tidak') : '⏳ Belum'}</span></div>`;
     });
     const rata = count > 0 ? (totalNilai / count).toFixed(1) : 0;
-    html += `</div><div class="rekapan-nilai" style="margin-top:1rem; border-top:1px solid #e2edf2; padding-top:1rem;"><div class="rekapan-item"><div class="label">📈 Rata-rata</div><div class="value">${rata}</div></div><div class="rekapan-item"><div class="label">🎯 Status</div><div class="value">${rata >= 70 ? '✅ LULUS' : '⏳ Belum lengkap'}</div></div></div></div>`;
+    const html = `
+      <div class="statistik-box">
+        <div class="stat-item"><div class="label">📊 Rata-rata Nilai</div><div class="value">${rata}</div></div>
+        <div class="stat-item"><div class="label">✅ Jumlah Lulus</div><div class="value">${jumlahLulus}</div></div>
+        <div class="stat-item"><div class="label">❌ Jumlah Tidak Lulus</div><div class="value">${jumlahTidakLulus}</div></div>
+        <div class="stat-item"><div class="label">📚 Total Mapel</div><div class="value">${daftarKompetisi.length}</div></div>
+      </div>
+      <div class="rekapan-list">${listHtml}</div>
+    `;
     document.getElementById('rekapanContainer').innerHTML = html;
   }
 
-  function startUjian(mapel, soal) {
-    selectedSoalData = { mapel, soal };
-    document.getElementById('petunjukWaktu').innerText = soal.length === 10 ? "30 menit" : "30 menit";
+  function startUjian(mapel) {
+    const kompetisi = daftarKompetisi.find(k => k.mapel === mapel);
+    if (!kompetisi) return;
+    const userData = dataPeserta[currentUser.username];
+    if (userData?.ujianSelesai?.[mapel] === true) { alert('⚠️ Anda sudah mengerjakan ujian ini! Tidak bisa mengulang.'); return; }
+    selectedSoalData = { mapel, soal: kompetisi.soal };
+    document.getElementById('petunjukWaktu').innerText = "30 menit";
+    document.getElementById('setujuJujur').checked = false;
+    document.getElementById('btnMulaiUjian').disabled = true;
     showPage('petunjukPage');
   }
+
+  document.getElementById('setujuJujur')?.addEventListener('change', (e) => {
+    document.getElementById('btnMulaiUjian').disabled = !e.target.checked;
+  });
 
   document.getElementById('btnMulaiUjian').addEventListener('click', () => {
     if (!selectedSoalData) return;
@@ -1145,7 +1390,10 @@
     renderSoalUjian();
     renderNomorSoal();
     if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
-    currentUjian.timerInterval = setInterval(() => { if (waktu <= 0) { clearInterval(currentUjian.timerInterval); alert('⏰ Waktu habis! Ujian akan dikirim.'); kirimUjian(); } else { waktu--; let menit = Math.floor(waktu / 60); let detik = waktu % 60; document.getElementById('timer').innerHTML = `${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`; } }, 1000);
+    currentUjian.timerInterval = setInterval(() => { 
+      if (waktu <= 0) { clearInterval(currentUjian.timerInterval); alert('⏰ Waktu habis! Ujian akan dikirim.'); kirimUjian(); } 
+      else { waktu--; let menit = Math.floor(waktu / 60); let detik = waktu % 60; document.getElementById('timer').innerHTML = `${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`; } 
+    }, 1000);
     showPage('ujianPage');
   });
 
@@ -1177,22 +1425,23 @@
     });
   }
 
-  document.getElementById('btnRagu').addEventListener('click', () => { currentUjian.statusRagu[currentUjian.currentIndex] = !currentUjian.statusRagu[currentUjian.currentIndex]; renderNomorSoal(); alert(currentUjian.statusRagu[currentUjian.currentIndex] ? 'Soal ini ditandai ragu' : 'Tanda ragu dihapus'); });
-  document.getElementById('prevSoal').addEventListener('click', () => { if (currentUjian.currentIndex > 0) { currentUjian.currentIndex--; renderSoalUjian(); } });
-  document.getElementById('nextSoal').addEventListener('click', () => { if (currentUjian.currentIndex < currentUjian.soal.length - 1) { currentUjian.currentIndex++; renderSoalUjian(); } });
-  document.getElementById('btnKirimUjian').addEventListener('click', () => { if (confirm('Apakah Anda yakin ingin mengirim ujian?')) kirimUjian(); });
+  document.getElementById('btnRagu')?.addEventListener('click', () => { currentUjian.statusRagu[currentUjian.currentIndex] = !currentUjian.statusRagu[currentUjian.currentIndex]; renderNomorSoal(); alert(currentUjian.statusRagu[currentUjian.currentIndex] ? 'Soal ini ditandai ragu' : 'Tanda ragu dihapus'); });
+  document.getElementById('prevSoal')?.addEventListener('click', () => { if (currentUjian.currentIndex > 0) { currentUjian.currentIndex--; renderSoalUjian(); } });
+  document.getElementById('nextSoal')?.addEventListener('click', () => { if (currentUjian.currentIndex < currentUjian.soal.length - 1) { currentUjian.currentIndex++; renderSoalUjian(); } });
+  document.getElementById('btnKirimUjian')?.addEventListener('click', () => { if (confirm('Apakah Anda yakin ingin mengirim ujian?')) kirimUjian(); });
 
   function kirimUjian() {
     if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
     let benar = 0;
     currentUjian.jawabanUser.forEach((jawab, idx) => { if (jawab === currentUjian.soal[idx].jawaban) benar++; });
-    let nilai = (benar / currentUjian.soal.length) * 100;
-    nilai = Math.round(nilai);
+    let nilai = Math.round((benar / currentUjian.soal.length) * 100);
     const lulus = nilai >= 70;
     const tanggal = new Date().toLocaleDateString('id-ID');
     const riwayatBaru = { mapel: currentUjian.mapel, nilai, lulus, tanggal };
-    dataPeserta[currentUser.username].riwayatUjian.push(riwayatBaru);
-    dataPeserta[currentUser.username].nilaiPerMapel[currentUjian.mapel] = nilai;
+    const userData = dataPeserta[currentUser.username];
+    userData.riwayatUjian.push(riwayatBaru);
+    userData.nilaiPerMapel[currentUjian.mapel] = nilai;
+    userData.ujianSelesai[currentUjian.mapel] = true;
     document.getElementById('hasilMapel').innerHTML = currentUjian.mapel;
     document.getElementById('nilaiAkhir').innerHTML = nilai;
     document.getElementById('statusKelulusan').innerHTML = lulus ? '<div class="status-lulus">✅ SELAMAT! ANDA LULUS</div>' : '<div class="status-tidak">❌ MOHON MAAF, ANDA TIDAK LULUS</div>';
@@ -1200,10 +1449,11 @@
     currentUjian.jawabanUser.forEach((jawab, idx) => { const isBenar = jawab === currentUjian.soal[idx].jawaban; detailHtml += `<li>Soal ${idx+1}: ${isBenar ? '✅ Benar' : '❌ Salah'} (Jawaban Anda: ${jawab || '-'}, Kunci: ${currentUjian.soal[idx].jawaban})</li>`; });
     detailHtml += `</ul><p><strong>Benar:</strong> ${benar} dari ${currentUjian.soal.length} soal</p>`;
     document.getElementById('detailJawaban').innerHTML = detailHtml;
+    renderKompetisiGrid();
     showPage('hasilUjianPage');
   }
 
-  document.getElementById('btnKembaliKeDashboard').addEventListener('click', () => { showPage('dashboardPage'); renderRiwayat(); renderRekapan(); });
+  document.getElementById('btnKembaliKeDashboard')?.addEventListener('click', () => { showPage('dashboardPage'); renderRiwayat(); renderRekapan(); renderKompetisiGrid(); });
 
   // LOGIN
   document.getElementById('btnLogin').addEventListener('click', () => {
@@ -1217,7 +1467,8 @@
       document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
       const inisial = user.nama.split(' ').map(n => n[0]).join('');
       document.getElementById('userAvatar').innerHTML = inisial;
-      initTabs();
+      if (!user.ujianSelesai) user.ujianSelesai = {};
+      renderKompetisiGrid();
       showPage('dashboardPage');
     } else { const errorDiv = document.getElementById('loginErrorMsg'); errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!'; setTimeout(() => errorDiv.style.display = 'none', 3000); }
   });
@@ -1233,13 +1484,17 @@
         document.getElementById('userName').innerHTML = user.nama;
         document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
         document.getElementById('userAvatar').innerHTML = user.nama.split(' ').map(n => n[0]).join('');
-        initTabs();
+        if (!user.ujianSelesai) user.ujianSelesai = {};
+        renderKompetisiGrid();
         showPage('dashboardPage');
       } else showPage('loginPage');
     } else showPage('loginPage');
   }
   checkSession();
 
+  // Modal Profile tambahan
+  const modalHtml = `<div id="profileModal" class="modal"><div class="modal-content"><h3>👤 PROFIL PENGGUNA</h3><div class="info-row"><strong>Nama Lengkap:</strong> <span id="modalNama"></span></div><div class="info-row"><strong>Username:</strong> <span id="modalUsername"></span></div><div class="info-row"><strong>NISN:</strong> <span id="modalNisn"></span></div><div class="info-row"><strong>Asal Sekolah:</strong> <span id="modalInstansi"></span></div><div class="info-row"><strong>Tanggal Lahir:</strong> <span id="modalTtl"></span></div><div class="info-row"><strong>Sebagai:</strong> <span id="modalRole"></span></div><button class="close-modal" onclick="closeProfileModal()">Tutup</button></div></div>`;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
 </script>
 </body>
 </html>
