@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sistem Ujian Online & Pengumuman Kelulusan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 24px 28px;
+            transition: all 0.3s;
+        }
+        h1, h2, h3 {
+            color: #1e3c72;
+            margin-top: 0;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .active-page {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            color: #2c3e66;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 24px;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #2a5298;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42,82,152,0.2);
+        }
+        button {
+            background: #2a5298;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+            margin-right: 12px;
+        }
+        button:hover {
+            background: #1e3c72;
+            transform: scale(1.02);
+        }
+        .btn-secondary {
+            background: #5a6e8a;
+        }
+        .btn-success {
+            background: #2e7d32;
+        }
+        .card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .soal-item {
+            background: white;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-left: 6px solid #2a5298;
+        }
+        .option {
+            margin: 10px 0 8px 20px;
+        }
+        .option label {
+            font-weight: normal;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        .radio-group, .checkbox-group {
+            margin: 8px 0;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        .info-badge {
+            background: #eef2ff;
+            padding: 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .nilai-akhir {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        .pengumuman-box {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 28px;
+            text-align: center;
+        }
+        .lulus {
+            color: #2e7d32;
+            background: #e8f5e9;
+            border-left: 8px solid #2e7d32;
+        }
+        .tidak-lulus {
+            color: #c62828;
+            background: #ffebee;
+            border-left: 8px solid #c62828;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 16px; }
+            button { width: 100%; margin-bottom: 10px; }
+        }
+        .flex-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="appRoot">
+    <!-- PAGE 1: LOGIN -->
+    <div id="pageLogin" class="page active-page">
+        <h1>📝 Sistem Ujian & Kelulusan</h1>
+        <div class="card">
+            <h3>🔐 Login Peserta</h3>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="loginUsername" placeholder="Masukkan username" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Password (sembarang)">
+            </div>
+            <button id="btnLogin">✅ Masuk ke Sistem</button>
+            <div id="loginError" style="color:red; margin-top:12px;"></div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: SELAMAT DATANG + PILIHAN -->
+    <div id="pageWelcome" class="page">
+        <h1>👋 Selamat Datang</h1>
+        <div class="info-badge" id="welcomeInfo">
+            <!-- diisi dinamis -->
+        </div>
+        <div class="flex-buttons">
+            <button id="btnToExam">📖 Halaman Ujian</button>
+            <button id="btnToAnnouncement">📢 Halaman Pengumuman Kelulusan</button>
+        </div>
+        <button id="btnLogoutWelcome" class="btn-secondary">🚪 Logout</button>
+    </div>
+
+    <!-- PAGE 3: HALAMAN UJIAN (pilih mapel dulu) -->
+    <div id="pageSubjectSelect" class="page">
+        <h2>📚 Pilih Mata Pelajaran Ujian</h2>
+        <div class="card">
+            <div class="form-group">
+                <label>Pilih Mapel 1 (wajib)</label>
+                <select id="mapel1">
+                    <option value="Matematika">Matematika</option>
+                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Pilih Mapel 2 (wajib)</label>
+                <select id="mapel2">
+                    <option value="IPA">IPA</option>
+                    <option value="IPS">IPS</option>
+                </select>
+            </div>
+            <button id="btnStartExam">🎯 Mulai Ujian</button>
+            <button id="btnBackToWelcomeFromSubject" class="btn-secondary">⬅ Kembali</button>
+        </div>
+    </div>
+
+    <!-- PAGE 4: UJIAN SESUNGGUHNYA (soal + nilai) -->
+    <div id="pageExam" class="page">
+        <h2>📝 Ujian Online</h2>
+        <div id="examMetaInfo" style="font-weight:500; margin-bottom:12px;"></div>
+        <div id="questionsContainer"></div>
+        <div class="flex-buttons">
+            <button id="btnSubmitExam" class="btn-success">✅ Selesai & Kirim Ujian</button>
+            <button id="btnCancelExam" class="btn-secondary">❌ Batal, Kembali</button>
+        </div>
+    </div>
+
+    <!-- PAGE 5: HASIL UJIAN (setelah selesai) -->
+    <div id="pageExamResult" class="page">
+        <h2>📄 Hasil Ujian</h2>
+        <div id="resultDetail"></div>
+        <button id="btnResultToWelcome">🏠 Kembali ke Beranda</button>
+    </div>
+
+    <!-- PAGE 6: PENGUMUMAN KELULUSAN (input username & tgl lahir) -->
+    <div id="pageAnnouncementInput" class="page">
+        <h2>📢 Pengumuman Kelulusan</h2>
+        <div class="card">
+            <p>Silakan masukkan data Anda untuk melihat pengumuman.</p>
+            <div class="form-group">
+                <label>Username (sama dengan login)</label>
+                <input type="text" id="announceUsername" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label>Tanggal Lahir (YYYY-MM-DD)</label>
+                <input type="date" id="announceBirthdate">
+            </div>
+            <button id="btnShowAnnouncement">📢 Lihat Pengumuman</button>
+            <button id="btnBackFromAnnounceInput" class="btn-secondary">Kembali</button>
+            <div id="announceError" style="color:red; margin-top:10px;"></div>
+        </div>
+    </div>
+
+    <!-- PAGE 7: HASIL PENGUMUMAN (LULUS / TIDAK LULUS) -->
+    <div id="pageAnnounceResult" class="page">
+        <h2>🎓 Pengumuman Kelulusan</h2>
+        <div id="announceResultBox"></div>
+        <button id="btnAnnounceBackToWelcome">Kembali ke Halaman Utama</button>
+    </div>
+</div>
+
+<script>
+    // ----- SESSION DATA -----
+    let currentUser = {
+        username: "",
+        nama: "",
+        nomorPeserta: "",
+        asalInstansi: "",
+        tanggalLahir: "",
+        nilaiAkhir: null,      // nilai total dari ujian (0-100)
+        examDone: false,        // apakah sudah mengerjakan ujian
+        mapel1: "",
+        mapel2: ""
+    };
+
+    // Bank soal dinamis berdasarkan mapel pilihan (untuk sederhana: setiap mapel punya 2 soal, campuran pilihan ganda dan isian)
+    // Agar lebih rapi: kita buat function generateSoal(mapel1, mapel2) -> array soal
+    function generateQuestions(mapel1, mapel2) {
+        // setiap mapel akan punya 2 soal: 1 PG + 1 isian singkat. total 4 soal.
+        // bobot tiap soal 25 poin, total 100.
+        const bank = {
+            Matematika: {
+                pg: { text: "Hasil dari 12 × 8 - 15 = ?", options: ["81", "96", "85", "91"], correct: "81" },
+                isian: { text: "Berapakah akar kuadrat dari 144? (tulis angka)", correct: "12" }
+            },
+            "Bahasa Indonesia": {
+                pg: { text: "Sinonim dari kata 'Cepat' adalah ...", options: ["Lambat", "Kilat", "Perlahan", "Lamban"], correct: "Kilat" },
+                isian: { text: "Tuliskan antonim dari kata 'Terang'", correct: "gelap" }
+            },
+            IPA: {
+                pg: { text: "Organ pernapasan manusia yang utama adalah ...", options: ["Jantung", "Paru-paru", "Hati", "Ginjal"], correct: "Paru-paru" },
+                isian: { text: "Planet terdekat dengan Matahari adalah?", correct: "Merkurius" }
+            },
+            IPS: {
+                pg: { text: "Ibu kota Provinsi Jawa Barat adalah ...", options: ["Bandung", "Semarang", "Surabaya", "Jakarta"], correct: "Bandung" },
+                isian: { text: "Sebutkan satu negara di Asia Tenggara selain Indonesia", correct: "Malaysia" }
+            }
+        };
+        // ambil data mapel1 & mapel2, pastikan ada di bank, fallback
+        const m1Data = bank[mapel1] || bank.Matematika;
+        const m2Data = bank[mapel2] || bank.IPA;
+
+        return [
+            {
+                id: 1,
+                text: `[${mapel1}] ${m1Data.pg.text}`,
+                type: "pg",
+                options: m1Data.pg.options,
+                correct: m1Data.pg.correct,
+                mapel: mapel1,
+                point: 25
+            },
+            {
+                id: 2,
+                text: `[${mapel1}] ${m1Data.isian.text}`,
+                type: "essay",
+                correct: m1Data.isian.correct.toLowerCase().trim(),
+                point: 25,
+                mapel: mapel1
+            },
+            {
+                id: 3,
+                text: `[${mapel2}] ${m2Data.pg.text}`,
+                type: "pg",
+                options: m2Data.pg.options,
+                correct: m2Data.pg.correct,
+                mapel: mapel2,
+                point: 25
+            },
+            {
+                id: 4,
+                text: `[${mapel2}] ${m2Data.isian.text}`,
+                type: "essay",
+                correct: m2Data.isian.correct.toLowerCase().trim(),
+                point: 25,
+                mapel: mapel2
+            }
+        ];
+    }
+
+    // variabel menyimpan soal aktif & jawaban
+    let activeQuestions = [];
+    let userAnswers = {};
+
+    // DOM elements
+    const pages = {
+        login: document.getElementById('pageLogin'),
+        welcome: document.getElementById('pageWelcome'),
+        subjectSelect: document.getElementById('pageSubjectSelect'),
+        exam: document.getElementById('pageExam'),
+        examResult: document.getElementById('pageExamResult'),
+        announceInput: document.getElementById('pageAnnouncementInput'),
+        announceResult: document.getElementById('pageAnnounceResult')
+    };
+
+    function showPage(pageName) {
+        Object.keys(pages).forEach(p => pages[p].classList.remove('active-page'));
+        pages[pageName].classList.add('active-page');
+    }
+
+    // Login logic
+    document.getElementById('btnLogin').addEventListener('click', () => {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        if (username === "") {
+            document.getElementById('loginError').innerText = "Username harus diisi!";
+            return;
+        }
+        // Untuk demo, password bebas asal tidak kosong, set data contoh:
+        if(password === "") {
+            document.getElementById('loginError').innerText = "Password tidak boleh kosong!";
+            return;
+        }
+        // Simulasi data peserta setelah login (bisa diisi secara manual)
+        currentUser = {
+            username: username,
+            nama: "Peserta " + username,
+            nomorPeserta: "2024-" + Math.floor(Math.random()*9000+1000),
+            asalInstansi: "SMK Nusantara",
+            tanggalLahir: "2005-05-15",   // default, nanti bisa diubah? untuk demo
+            nilaiAkhir: null,
+            examDone: false,
+            mapel1: "",
+            mapel2: ""
+        };
+        // reset answers & soal
+        userAnswers = {};
+        activeQuestions = [];
+        // Update tampilan selamat datang
+        document.getElementById('welcomeInfo').innerHTML = `
+            <strong>Nama:</strong> ${currentUser.nama}<br>
+            <strong>Nomor Peserta:</strong> ${currentUser.nomorPeserta}<br>
+            <strong>Asal Instansi:</strong> ${currentUser.asalInstansi}<br>
+            <strong>Tanggal Lahir:</strong> ${currentUser.tanggalLahir}
+        `;
+        showPage('welcome');
+        document.getElementById('loginError').innerText = "";
+    });
+
+    // Navigasi
+    document.getElementById('btnToExam').addEventListener('click', () => {
+        if (currentUser.examDone) {
+            alert("Anda sudah mengerjakan ujian! Nilai akhir: " + currentUser.nilaiAkhir + ". Tidak dapat mengulang.");
+            return;
+        }
+        // reset data ujian jika sebelumnya pernah mulai
+        showPage('subjectSelect');
+    });
+    document.getElementById('btnToAnnouncement').addEventListener('click', () => {
+        // masuk halaman input username & tgl lahir
+        document.getElementById('announceUsername').value = "";
+        document.getElementById('announceBirthdate').value = "";
+        document.getElementById('announceError').innerText = "";
+        showPage('announceInput');
+    });
+    document.getElementById('btnLogoutWelcome').addEventListener('click', () => {
+        currentUser = { username:"", nama:"", nomorPeserta:"", asalInstansi:"", tanggalLahir:"", nilaiAkhir:null, examDone:false, mapel1:"", mapel2:"" };
+        document.getElementById('loginUsername').value = "";
+        document.getElementById('loginPassword').value = "";
+        showPage('login');
+    });
+    document.getElementById('btnBackToWelcomeFromSubject').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('btnCancelExam').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('btnResultToWelcome').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('btnBackFromAnnounceInput').addEventListener('click', () => showPage('welcome'));
+    document.getElementById('btnAnnounceBackToWelcome').addEventListener('click', () => showPage('welcome'));
+
+    // Mulai ujian setelah pilih mapel
+    document.getElementById('btnStartExam').addEventListener('click', () => {
+        const mapel1 = document.getElementById('mapel1').value;
+        const mapel2 = document.getElementById('mapel2').value;
+        if (!mapel1 || !mapel2) {
+            alert("Pilih kedua mata pelajaran!");
+            return;
+        }
+        currentUser.mapel1 = mapel1;
+        currentUser.mapel2 = mapel2;
+        activeQuestions = generateQuestions(mapel1, mapel2);
+        userAnswers = {};
+        renderExamForm();
+        document.getElementById('examMetaInfo').innerHTML = `Mapel: ${mapel1} & ${mapel2} | Total soal: 4 (masing-masing 25 poin)`;
+        showPage('exam');
+    });
+
+    function renderExamForm() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+        activeQuestions.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'soal-item';
+            div.innerHTML = `<strong>Soal ${idx+1}. ${q.text}</strong> (Bobot ${q.point})<br>`;
+            if (q.type === 'pg') {
+                q.options.forEach(opt => {
+                    const radioId = `q${q.id}_${opt}`;
+                    const checked = (userAnswers[q.id] === opt) ? 'checked' : '';
+                    div.innerHTML += `
+                        <div class="option">
+                            <input type="radio" name="q${q.id}" value="${opt}" id="${radioId}" ${checked}>
+                            <label for="${radioId}">${opt}</label>
+                        </div>
+                    `;
+                });
+            } else {
+                // essay
+                const savedVal = userAnswers[q.id] || '';
+                div.innerHTML += `<input type="text" id="essay_${q.id}" placeholder="Jawaban singkat..." value="${escapeHtml(savedVal)}" style="width:100%; padding:10px; margin-top:8px;">`;
+            }
+            container.appendChild(div);
+        });
+        // attach event listeners untuk radio & essay (simpan ke userAnswers)
+        activeQuestions.forEach(q => {
+            if (q.type === 'pg') {
+                const radios = document.querySelectorAll(`input[name="q${q.id}"]`);
+                radios.forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        userAnswers[q.id] = e.target.value;
+                    });
+                });
+            } else {
+                const inputEssay = document.getElementById(`essay_${q.id}`);
+                if (inputEssay) {
+                    inputEssay.addEventListener('input', (e) => {
+                        userAnswers[q.id] = e.target.value.trim();
+                    });
+                }
+            }
+        });
+    }
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // Submit ujian, hitung nilai, simpan ke currentUser
+    document.getElementById('btnSubmitExam').addEventListener('click', () => {
+        // pastikan semua soal terjawab
+        let allAnswered = true;
+        for (let q of activeQuestions) {
+            const answer = userAnswers[q.id];
+            if (!answer || answer === "") {
+                allAnswered = false;
+                break;
+            }
+        }
+        if (!allAnswered) {
+            alert("Harap jawab semua soal terlebih dahulu!");
+            return;
+        }
+        let totalNilai = 0;
+        const detailJawaban = [];
+        for (let q of activeQuestions) {
+            let jawabanUser = userAnswers[q.id];
+            let isCorrect = false;
+            if (q.type === 'pg') {
+                isCorrect = (jawabanUser === q.correct);
+            } else {
+                // essay: case insensitive & trim
+                isCorrect = (jawabanUser.toLowerCase().trim() === q.correct.toLowerCase());
+            }
+            if (isCorrect) totalNilai += q.point;
+            detailJawaban.push({ soal: q.text, jawabanUser, benar: isCorrect, point: q.point });
+        }
+        currentUser.nilaiAkhir = totalNilai;
+        currentUser.examDone = true;
+
+        // Tampilkan halaman hasil ujian "Selamat Anda sudah mengerjakan ujian" + data siswa + nilai akhir
+        const resultDiv = document.getElementById('resultDetail');
+        resultDiv.innerHTML = `
+            <div class="pengumuman-box" style="background:#e6f7ff;">
+                <h3>✅ Selamat Anda sudah mengerjakan ujian!</h3>
+                <p><strong>Nama:</strong> ${currentUser.nama}</p>
+                <p><strong>Nomor Peserta:</strong> ${currentUser.nomorPeserta}</p>
+                <p><strong>Asal Instansi:</strong> ${currentUser.asalInstansi}</p>
+                <p><strong>Tanggal Lahir:</strong> ${currentUser.tanggalLahir}</p>
+                <p><strong>Mata Pelajaran:</strong> ${currentUser.mapel1} & ${currentUser.mapel2}</p>
+                <hr>
+                <p><strong>🎯 Nilai Akhir Ujian:</strong> <span class="nilai-akhir">${totalNilai} / 100</span></p>
+                <p>Detail jawaban:</p>
+                <ul>
+                    ${detailJawaban.map(d => `<li>${d.soal} → Jawaban: ${d.jawabanUser} (${d.benar ? '✔ Benar' : '❌ Salah'}) +${d.benar ? d.point : 0}</li>`).join('')}
+                </ul>
+                <p><i>Silakan cek pengumuman kelulusan pada halaman Pengumuman Kelulusan.</i></p>
+            </div>
+        `;
+        showPage('examResult');
+    });
+
+    // PENGUMUMAN KELULUSAN: verifikasi username + tanggal lahir cocok dengan data currentUser (atau data yang login)
+    // Dan tentukan kelulusan berdasarkan nilai akhir (KKM = 70)
+    const KKM = 70;
+    document.getElementById('btnShowAnnouncement').addEventListener('click', () => {
+        const inputUser = document.getElementById('announceUsername').value.trim();
+        const inputTgl = document.getElementById('announceBirthdate').value;
+        if (!inputUser || !inputTgl) {
+            document.getElementById('announceError').innerText = "Username dan tanggal lahir harus diisi!";
+            return;
+        }
+        // cek apakah cocok dengan data user yang sedang login (karena hanya 1 sesi)
+        if (inputUser !== currentUser.username || inputTgl !== currentUser.tanggalLahir) {
+            document.getElementById('announceError').innerText = "Data tidak cocok! Pastikan username dan tanggal lahir sesuai dengan data saat login.";
+            return;
+        }
+        if (currentUser.nilaiAkhir === null || !currentUser.examDone) {
+            document.getElementById('announceError').innerText = "Anda belum mengerjakan ujian! Silakan selesaikan ujian terlebih dahulu.";
+            return;
+        }
+        const lulus = currentUser.nilaiAkhir >= KKM;
+        const statusText = lulus ? "SELAMAT ANDA LULUS" : "MOHON MAAF ANDA TIDAK LULUS";
+        const statusClass = lulus ? "lulus" : "tidak-lulus";
+        const nilai = currentUser.nilaiAkhir;
+        const resultHtml = `
+            <div class="pengumuman-box ${statusClass}">
+                <h2>${statusText}</h2>
+                <p><strong>Nama:</strong> ${currentUser.nama}</p>
+                <p><strong>Nomor Peserta:</strong> ${currentUser.nomorPeserta}</p>
+                <p><strong>Asal Instansi:</strong> ${currentUser.asalInstansi}</p>
+                <p><strong>Tanggal Lahir:</strong> ${currentUser.tanggalLahir}</p>
+                <p><strong>Nilai Akhir Ujian:</strong> ${nilai} / 100</p>
+                <p><strong>KKM (Kriteria Ketuntasan Minimal):</strong> ${KKM}</p>
+                <p><strong>Kesimpulan:</strong> ${lulus ? "✔️ LULUS" : "❌ TIDAK LULUS"}</p>
+                <p><i>Terima kasih telah mengikuti ujian.</i></p>
+            </div>
+        `;
+        document.getElementById('announceResultBox').innerHTML = resultHtml;
+        showPage('announceResult');
+    });
+</script>
+</body>
+</html>
