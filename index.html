@@ -523,6 +523,25 @@
       background: #015331;
     }
 
+    /* Countdown Style */
+    .countdown-box {
+      background: #e8f5e9;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+    
+    .countdown-box i {
+      margin-right: 0.3rem;
+    }
+    
+    .countdown-text {
+      font-weight: 700;
+      color: #058d4e;
+      font-size: 0.75rem;
+    }
+
     /* Help Card */
     .help-card {
       background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
@@ -1283,6 +1302,7 @@
   let currentUser = null;
   let currentUjian = { mapel: "", soal: [], jawabanUser: [], statusRagu: [], currentIndex: 0, timerInterval: null };
   let selectedSoalData = null;
+  let countdownInterval = null;
 
   function showPage(pageId) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(pageId).classList.add('active'); }
 
@@ -1312,21 +1332,104 @@
     closeSidebar();
   }
 
+  // Fungsi hitung mundur untuk setiap kompetisi
+  function hitungMundurKeUjian(tanggal, waktuMulai) {
+    // Parse tanggal: "Min, 19 Apr 2026"
+    const parts = tanggal.split(' ');
+    const day = parseInt(parts[1]);
+    const month = parts[2];
+    const year = parseInt(parts[3]);
+    
+    const bulanMap = { 'Jan':0, 'Feb':1, 'Mar':2, 'Apr':3, 'May':4, 'Jun':5, 'Jul':6, 'Aug':7, 'Sep':8, 'Oct':9, 'Nov':10, 'Dec':11 };
+    const bulan = bulanMap[month];
+    
+    // Parse waktu mulai: "10:00"
+    const waktuParts = waktuMulai.split(':');
+    const jam = parseInt(waktuParts[0]);
+    const menit = parseInt(waktuParts[1]);
+    
+    const targetDate = new Date(year, bulan, day, jam, menit, 0);
+    const now = new Date();
+    const selisih = targetDate - now;
+    
+    if (selisih <= 0) {
+      return { expired: true, text: "✅ Ujian tersedia!" };
+    }
+    
+    const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+    const jamSisa = Math.floor((selisih % (86400000)) / (3600000));
+    const menitSisa = Math.floor((selisih % 3600000) / 60000);
+    const detikSisa = Math.floor((selisih % 60000) / 1000);
+    
+    return {
+      expired: false,
+      hari: hari,
+      jam: jamSisa,
+      menit: menitSisa,
+      detik: detikSisa,
+      text: `${hari} hari ${jamSisa} jam ${menitSisa} menit ${detikSisa} detik`
+    };
+  }
+
   function renderKompetisiGrid() {
     const grid = document.getElementById('kompetisiGrid');
     if (!grid) return;
     const userData = dataPeserta[currentUser?.username];
+    
     grid.innerHTML = daftarKompetisi.map(k => {
       const sudahSelesai = userData?.ujianSelesai?.[k.mapel] === true;
+      const waktuMulai = k.waktu.split(' - ')[0];
+      const countdown = hitungMundurKeUjian(k.tanggal, waktuMulai);
+      const countdownId = `countdown-${k.mapel.replace(/\s/g, '')}`;
+      
       return `
         <div class="kompetisi-card">
-          <div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div>
+          <div class="card-title">Ujian Akhir Semester(UAS) Tahun Ajaran 2025/2026</div>
           <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓 Mahasiswa</span></div>
           <div class="card-date"><span><i class="far fa-calendar-alt"></i> ${k.tanggal}</span><span><i class="far fa-clock"></i> ${k.waktu}</span></div>
-          <button class="btn-mulai" onclick="startUjian('${k.mapel}')" ${sudahSelesai ? 'disabled' : ''}>${sudahSelesai ? '✓ Sudah Dikerjakan' : 'Mulai Ujian →'}</button>
+          <div class="countdown-box">
+            <i class="fas fa-hourglass-half"></i> 
+            <span id="${countdownId}" class="countdown-text">
+              ${countdown.expired ? 'Ujian tersedia!' : countdown.text}
+            </span>
+          </div>
+          <button class="btn-mulai" onclick="startUjian('${k.mapel}')" ${sudahSelesai || !countdown.expired ? 'disabled' : ''}>
+            ${sudahSelesai ? '✓ Sudah Dikerjakan' : (countdown.expired ? 'Mulai Ujian →' : '⏳ Belum tersedia')}
+          </button>
         </div>
       `;
     }).join('');
+    
+    // Jalankan update countdown setiap detik
+    if (countdownInterval) clearInterval(countdownInterval);
+    countdownInterval = setInterval(updateAllCountdowns, 1000);
+  }
+
+  function updateAllCountdowns() {
+    daftarKompetisi.forEach(k => {
+      const element = document.getElementById(`countdown-${k.mapel.replace(/\s/g, '')}`);
+      if (element) {
+        const waktuMulai = k.waktu.split(' - ')[0];
+        const countdown = hitungMundurKeUjian(k.tanggal, waktuMulai);
+        element.textContent = countdown.expired ? 'Ujian tersedia!' : countdown.text;
+        
+        // Update status tombol
+        const card = element.closest('.kompetisi-card');
+        const button = card?.querySelector('.btn-mulai');
+        const userData = dataPeserta[currentUser?.username];
+        const sudahSelesai = userData?.ujianSelesai?.[k.mapel] === true;
+        
+        if (button && !sudahSelesai) {
+          if (countdown.expired) {
+            button.disabled = false;
+            button.textContent = 'Mulai Ujian →';
+          } else {
+            button.disabled = true;
+            button.textContent = '⏳ Belum tersedia';
+          }
+        }
+      }
+    });
   }
 
   function updateProfileTab() { if (currentUser) { document.getElementById('profileNama').innerText = currentUser.nama; document.getElementById('profileUsername').innerText = currentUser.username; document.getElementById('profileNisn').innerText = currentUser.noPeserta; document.getElementById('profileInstansi').innerText = currentUser.instansi; document.getElementById('profileTtl').innerText = currentUser.ttl; } }
@@ -1366,6 +1469,9 @@
   }
 
   function startUjian(mapel) {
+    // Hentikan countdown saat masuk ujian
+    if (countdownInterval) clearInterval(countdownInterval);
+    
     const kompetisi = daftarKompetisi.find(k => k.mapel === mapel);
     if (!kompetisi) return;
     const userData = dataPeserta[currentUser.username];
@@ -1470,10 +1576,17 @@
       if (!user.ujianSelesai) user.ujianSelesai = {};
       renderKompetisiGrid();
       showPage('dashboardPage');
-    } else { const errorDiv = document.getElementById('loginErrorMsg'); errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!'; setTimeout(() => errorDiv.style.display = 'none', 3000); }
+    } else { const errorDiv = document.getElementById('loginErrorMsg'); errorDiv.style.display = 'block'; errorDiv.innerHTML =  'Username atau password salah!'; setTimeout(() => errorDiv.style.display = 'none', 3000); }
   });
 
-  document.getElementById('logoutBtnDashboard').addEventListener('click', () => { localStorage.removeItem('currentUser'); currentUser = null; showPage('loginPage'); document.getElementById('loginUsername').value = ''; document.getElementById('loginPassword').value = ''; });
+  document.getElementById('logoutBtnDashboard').addEventListener('click', () => { 
+    localStorage.removeItem('currentUser'); 
+    currentUser = null; 
+    if (countdownInterval) clearInterval(countdownInterval);
+    showPage('loginPage'); 
+    document.getElementById('loginUsername').value = ''; 
+    document.getElementById('loginPassword').value = ''; 
+  });
 
   function checkSession() {
     const saved = localStorage.getItem('currentUser');
