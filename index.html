@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FASA Learning Center | Sistem Ujian Online</title>
+  <title>FASA Learning Center | FASA Official</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -15,7 +15,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #f5f7fa;
+      background: #f0f2f5;
       color: #1a2c3e;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
@@ -162,17 +162,6 @@
       display: none;
     }
 
-    .success-message {
-      background: #d4edda;
-      color: #155724;
-      padding: 0.7rem;
-      border-radius: 1rem;
-      font-size: 0.75rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      display: none;
-    }
-
     .divider {
       text-align: center;
       margin: 1.2rem 0;
@@ -214,19 +203,19 @@
       text-decoration: underline;
     }
 
-    /* ========== NAVBAR ========== */
-    .navbar {
+    /* ========== DASHBOARD STYLE ========== */
+    .dashboard-page {
+      display: none;
+    }
+
+    /* Navbar Atas */
+    .top-navbar {
       background: white;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      padding: 1rem 2rem;
+      padding: 0.8rem 2rem;
       position: sticky;
       top: 0;
       z-index: 100;
-    }
-
-    .nav-container {
-      max-width: 1280px;
-      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -240,58 +229,417 @@
       gap: 0.5rem;
     }
 
-    .logo-fasa-nav {
-      height: 45px;
+    .logo-img {
+      height: 40px;
       width: auto;
-      object-fit: contain;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     .logo-text {
       font-weight: 700;
       font-size: 1.2rem;
-      color: #1a4d5f;
+      color: #058d4e;
     }
 
-    .nav-links {
+    .nav-menu {
       display: flex;
-      gap: 1.5rem;
+      gap: 0.5rem;
+      background: #f0f2f5;
+      padding: 0.3rem;
+      border-radius: 2rem;
+    }
+
+    .nav-item {
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #4a627a;
+    }
+
+    .nav-item:hover {
+      background: #e0e5ec;
+    }
+
+    .nav-item.active {
+      background: #058d4e;
+      color: white;
+    }
+
+    .user-area {
+      display: flex;
       align-items: center;
+      gap: 1rem;
     }
 
-    .fullscreen-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: #1a4d5f;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
-      transition: 0.2s;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
       background: #eef2f5;
-    }
-
-    .fullscreen-btn:hover {
-      background: #d4e2ec;
-    }
-
-    .user-name-click {
-      cursor: pointer;
-      padding: 0.3rem 0.8rem;
+      padding: 0.3rem 1rem;
       border-radius: 2rem;
-      transition: 0.2s;
-      background: #eef2f5;
-      color: #1a4d5f;
+      cursor: pointer;
+    }
+
+    .user-avatar {
+      width: 35px;
+      height: 35px;
+      background: #058d4e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       font-weight: 600;
     }
 
-    .user-name-click:hover {
-      background: #d4e2ec;
+    .user-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1a4d5f;
     }
 
     .logout-btn {
       background: #1e4663;
       color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    /* Welcome Banner */
+    .welcome-banner {
+      background: linear-gradient(135deg, #058d4e, #015331);
+      margin: 1.5rem 2rem 0 2rem;
+      padding: 1.5rem 2rem;
+      border-radius: 1.5rem;
+      color: white;
+    }
+
+    .welcome-banner h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .welcome-banner p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 1.5rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-header h3 {
+      font-size: 1.2rem;
+      color: #1a4d5f;
+    }
+
+    .info-text {
+      font-size: 0.7rem;
+      color: #8ba0b0;
+    }
+
+    /* Grid Kompetisi */
+    .kompetisi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .kompetisi-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: 0.2s;
+      border: 1px solid #e2edf2;
+    }
+
+    .kompetisi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      border-color: #c8e6d9;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a4d5f;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-mapel {
+      background: #e8f5e9;
+      color: #058d4e;
+      padding: 0.2rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .badge-kategori {
+      background: #fff8e1;
+      color: #f4a261;
+      padding: 0.2rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .card-date {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.75rem;
+      color: #6c7e91;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-date i {
+      width: 16px;
+      color: #058d4e;
+    }
+
+    .btn-mulai {
+      background: #058d4e;
+      color: white;
+      border: none;
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .btn-mulai:hover {
+      background: #015331;
+    }
+
+    /* Help Card */
+    .help-card {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .help-card p {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1a4d5f;
+    }
+
+    .help-card button {
+      background: #058d4e;
+      color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    .footer-note {
+      text-align: center;
+      margin: 2rem 2rem 1rem;
+      font-size: 0.7rem;
+      color: #6c7e91;
+      border-top: 1px solid #d4e2ec;
+      padding-top: 1rem;
+    }
+
+    /* ========== HALAMAN UJIAN ========== */
+    .ujian-page {
+      display: none;
+      min-height: 100vh;
+      background: #f0f2f5;
+    }
+
+    .ujian-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .ujian-header {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .ujian-judul {
+      font-weight: 700;
+      color: #1a4d5f;
+    }
+
+    .ujian-waktu {
+      background: #e8f5e9;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #058d4e;
+    }
+
+    /* Layout Soal */
+    .ujian-layout {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Sidebar Nomor Soal */
+    .soal-sidebar {
+      width: 280px;
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .soal-sidebar h4 {
+      color: #1a4d5f;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2edf2;
+    }
+
+    .nomor-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+
+    .nomor-soal-btn {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: 0.2s;
+      border: 1px solid #e2edf2;
+      background: white;
+      color: #1a2c3e;
+    }
+
+    .nomor-soal-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .nomor-soal-btn.answered {
+      background: #058d4e;
+      color: white;
+      border-color: #058d4e;
+    }
+
+    .nomor-soal-btn.current {
+      background: #f4a261;
+      color: white;
+      border-color: #f4a261;
+      box-shadow: 0 0 0 2px #f4a261;
+    }
+
+    .nomor-soal-btn.ragu {
+      background: #e53e3e;
+      color: white;
+      border-color: #e53e3e;
+    }
+
+    /* Konten Soal */
+    .soal-konten {
+      flex: 1;
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .soal-text {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .opsi-item {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.5rem;
+      border-radius: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .opsi-item:hover {
+      background: #f0f4fa;
+    }
+
+    .opsi-item input {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .opsi-item label {
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .soal-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2edf2;
+    }
+
+    .soal-nav button {
+      background: #eef2f5;
       border: none;
       padding: 0.5rem 1.2rem;
       border-radius: 2rem;
@@ -299,194 +647,135 @@
       font-weight: 600;
     }
 
-    /* ========== MAIN CONTENT ========== */
-    .main-content {
-      display: none;
+    .soal-nav button:hover {
+      background: #e2edf2;
     }
 
-    .dashboard-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    .welcome-banner {
-      background: linear-gradient(135deg, #1a4d5f, #0f2c38);
-      border-radius: 1rem;
-      padding: 1.5rem 2rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+    .btn-kirim {
+      background: #058d4e !important;
       color: white;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem;
     }
 
-    .user-name-large {
-      font-size: 1.6rem;
-      font-weight: 700;
+    .btn-kirim:hover {
+      background: #015331 !important;
+    }
+
+    /* Petunjuk Pengerjaan */
+    .petunjuk-page {
+      display: none;
+      min-height: 100vh;
+      background: #f0f2f5;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .petunjuk-card {
+      background: white;
+      border-radius: 1.5rem;
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+    }
+
+    .petunjuk-card h2 {
+      color: #1a4d5f;
+      margin-bottom: 1rem;
+    }
+
+    .petunjuk-card ul {
+      text-align: left;
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .petunjuk-card li {
       margin: 0.5rem 0;
     }
 
-    .badge-admin {
-      background: #f4a261;
-      color: #1a2c3e;
-      padding: 0.2rem 0.8rem;
-      border-radius: 2rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      margin-left: 0.5rem;
+    /* Hasil Ujian */
+    .hasil-ujian-page {
+      display: none;
+      min-height: 100vh;
+      background: #f0f2f5;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
     }
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .menu-card {
+    .hasil-card {
       background: white;
-      border-radius: 1rem;
+      border-radius: 1.5rem;
+      max-width: 600px;
+      width: 100%;
       padding: 2rem;
       text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid #e2edf2;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
     }
 
-    .menu-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-color: #058d4e;
-    }
-
-    .menu-card i {
+    .nilai-akhir {
       font-size: 3rem;
+      font-weight: 800;
       color: #058d4e;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
 
-    .menu-card h3 {
-      color: #1a4d5f;
-      margin-bottom: 0.5rem;
-    }
-
-    .card {
-      background: white;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1.5rem;
-    }
-
-    .card h2 {
-      color: #1a4d5f;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      background: #1e4663;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
+    .status-lulus {
+      background: #d4edda;
+      color: #155724;
+      padding: 0.5rem;
       border-radius: 2rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
     }
 
-    .btn:hover {
-      background: #0f2c38;
+    .status-tidak {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 0.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
     }
 
-    .btn-secondary {
-      background: #058d4e;
-    }
-
-    .btn-secondary:hover {
-      background: #015331;
-    }
-
-    .btn-outline {
+    /* Riwayat & Rekapan */
+    .riwayat-card, .rekapan-card {
       background: white;
-      color: #1e4663;
-      border: 2px solid #1e4663;
-    }
-
-    .btn-outline:hover {
-      background: #1e4663;
-      color: white;
-    }
-
-    .btn-danger {
-      background: #e53e3e;
-    }
-
-    .btn-danger:hover {
-      background: #c53030;
-    }
-
-    .mapel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .mapel-card {
-      background: #f9fbfe;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid #e2edf2;
-      transition: 0.2s;
-    }
-
-    .mapel-card:hover {
-      border-color: #058d4e;
-      background: #f0f4ff;
-    }
-
-    .soal-item {
-      background: #f9fbfe;
       border-radius: 1rem;
       padding: 1.2rem;
       margin-bottom: 1rem;
       border: 1px solid #e2edf2;
     }
 
-    .option {
-      margin: 0.5rem 0;
+    .rekapan-nilai {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
     }
 
-    .option input {
-      width: auto;
-    }
-
-    .result-card {
-      background: #f0fff4;
-      border-left: 4px solid #48bb78;
-      padding: 1.5rem;
+    .rekapan-item {
+      text-align: center;
+      flex: 1;
+      background: #f9fbfe;
+      padding: 0.8rem;
       border-radius: 1rem;
-      margin-top: 1rem;
     }
 
-    .result-card.failed {
-      background: #fff5f5;
-      border-left-color: #e53e3e;
+    .rekapan-item .label {
+      font-size: 0.7rem;
+      color: #6c7e91;
     }
 
-    .nilai {
-      font-size: 2rem;
+    .rekapan-item .value {
+      font-size: 1.5rem;
       font-weight: 700;
       color: #058d4e;
-      margin: 1rem 0;
     }
 
     .page {
@@ -497,509 +786,36 @@
       display: block;
     }
 
-    .footer-note {
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 0.7rem;
-      color: #6c7e91;
-      border-top: 1px solid #d4e2ec;
-      padding-top: 1rem;
-    }
-
-    /* Tabel Data */
-    .table-wrapper {
-      overflow-x: auto;
-      margin-top: 1rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.8rem;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    th {
-      background: #058d4e;
-      color: white;
-      position: sticky;
-      top: 0;
-    }
-
-    tr:hover {
-      background: #f0f4ff;
-    }
-
-    .action-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      margin: 0 3px;
-      padding: 4px 8px;
-      border-radius: 0.5rem;
-    }
-
-    .edit-btn {
-      color: #058d4e;
-    }
-
-    .edit-btn:hover {
-      background: #e6f7ec;
-    }
-
-    .delete-btn {
-      color: #e53e3e;
-    }
-
-    .delete-btn:hover {
-      background: #fee2e2;
-    }
-
-    /* Statistik Card */
-    .statistik-card {
-      background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .stat-item {
-      text-align: center;
-      flex: 1;
-      min-width: 100px;
-    }
-
-    .stat-item .label {
-      font-size: 0.7rem;
-      color: #2c4c6c;
-      font-weight: 600;
-    }
-
-    .stat-item .value {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #058d4e;
-    }
-
-    .stat-item .value small {
-      font-size: 0.8rem;
-      font-weight: normal;
-    }
-
-    .jumlah-peserta {
-      background: #058d4e;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      font-weight: 600;
-    }
-
-    /* Modal */
-    .modal-edit {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1001;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-edit-content {
-      background: white;
-      border-radius: 2rem;
-      max-width: 500px;
-      width: 90%;
-      padding: 2rem;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 2rem;
-      max-width: 450px;
-      width: 90%;
-      padding: 2rem;
-      text-align: center;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .modal-content h3 {
-      color: #1a4d5f;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-content .info-row {
-      margin: 0.8rem 0;
-      text-align: left;
-      padding: 0.5rem;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    .modal-content .info-row strong {
-      display: inline-block;
-      width: 110px;
-      color: #058d4e;
-    }
-
-    .close-modal {
-      background: #058d4e;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-
-    /* PENGUMUMAN KELULUSAN */
-    .pengumuman-card {
-      max-width: 550px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 48px;
-      overflow: hidden;
-      box-shadow: 0 30px 45px -15px rgba(0, 32, 0, 0.25);
-      border: 1px solid rgba(60, 100, 70, 0.2);
-    }
-
-    .pengumuman-header {
-      background: linear-gradient(115deg, #1b4d3b, #256f50);
-      padding: 32px 20px 28px;
-      text-align: center;
-      color: white;
-    }
-
-    .pengumuman-header h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .pengumuman-header .sub-title {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      background: rgba(255,255,255,0.15);
-      display: inline-block;
-      padding: 5px 16px;
-      border-radius: 60px;
-    }
-
-    .pengumuman-form {
-      padding: 34px 28px 30px;
-    }
-
-    .btn-cek-pengumuman {
-      width: 100%;
-      background: linear-gradient(100deg, #1b4d3b, #2a7a5a);
-      border: none;
-      padding: 16px;
-      border-radius: 60px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: white;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin: 12px 0 10px;
-      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-cek-pengumuman:hover {
-      background: linear-gradient(100deg, #123b2c, #1f6248);
-      transform: scale(0.98);
-    }
-
-    .card-lulus {
-      background: linear-gradient(135deg, #eafff0, #d9f5e5);
-      border-radius: 36px;
-      padding: 28px 22px;
-      text-align: center;
-      border-left: 8px solid #1f9a5a;
-      margin-top: 20px;
-    }
-
-    .card-lulus h3 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0f6e3f;
-    }
-
-    .card-tidak {
-      background: linear-gradient(135deg, #fff5f0, #ffe8df);
-      border-radius: 36px;
-      padding: 28px 22px;
-      text-align: center;
-      border-left: 8px solid #e0682e;
-      margin-top: 20px;
-    }
-
-    .card-tidak h3 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #bc5727;
-    }
-
-    .info-siswa-pengumuman {
-      margin-top: 20px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 28px;
-      padding: 16px;
-      text-align: left;
-      border: 1px solid rgba(60, 100, 70, 0.15);
-    }
-
-    .info-siswa-pengumuman p {
-      margin: 6px 0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 6px 4px;
-      border-bottom: 1px dashed #ccc8;
-    }
-
-    .badge-success {
-      background: #1f9a5a;
-      display: inline-block;
-      padding: 8px 24px;
-      border-radius: 60px;
-      color: white;
-      font-weight: bold;
-      margin-top: 12px;
-    }
-
-    .badge-failed {
-      background: #c2572a;
-      display: inline-block;
-      padding: 8px 24px;
-      border-radius: 60px;
-      color: white;
-      font-weight: bold;
-      margin-top: 12px;
-    }
-
-    /* LOADING SCREEN */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .loading-overlay.show {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .loading-content {
-      background: white;
-      border-radius: 2rem;
-      padding: 2rem 2.5rem;
-      text-align: center;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid #e2edf2;
-      border-top-color: #058d4e;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 1rem;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Full Screen */
-    :-webkit-full-screen {
-      background: #f5f7fa;
-    }
-    :-moz-full-screen {
-      background: #f5f7fa;
-    }
-    :fullscreen {
-      background: #f5f7fa;
-    }
-
     @media (max-width: 768px) {
-      .dashboard-container {
-        padding: 1rem;
+      .top-navbar {
+        flex-direction: column;
+        padding: 0.8rem 1rem;
+      }
+      .nav-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
       }
       .welcome-banner {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+        margin: 1rem;
       }
-      .menu-grid {
+      .main-content {
+        padding: 1rem;
+      }
+      .kompetisi-grid {
         grid-template-columns: 1fr;
       }
-      th, td {
-        padding: 6px;
-        font-size: 0.7rem;
-      }
-      .statistik-card {
+      .ujian-layout {
         flex-direction: column;
+      }
+      .soal-sidebar {
+        width: 100%;
+        position: static;
       }
     }
   </style>
 </head>
 <body>
-
-<!-- LOADING SCREEN -->
-<div id="loadingOverlay" class="loading-overlay">
-  <div class="loading-content">
-    <div class="loading-spinner"></div>
-    <p>⏳ Memuat halaman...</p>
-  </div>
-</div>
-
-<!-- MODAL DATA DIRI -->
-<div id="dataDiriModal" class="modal">
-  <div class="modal-content">
-    <h3>📋 Data Diri Peserta</h3>
-    <div class="info-row"><strong>Nama Lengkap:</strong> <span id="modalNama"></span></div>
-    <div class="info-row"><strong>NISN:</strong> <span id="modalNisn"></span></div>
-    <div class="info-row"><strong>Username:</strong> <span id="modalUsername"></span></div>
-    <div class="info-row"><strong>Asal Sekolah:</strong> <span id="modalInstansi"></span></div>
-    <div class="info-row"><strong>Tanggal Lahir:</strong> <span id="modalTtl"></span></div>
-    <div class="info-row"><strong>Role:</strong> <span id="modalRole"></span></div>
-    <button class="close-modal" onclick="closeModal()">Tutup</button>
-  </div>
-</div>
-
-<!-- MODAL EDIT PESERTA (ADMIN) -->
-<div id="modalEditPeserta" class="modal-edit">
-  <div class="modal-edit-content">
-    <h3>✏️ Edit Data Peserta</h3>
-    <input type="hidden" id="editUsername">
-    <div class="form-group">
-      <label>Nama Lengkap</label>
-      <input type="text" id="editNama" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>NISN</label>
-      <input type="text" id="editNisn" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Asal Sekolah</label>
-      <input type="text" id="editInstansi" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Tanggal Lahir</label>
-      <input type="date" id="editTtl" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" id="editUsernameField" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="text" id="editPassword" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <button class="btn btn-secondary" id="btnSimpanEditPeserta" style="width:100%; margin-top:0.5rem;">💾 Simpan Perubahan</button>
-    <button class="btn btn-outline" onclick="closeModalEditPeserta()" style="width:100%; margin-top:0.5rem;">Batal</button>
-  </div>
-</div>
-
-<!-- MODAL TAMBAH PESERTA (ADMIN) -->
-<div id="modalTambahPeserta" class="modal-edit">
-  <div class="modal-edit-content">
-    <h3>➕ Tambah Peserta Baru</h3>
-    <div class="form-group">
-      <label>Nama Lengkap</label>
-      <input type="text" id="tambahNama" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>NISN</label>
-      <input type="text" id="tambahNisn" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Asal Sekolah</label>
-      <input type="text" id="tambahInstansi" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Tanggal Lahir</label>
-      <input type="date" id="tambahTtl" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
-    </div>
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" id="tambahUsername" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="Buat username">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="text" id="tambahPassword" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="Password (default: 123456)" value="123456">
-    </div>
-    <button class="btn btn-secondary" id="btnSimpanTambah" style="width:100%; margin-top:0.5rem;">💾 Simpan Peserta</button>
-    <button class="btn btn-outline" onclick="closeTambahPesertaModal()" style="width:100%; margin-top:0.5rem;">Batal</button>
-  </div>
-</div>
-
-<!-- MODAL EDIT NILAI (ADMIN) -->
-<div id="modalEditNilai" class="modal-edit">
-  <div class="modal-edit-content">
-    <h3>✏️ Edit Nilai Peserta</h3>
-    <input type="hidden" id="editNilaiUsername">
-    <div class="form-group">
-      <label>Nama Peserta</label>
-      <input type="text" id="editNilaiNama" disabled style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8; background:#f5f7fa;">
-    </div>
-    <div class="form-group">
-      <label>NISN</label>
-      <input type="text" id="editNilaiNisn" disabled style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8; background:#f5f7fa;">
-    </div>
-    <div class="form-group">
-      <label>📐 Nilai Matematika</label>
-      <input type="number" id="editNilaiMat" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="0-100">
-    </div>
-    <div class="form-group">
-      <label>📖 Nilai Bahasa Indonesia</label>
-      <input type="number" id="editNilaiBhs" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="0-100">
-    </div>
-    <button class="btn btn-secondary" id="btnSimpanEditNilai" style="width:100%; margin-top:0.5rem;">💾 Simpan Nilai</button>
-    <button class="btn btn-outline" onclick="closeModalEditNilai()" style="width:100%; margin-top:0.5rem;">Batal</button>
-  </div>
-</div>
 
 <!-- HALAMAN LOGIN -->
 <div id="loginPage" class="page active">
@@ -1028,449 +844,177 @@
       <button class="btn-login" id="btnLogin">Masuk</button>
       
       <div class="divider"><span>ATAU</span></div>
-      <div class="register-link">Belum punya akun? <a onclick="goToDaftar()">Daftar Sekarang</a></div>
+      <div class="register-link">Belum punya akun? <a onclick="alert('Fitur pendaftaran sedang dalam pengembangan. Hubungi admin untuk membuat akun.')">Daftar Sekarang</a></div>
       <div style="text-align: center; margin-top: 1rem; font-size: 0.7rem; color: #6c7e91;">
-        Demo Admin: admin / admin123<br>
-        Demo Peserta: peserta001 / 123456
+        @2026 | FASA Learning Center - FASA Official
       </div>
     </div>
   </div>
 </div>
 
-<!-- HALAMAN DAFTAR -->
-<div id="daftarPage" class="page">
-  <div class="login-container">
-    <div class="login-card" style="max-width: 500px;">
-      <div class="login-header">
-        <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA Logo" class="logo-login">
-        <h1>📝Daftar Akun Baru</h1>
-        <p>Isi data diri Anda dengan lengkap</p>
+<!-- DASHBOARD POSI -->
+<div id="dashboardPage" class="page">
+  <div class="top-navbar">
+    <div class="logo-area">
+      <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA Logo" class="logo-img">
+      <span class="logo-text">FASA Dashboard</span>
+    </div>
+    <div class="nav-menu">
+      <div class="nav-item active" data-tab="kompetisi"><i class="fas fa-trophy"></i> Kompetisi</div>
+      <div class="nav-item" data-tab="riwayat"><i class="fas fa-history"></i> Riwayat Ujian</div>
+      <div class="nav-item" data-tab="rekapan"><i class="fas fa-chart-line"></i> Rekapan Nilai</div>
+      <div class="nav-item" data-tab="pengumuman"><i class="fas fa-bullhorn"></i> Pengumuman</div>
+      <div class="nav-item" data-tab="dokumen"><i class="fas fa-file-alt"></i> Dokumen</div>
+      <div class="nav-item" data-tab="profil"><i class="fas fa-user-circle"></i> Profil</div>
+    </div>
+    <div class="user-area">
+      <div class="user-info" onclick="showProfileModal()">
+        <div class="user-avatar" id="userAvatar">AM</div>
+        <span class="user-name" id="userName">Achmad Muqorrobin</span>
+        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
       </div>
-      <div id="daftarErrorMsg" class="error-message"></div>
-      <div id="daftarSuccessMsg" class="success-message"></div>
-      
-      <div class="form-group">
-        <label>Nama Lengkap</label>
-        <div class="input-with-icon">
-          <i class="fas fa-user"></i>
-          <input type="text" id="daftarNama" placeholder="Masukkan nama lengkap">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Tanggal Lahir</label>
-        <div class="input-with-icon">
-          <i class="fas fa-calendar-alt"></i>
-          <input type="date" id="daftarTtl">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>NISN</label>
-        <div class="input-with-icon">
-          <i class="fas fa-id-card"></i>
-          <input type="text" id="daftarNisn" placeholder="Masukkan NISN 10 digit">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Asal Sekolah</label>
-        <div class="input-with-icon">
-          <i class="fas fa-school"></i>
-          <input type="text" id="daftarSekolah" placeholder="Masukkan asal sekolah">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Username</label>
-        <div class="input-with-icon">
-          <i class="fas fa-user-circle"></i>
-          <input type="text" id="daftarUsername" placeholder="Buat username">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Password</label>
-        <div class="input-with-icon">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="daftarPassword" placeholder="Buat password (min 4 karakter)">
-        </div>
-      </div>
-      
-      <button class="btn-login" id="btnDaftar">Daftar Sekarang</button>
-      
-      <div class="divider"><span>ATAU</span></div>
-      <div class="register-link">Sudah punya akun? <a onclick="backToLoginFromDaftar()">Masuk di sini</a></div>
+      <button id="logoutBtnDashboard" class="logout-btn">LOGOUT</button>
     </div>
   </div>
+
+  <div class="welcome-banner">
+    <h2>Hai, <span id="welcomeName">Achmad Muqorrobin</span>!</h2>
+    <p>Selamat datang kembali di dashboard FASA. Ikuti kompetisi dan pantau perkembangan belajarmu.</p>
+  </div>
+
+  <div class="main-content">
+    <!-- Tab Kompetisi -->
+    <div id="tabKompetisi" class="tab-content">
+      <div class="section-header">
+        <h3>📋 Kompetisi Terdaftar</h3>
+        <span class="info-text">Diperbarui 12:36 | Menampilkan 1 - 5 dari 5 kompetisi</span>
+      </div>
+      <div class="kompetisi-grid">
+        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">📘 Bahasa Arab</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 10:00 - 11:00</span></div><button class="btn-mulai" onclick="startUjian('Bahasa Arab', soalBahasaArab)">Mulai Ujian →</button></div>
+        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">⚛️ Fisika Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 11:15 - 12:15</span></div><button class="btn-mulai" onclick="startUjian('Fisika Terintegrasi', soalFisika)">Mulai Ujian →</button></div>
+        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">🧪 Kimia Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 13:00 - 14:00</span></div><button class="btn-mulai" onclick="startUjian('Kimia Terintegrasi', soalKimia)">Mulai Ujian →</button></div>
+        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">🔬 Biologi Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 14:15 - 15:15</span></div><button class="btn-mulai" onclick="startUjian('Biologi Terintegrasi', soalBiologi)">Mulai Ujian →</button></div>
+        <div class="kompetisi-card"><div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div><div class="card-badges"><span class="badge-mapel">📐 Matematika Terintegrasi</span><span class="badge-kategori">🎓 Mahasiswa</span></div><div class="card-date"><span><i class="far fa-calendar-alt"></i> Min, 19 Apr 2026</span><span><i class="far fa-clock"></i> 15:30 - 16:30</span></div><button class="btn-mulai" onclick="startUjian('Matematika Terintegrasi', soalMatematika)">Mulai Ujian →</button></div>
+      </div>
+    </div>
+
+    <!-- Tab Riwayat Ujian -->
+    <div id="tabRiwayat" class="tab-content" style="display: none;">
+      <div class="section-header"><h3>📜 Riwayat Ujian</h3></div>
+      <div id="riwayatContainer"></div>
+    </div>
+
+    <!-- Tab Rekapan Nilai -->
+    <div id="tabRekapan" class="tab-content" style="display: none;">
+      <div class="section-header"><h3>📊 Rekapan Nilai</h3></div>
+      <div id="rekapanContainer"></div>
+    </div>
+
+    <!-- Tab Pengumuman -->
+    <div id="tabPengumuman" class="tab-content" style="display: none;">
+      <div class="section-header"><h3>📢 Pengumuman</h3></div>
+      <div class="kompetisi-card"><div class="card-title">Pengumuman Ujian MASCO 2026</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 15 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Jadwal ujian telah dirilis. Silakan cek jadwal masing-masing mata pelajaran.</p></div>
+      <div class="kompetisi-card"><div class="card-title">Perpanjangan Masa Pendaftaran</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 10 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Pendaftaran MASCO diperpanjang hingga 25 April 2026.</p></div>
+    </div>
+
+    <!-- Tab Dokumen -->
+    <div id="tabDokumen" class="tab-content" style="display: none;">
+      <div class="section-header"><h3>📄 Dokumen Digital</h3></div>
+      <div class="kompetisi-card"><div class="card-title">📎 Panduan Ujian MASCO 2026</div><button class="btn-mulai" style="width: auto; padding: 0.3rem 1rem;" onclick="alert('Mengunduh dokumen...')">Download PDF</button></div>
+      <div class="kompetisi-card"><div class="card-title">📎 Sertifikat Peserta</div><button class="btn-mulai" style="width: auto; padding: 0.3rem 1rem;" onclick="alert('Mengunduh dokumen...')">Download PDF</button></div>
+    </div>
+
+    <!-- Tab Profil -->
+    <div id="tabProfil" class="tab-content" style="display: none;">
+      <div class="section-header"><h3>👤 Profil Saya</h3></div>
+      <div class="kompetisi-card"><div class="info-row" style="padding: 0.5rem 0;"><strong>Nama Lengkap:</strong> <span id="profileNama"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Username:</strong> <span id="profileUsername"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>NISN:</strong> <span id="profileNisn"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Asal Sekolah:</strong> <span id="profileInstansi"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Tanggal Lahir:</strong> <span id="profileTtl"></span></div></div>
+    </div>
+
+    <div class="help-card">
+      <p><i class="fas fa-question-circle"></i> Butuh bantuan dengan ujian?</p>
+      <button onclick="alert('Hubungi admin di wa.me/628123456789')">Hubungi Admin</button>
+    </div>
+  </div>
+
+  <div class="footer-note">© 2026 | FASA - Forum Alumni Sunan Ampel | FASA Official</div>
 </div>
 
-<!-- KONTEN UTAMA (BERANDA) -->
-<div id="mainApp" class="main-content">
-  <div class="navbar">
-    <div class="nav-container">
-      <div class="logo-area">
-        <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA" class="logo-fasa-nav">
-        <span class="logo-text">FASA OFFICIAL</span>
-      </div>
-      <div class="nav-links">
-        <button id="fullscreenBtn" class="fullscreen-btn" onclick="toggleFullScreen()">
-          <i class="fas fa-expand"></i>
-        </button>
-        <span id="navbarUser" class="user-name-click" onclick="showDataDiri()"></span>
-        <button id="logoutBtn" class="logout-btn">LOGOUT</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="dashboard-container">
-    <div class="welcome-banner">
-      <div>
-        <span style="font-size: 0.8rem;">👋 SELAMAT DATANG,</span>
-        <div class="user-name-large" id="userFullName">Mahasiswa</div>
-        <div style="font-size: 0.8rem; opacity: 0.9;" id="userInfo">NISN: - | Asal Sekolah: -</div>
-      </div>
-    </div>
-
-    <div class="menu-grid">
-      <div class="menu-card" onclick="goToUjian()">
-        <i class="fas fa-pen-alt"></i>
-        <h3>📝 E-Ujian</h3>
-        <p>Kerjakan soal ujian online</p>
-      </div>
-      <div class="menu-card" onclick="goToPengumuman()">
-        <i class="fas fa-bullhorn"></i>
-        <h3>📢 Pengumuman</h3>
-        <p>Lihat hasil kelulusan Anda</p>
-      </div>
-      <div id="menuDataPeserta" class="menu-card" onclick="goToDataPeserta()" style="display: none;">
-        <i class="fas fa-users"></i>
-        <h3>📋 Data Peserta</h3>
-        <p>Kelola data diri peserta (Admin)</p>
-      </div>
-      <div id="menuDataNilai" class="menu-card" onclick="goToDataNilai()" style="display: none;">
-        <i class="fas fa-chart-line"></i>
-        <h3>📊 Data Nilai</h3>
-        <p>Kelola nilai ujian peserta (Admin)</p>
-      </div>
-    </div>
-
-    <div class="footer-note">
-      © 2026 | FASA Learning Digital - FASA OFFICIAL
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN PILIH MAPEL + RIWAYAT -->
-<div id="mapelPage" class="page">
-  <div class="dashboard-container">
-    <!-- Riwayat Ujian -->
-    <div class="card" id="riwayatUjian" style="margin-bottom: 1rem;">
-      <h3>📜 Riwayat Ujian Anda</h3>
-      <div id="riwayatContainer">
-        <p>📐 Matematika: <span id="riwayatMat">⏳ Belum dikerjakan</span></p>
-        <p>📖 Bahasa Indonesia: <span id="riwayatBhs">⏳ Belum dikerjakan</span></p>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h2>📚 Pilih Mata Pelajaran</h2>
-      <div class="mapel-grid">
-        <div class="mapel-card" onclick="startUjian('matematika')">
-          <i class="fas fa-calculator" style="font-size: 2rem; color: #058d4e;"></i>
-          <h3>Matematika</h3>
-          <p>5 Soal Pilihan Ganda</p>
-        </div>
-        <div class="mapel-card" onclick="startUjian('bahasa')">
-          <i class="fas fa-language" style="font-size: 2rem; color: #058d4e;"></i>
-          <h3>Bahasa Indonesia</h3>
-          <p>5 Soal Pilihan Ganda</p>
-        </div>
-      </div>
-      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="backToBeranda()">← Kembali ke Beranda</button>
+<!-- HALAMAN PETUNJUK PENGERJAAN -->
+<div id="petunjukPage" class="page">
+  <div class="petunjuk-page" style="display: flex;">
+    <div class="petunjuk-card">
+      <h2>📋 Petunjuk Pengerjaan</h2>
+      <p>Silakan baca petunjuk berikut sebelum mengerjakan ujian:</p>
+      <ul>
+        <li>Ujian terdiri dari 10 soal pilihan ganda</li>
+        <li>Waktu pengerjaan: <strong id="petunjukWaktu">30 menit</strong></li>
+        <li>Klik pada nomor soal di samping untuk berpindah soal</li>
+        <li>Soal yang sudah dijawab akan berwarna <span style="color:#058d4e;">hijau</span></li>
+        <li>Soal yang diragukan bisa ditandai dengan tombol "Ragu"</li>
+        <li>Pastikan semua soal terjawab sebelum mengirim</li>
+        <li>Nilai minimal kelulusan: <strong>70</strong></li>
+      </ul>
+      <button class="btn-login" id="btnMulaiUjian" style="margin-top: 1rem;">✅ Mulai Ujian</button>
     </div>
   </div>
 </div>
 
 <!-- HALAMAN UJIAN -->
 <div id="ujianPage" class="page">
-  <div class="dashboard-container">
-    <div class="card">
-      <h2 id="mapelTitle">Mata Pelajaran</h2>
-      <div id="soalContainer"></div>
-      <button class="btn btn-secondary" id="btnSelesaiUjian" style="margin-top: 1rem;">✅ Selesai Ujian</button>
-      <button class="btn btn-outline" style="margin-top: 0.5rem;" onclick="backToMapel()">← Kembali</button>
+  <div class="ujian-container">
+    <div class="ujian-header">
+      <div class="ujian-judul"><strong id="ujianMapelTitle">Mata Pelajaran</strong></div>
+      <div class="ujian-waktu"><i class="far fa-clock"></i> Sisa Waktu: <span id="timer">30:00</span></div>
+    </div>
+    <div class="ujian-layout">
+      <div class="soal-sidebar">
+        <h4>📌 Daftar Soal</h4>
+        <div class="nomor-grid" id="nomorGrid"></div>
+        <button id="btnRagu" class="btn-login" style="margin-top: 1rem; background:#e53e3e;">❓ Tandai Ragu</button>
+      </div>
+      <div class="soal-konten">
+        <div class="soal-text" id="soalText"></div>
+        <div id="opsiContainer"></div>
+        <div class="soal-nav">
+          <button id="prevSoal"><i class="fas fa-chevron-left"></i> Sebelumnya</button>
+          <button id="nextSoal">Selanjutnya <i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button id="btnKirimUjian" class="btn-kirim">📤 Kirim Ujian</button>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- HALAMAN HASIL UJIAN -->
 <div id="hasilUjianPage" class="page">
-  <div class="dashboard-container">
-    <div class="card">
+  <div class="hasil-ujian-page" style="display: flex;">
+    <div class="hasil-card">
       <h2>📊 Hasil Ujian</h2>
-      <div id="hasilUjianContainer"></div>
-      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="backToBeranda()">← Kembali ke Beranda</button>
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN PENGUMUMAN KELULUSAN -->
-<div id="pengumumanPage" class="page">
-  <div class="dashboard-container">
-    <div class="pengumuman-card">
-      <div class="pengumuman-header">
-        <h2>🎓 HASIL UJIAN</h2>
-        <div class="sub-title">MTs Sunan Ampel Mulyosari Tahun 2025/2026</div>
-      </div>
-      <div class="pengumuman-form">
-        <div class="form-group">
-          <label>🔖 NISN (Nomor Induk Siswa Nasional)</label>
-          <div class="input-with-icon">
-            <i class="fas fa-id-card"></i>
-            <input type="text" id="nisnInput" placeholder="Masukkan NISN 10 digit">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>📅 Tanggal Lahir</label>
-          <div class="input-with-icon">
-            <i class="fas fa-calendar-alt"></i>
-            <input type="date" id="tglLahirInput">
-          </div>
-        </div>
-        <button class="btn-cek-pengumuman" id="btnCekKelulusan">CEK</button>
-        <div id="hasilPengumuman" style="margin-top: 20px;"></div>
-        
-        <!-- Admin Edit Kelulusan -->
-        <div id="adminEditKelulusan" style="display: none; margin-top: 1rem;">
-          <hr style="margin: 1rem 0;">
-          <h4>🔧 Admin: Edit Status Kelulusan</h4>
-          <div class="form-group">
-            <label>Pilih Peserta</label>
-            <select id="adminPilihPeserta" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;"></select>
-          </div>
-          <button class="btn" id="btnAdminSetLulus" style="background:#058d4e; margin-bottom:0.5rem;">✅ Set Lulus</button>
-          <button class="btn btn-danger" id="btnAdminSetTidakLulus">❌ Set Tidak Lulus</button>
-        </div>
-        
-        <button class="btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="backToBeranda()">← Kembali ke Beranda</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN DATA PESERTA (ADMIN ONLY) -->
-<div id="dataPesertaPage" class="page">
-  <div class="dashboard-container">
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <h2>📋 Data Seluruh Peserta</h2>
-        <button class="btn btn-secondary" onclick="openTambahPesertaModal()" style="padding: 0.5rem 1rem;">
-          <i class="fas fa-plus"></i> Tambah Peserta
-        </button>
-      </div>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr style="background: #058d4e; color: white;">
-              <th>No</th>
-              <th>Nama</th>
-              <th>NISN</th>
-              <th>Asal Sekolah</th>
-              <th>Username</th>
-              <th>Password</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="tabelDataPeserta"></tbody>
-        </table>
-      </div>
-      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="backToBeranda()">← Kembali ke Beranda</button>
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN DATA NILAI (ADMIN ONLY) -->
-<div id="dataNilaiPage" class="page">
-  <div class="dashboard-container">
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <h2>📊 Data Nilai & Kelulusan Peserta</h2>
-      </div>
-      
-      <!-- Statistik Rata-rata -->
-      <div class="statistik-card" id="statistikNilai">
-        <div class="stat-item">
-          <div class="label">📊 Rata-rata Matematika</div>
-          <div class="value" id="rataMatematika">0</div>
-        </div>
-        <div class="stat-item">
-          <div class="label">📖 Rata-rata Bahasa Indonesia</div>
-          <div class="value" id="rataBahasa">0</div>
-        </div>
-        <div class="stat-item">
-          <div class="label">📈 Rata-rata Keseluruhan</div>
-          <div class="value" id="rataKeseluruhan">0</div>
-        </div>
-        <div class="stat-item">
-          <div class="label">👥 Jumlah Peserta</div>
-          <div class="value jumlah-peserta" id="jumlahPeserta">0</div>
-        </div>
-      </div>
-      
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr style="background: #058d4e; color: white;">
-              <th>No</th>
-              <th>Nama</th>
-              <th>NISN</th>
-              <th>Asal Sekolah</th>
-              <th>Nilai Matematika</th>
-              <th>Nilai Bahasa</th>
-              <th>Status Kelulusan</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="tabelDataNilai"></tbody>
-        </table>
-      </div>
-      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="backToBeranda()">← Kembali ke Beranda</button>
+      <div id="hasilMapel" style="font-size: 1.2rem; font-weight: 600;"></div>
+      <div class="nilai-akhir" id="nilaiAkhir">0</div>
+      <div id="statusKelulusan"></div>
+      <div id="detailJawaban" style="margin: 1rem 0; text-align: left;"></div>
+      <button class="btn-login" id="btnKembaliKeDashboard" style="margin-top: 1rem;">← Kembali ke Dashboard</button>
     </div>
   </div>
 </div>
 
 <script>
   // ========== ANTI SCREENSHOT ==========
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    return false;
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (e.key === 'PrintScreen') { e.preventDefault(); alert('📸 Screenshot dilarang!'); return false; }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); alert('🔧 Inspect Element dilarang!'); return false; }
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) { e.preventDefault(); alert('📄 View Source dilarang!'); return false; }
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); alert('💾 Save page dilarang!'); return false; }
   });
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'PrintScreen') {
-      e.preventDefault();
-      alert('📸 Screenshot dilarang!');
-      return false;
-    }
-    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
-      e.preventDefault();
-      alert('🔧 Inspect Element dilarang!');
-      return false;
-    }
-    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-      e.preventDefault();
-      alert('📄 View Source dilarang!');
-      return false;
-    }
-    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
-      e.preventDefault();
-      alert('💾 Save page dilarang!');
-      return false;
-    }
-    if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) {
-      e.preventDefault();
-      alert('🖨️ Print dilarang!');
-      return false;
-    }
-    if (e.key === 'F11') {
-      e.preventDefault();
-      toggleFullScreen();
-    }
-  });
-
-  // ========== FUNGSI FULL SCREEN ==========
-  function toggleFullScreen() {
-    const doc = document.documentElement;
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-    
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
-      if (doc.requestFullscreen) doc.requestFullscreen();
-      else if (doc.webkitRequestFullscreen) doc.webkitRequestFullscreen();
-      else if (doc.msRequestFullscreen) doc.msRequestFullscreen();
-      if (fullscreenBtn) fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      else if (document.msExitFullscreen) document.msExitFullscreen();
-      if (fullscreenBtn) fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-    }
-  }
-
-  document.addEventListener('fullscreenchange', updateFullscreenIcon);
-  document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
-  document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
-
-  function updateFullscreenIcon() {
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-    if (fullscreenBtn) {
-      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
-        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
-      } else {
-        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
-      }
-    }
-  }
-
-  // ========== FUNGSI LOADING SCREEN ==========
-  function showLoading() {
-    document.getElementById('loadingOverlay').classList.add('show');
-  }
-  function hideLoading() {
-    document.getElementById('loadingOverlay').classList.remove('show');
-  }
-
-  // DATABASE PESERTA (untuk login & data)
-  let dataPeserta = {
-    "admin": {
-      nama: "Administrator FASA",
-      noPeserta: "ADMIN001",
-      instansi: "FASA Official",
-      ttl: "1990-01-01",
-      password: "admin123",
-      nilaiMatematika: null,
-      nilaiBahasa: null,
-      role: "admin",
-      ujianMatematikaSelesai: false,
-      ujianBahasaSelesai: false
-    },
-    "peserta001": {
-      nama: "Ahmad Fadillah",
-      noPeserta: "2024001",
-      instansi: "SMA Negeri 1 Semarang",
-      ttl: "2005-05-15",
-      password: "123456",
-      nilaiMatematika: null,
-      nilaiBahasa: null,
-      role: "peserta",
-      ujianMatematikaSelesai: false,
-      ujianBahasaSelesai: false
-    },
-    "peserta002": {
-      nama: "Siti Nurhaliza",
-      noPeserta: "2024002",
-      instansi: "SMA Negeri 2 Semarang",
-      ttl: "2005-08-20",
-      password: "123456",
-      nilaiMatematika: 85,
-      nilaiBahasa: 90,
-      role: "peserta",
-      ujianMatematikaSelesai: true,
-      ujianBahasaSelesai: true
-    }
+  // ========== DATABASE PESERTA ==========
+  const dataPeserta = {
+    "achmad": { nama: "Achmad Muqorrobin", noPeserta: "2504030064", instansi: "Universitas Negeri Semarang", ttl: "2005-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {} },
+    "ahmad": { nama: "Ahmad Fadillah", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {} },
+    "admin": { nama: "Administrator", noPeserta: "ADMIN001", instansi: "FASA Official", ttl: "1990-01-01", password: "admin123", role: "admin", riwayatUjian: [], nilaiPerMapel: {} }
   };
-
-  // DATA SISWA UNTUK PENGUMUMAN KELULUSAN
-  let dataSiswaKelulusan = [
-    { nisn: "0051234567", tglLahir: "2009-05-12", nama: "Ahmad Faiz Al Farisi", lulus: true, keterangan: "Nilai rapor & ujian madrasah memenuhi KKM." },
-    { nisn: "0051245678", tglLahir: "2009-11-03", nama: "Raka Septian Wijaya", lulus: false, keterangan: "Nilai beberapa mata pelajaran di bawah standar kelulusan." },
-    { nisn: "0051298765", tglLahir: "2009-12-30", nama: "Siti Khadijah binti Umar", lulus: true, keterangan: "Lulus, silakan melanjutkan ke jenjang berikutnya." },
-    { nisn: "2024001", tglLahir: "2005-05-15", nama: "Ahmad Fadillah", lulus: false, keterangan: "Belum mengikuti ujian" },
-    { nisn: "2024002", tglLahir: "2005-08-20", nama: "Siti Nurhaliza", lulus: true, keterangan: "Lulus dengan nilai baik." }
-  ];
-
-  let currentUser = null;
-  let currentMapel = null;
 
   // SOAL UJIAN
   const soalMatematika = [
@@ -1478,557 +1022,224 @@
     { text: "Akar kuadrat dari 144 adalah...", options: ["10", "11", "12", "13"], jawaban: "12" },
     { text: "Nilai dari 7 × 8 adalah...", options: ["48", "54", "56", "64"], jawaban: "56" },
     { text: "Hasil dari 100 ÷ 4 adalah...", options: ["20", "25", "30", "35"], jawaban: "25" },
-    { text: "Bilangan prima berikut ini adalah...", options: ["4", "6", "9", "11"], jawaban: "11" }
+    { text: "Bilangan prima berikut ini adalah...", options: ["4", "6", "9", "11"], jawaban: "11" },
+    { text: "Hasil dari 15² adalah...", options: ["200", "225", "250", "275"], jawaban: "225" },
+    { text: "Nilai x dari 2x + 5 = 15 adalah...", options: ["3", "4", "5", "6"], jawaban: "5" },
+    { text: "Luas persegi dengan sisi 8 cm adalah...", options: ["32 cm²", "64 cm²", "16 cm²", "48 cm²"], jawaban: "64 cm²" },
+    { text: "Keliling lingkaran dengan jari-jari 7 cm adalah...", options: ["22 cm", "44 cm", "66 cm", "88 cm"], jawaban: "44 cm" },
+    { text: "Hasil dari 3/4 + 1/2 adalah...", options: ["1/4", "3/6", "5/4", "6/8"], jawaban: "5/4" }
+  ];
+  const soalFisika = [
+    { text: "Satuan gaya dalam SI adalah...", options: ["Newton", "Joule", "Watt", "Pascal"], jawaban: "Newton" },
+    { text: "Rumus kecepatan adalah...", options: ["s/t", "t/s", "m/s", "s×t"], jawaban: "s/t" },
+    { text: "Hukum Newton I menyatakan tentang...", options: ["Kelembaman", "Percepatan", "Aksi-Reaksi", "Gravitasi"], jawaban: "Kelembaman" },
+    { text: "Energi kinetik bergantung pada...", options: ["Massa dan kecepatan", "Massa dan ketinggian", "Kecepatan dan percepatan", "Berat dan waktu"], jawaban: "Massa dan kecepatan" },
+    { text: "Alat untuk mengukur kuat arus listrik adalah...", options: ["Voltmeter", "Amperemeter", "Ohmmeter", "Galvanometer"], jawaban: "Amperemeter" },
+    { text: "Perubahan wujud dari padat ke gas disebut...", options: ["Menguap", "Menyublim", "Mencair", "Mengembun"], jawaban: "Menyublim" },
+    { text: "Frekuensi adalah...", options: ["Jumlah gelombang per detik", "Panjang gelombang", "Cepat rambat", "Amplitudo"], jawaban: "Jumlah gelombang per detik" },
+    { text: "Cepat rambat bunyi tercepat pada medium...", options: ["Udara", "Air", "Besi", "Vakum"], jawaban: "Besi" },
+    { text: "Lensa cekung bersifat...", options: ["Mengumpulkan cahaya", "Menyebarkan cahaya", "Membalik bayangan", "Memperbesar bayangan"], jawaban: "Menyebarkan cahaya" },
+    { text: "Gaya yang melawan gerak benda disebut...", options: ["Gaya berat", "Gaya gesek", "Gaya normal", "Gaya sentripetal"], jawaban: "Gaya gesek" }
+  ];
+  const soalKimia = [
+    { text: "Lambang unsur Natrium adalah...", options: ["Na", "N", "Ni", "Ne"], jawaban: "Na" },
+    { text: "Air memiliki rumus kimia...", options: ["CO2", "O2", "H2O", "H2O2"], jawaban: "H2O" },
+    { text: "pH air murni adalah...", options: ["5", "6", "7", "8"], jawaban: "7" },
+    { text: "Asam cuka mengandung...", options: ["Asam sulfat", "Asam asetat", "Asam klorida", "Asam nitrat"], jawaban: "Asam asetat" },
+    { text: "Unsur dengan nomor atom 6 adalah...", options: ["Karbon", "Oksigen", "Nitrogen", "Hidrogen"], jawaban: "Karbon" },
+    { text: "Reaksi yang melepaskan panas disebut...", options: ["Eksoterm", "Endoterm", "Netral", "Redoks"], jawaban: "Eksoterm" },
+    { text: "Gas yang paling banyak di atmosfer adalah...", options: ["Oksigen", "Karbon dioksida", "Nitrogen", "Argon"], jawaban: "Nitrogen" },
+    { text: "Ikatan antara logam dan nonlogam disebut...", options: ["Ion", "Kovalen", "Logam", "Hidrogen"], jawaban: "Ion" },
+    { text: "Contoh senyawa adalah...", options: ["Emas", "Oksigen", "Air", "Besi"], jawaban: "Air" },
+    { text: "Larutan yang dapat menghantarkan listrik disebut...", options: ["Elektrolit", "Non-elektrolit", "Isolator", "Semi konduktor"], jawaban: "Elektrolit" }
+  ];
+  const soalBiologi = [
+    { text: "Organel tempat fotosintesis adalah...", options: ["Mitokondria", "Kloroplas", "Ribosom", "Nukleus"], jawaban: "Kloroplas" },
+    { text: "Alat pernapasan pada ikan adalah...", options: ["Paru-paru", "Insang", "Trakea", "Kulit"], jawaban: "Insang" },
+    { text: "Proses pembelahan sel untuk pertumbuhan disebut...", options: ["Meiosis", "Mitosis", "Fagositosis", "Osmosis"], jawaban: "Mitosis" },
+    { text: "Hewan pemakan tumbuhan disebut...", options: ["Karnivora", "Herbivora", "Omnivora", "Insektivora"], jawaban: "Herbivora" },
+    { text: "Sistem gerak pada manusia melibatkan...", options: ["Otot dan tulang", "Jantung dan paru", "Otak dan saraf", "Hati dan ginjal"], jawaban: "Otot dan tulang" },
+    { text: "Lapisan ozon berfungsi menyerap...", options: ["Sinar UV", "Sinar inframerah", "Sinar tampak", "Sinar gamma"], jawaban: "Sinar UV" },
+    { text: "Contoh simbiosis mutualisme adalah...", options: ["Kupu-kupu dan bunga", "Benalu dan pohon", "Ikan hiu dan remora", "Cacing dan manusia"], jawaban: "Kupu-kupu dan bunga" },
+    { text: "Alat ekskresi pada manusia adalah...", options: ["Jantung", "Paru-paru", "Ginjal", "Lambung"], jawaban: "Ginjal" },
+    { text: "Jaringan yang mengangkut air pada tumbuhan adalah...", options: ["Floem", "Xilem", "Epidermis", "Endodermis"], jawaban: "Xilem" },
+    { text: "Penyebab penyakit malaria adalah...", options: ["Virus", "Bakteri", "Protozoa", "Jamur"], jawaban: "Protozoa" }
+  ];
+  const soalBahasaArab = [
+    { text: "Arti dari 'الكتاب' adalah...", options: ["Meja", "Kursi", "Buku", "Pensil"], jawaban: "Buku" },
+    { text: "Kata ganti 'هو' berarti...", options: ["Dia (lk)", "Dia (pr)", "Kamu (lk)", "Kami"], jawaban: "Dia (lk)" },
+    { text: "Bilangan 5 dalam bahasa Arab adalah...", options: ["ثلاثة", "أربعة", "خمسة", "ستة"], jawaban: "خمسة" },
+    { text: "Art dari 'مدرسة' adalah...", options: ["Guru", "Murid", "Sekolah", "Kelas"], jawaban: "Sekolah" },
+    { text: "Kata kerja 'menulis' dalam bahasa Arab adalah...", options: ["كتب", "قرأ", "درس", "لعب"], jawaban: "كتب" },
+    { text: "Hari Jumat dalam bahasa Arab adalah...", options: ["السبت", "الأحد", "الجمعة", "الخميس"], jawaban: "الجمعة" },
+    { text: "Art dari 'السماء' adalah...", options: ["Bumi", "Langit", "Air", "Api"], jawaban: "Langit" },
+    { text: "Warna merah dalam bahasa Arab adalah...", options: ["أحمر", "أصفر", "أخضر", "أزرق"], jawaban: "أحمر" },
+    { text: "Kata 'رحمن' artinya...", options: ["Maha Kaya", "Maha Pengasih", "Maha Adil", "Maha Besar"], jawaban: "Maha Pengasih" },
+    { text: "Art dari 'باب' adalah...", options: ["Jendela", "Pintu", "Dinding", "Lantai"], jawaban: "Pintu" }
   ];
 
-  const soalBahasa = [
-    { text: "Kalimat yang tepat untuk mengungkapkan permintaan maaf adalah...", options: ["Terima kasih", "Maaf, saya salah", "Selamat pagi", "Sampai jumpa"], jawaban: "Maaf, saya salah" },
-    { text: "Sinonim dari kata 'cepat' adalah...", options: ["Lambat", "Perlahan", "Cepat", "Lama"], jawaban: "Cepat" },
-    { text: "Antonim dari kata 'besar' adalah...", options: ["Gede", "Agung", "Kecil", "Raya"], jawaban: "Kecil" },
-    { text: "Kalimat tanya yang tepat untuk menanyakan alasan adalah...", options: ["Apa", "Siapa", "Mengapa", "Kapan"], jawaban: "Mengapa" },
-    { text: "Kata baku dari 'Aktifitas' adalah...", options: ["Aktifitas", "Aktivitas", "Aktif", "Aktifasi"], jawaban: "Aktivitas" }
-  ];
+  let currentUser = null;
+  let currentUjian = { mapel: "", soal: [], jawabanUser: [], statusRagu: [], currentIndex: 0, timerInterval: null };
+  let selectedSoalData = null;
 
-  // Fungsi update status kelulusan ke dataSiswaKelulusan
-  function updateStatusKelulusan(username) {
-    const user = dataPeserta[username];
-    if (user && user.role === 'peserta') {
-      const kkm = 70;
-      const lulus = (user.nilaiMatematika !== null && user.nilaiBahasa !== null && user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm);
-      const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
-      if (index !== -1) {
-        dataSiswaKelulusan[index].lulus = lulus;
-        dataSiswaKelulusan[index].keterangan = lulus ? 
-          `Lulus dengan nilai Matematika: ${user.nilaiMatematika}, Bahasa Indonesia: ${user.nilaiBahasa}` : 
-          `Nilai Matematika: ${user.nilaiMatematika || 'belum'}, Bahasa: ${user.nilaiBahasa || 'belum'}`;
-      }
-    }
-  }
+  function showPage(pageId) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(pageId).classList.add('active'); }
 
-  // Fungsi update riwayat ujian
-  function updateRiwayat() {
-    if (!currentUser) return;
-    const matStatus = currentUser.ujianMatematikaSelesai ? `✅ Selesai (Nilai: ${currentUser.nilaiMatematika ?? '-'})` : '⏳ Belum dikerjakan';
-    const bhsStatus = currentUser.ujianBahasaSelesai ? `✅ Selesai (Nilai: ${currentUser.nilaiBahasa ?? '-'})` : '⏳ Belum dikerjakan';
-    document.getElementById('riwayatMat').innerHTML = matStatus;
-    document.getElementById('riwayatBhs').innerHTML = bhsStatus;
-  }
-
-  // Fungsi hitung rata-rata
-  function hitungRataRata() {
-    let totalMat = 0, totalBhs = 0, countMat = 0, countBhs = 0, jumlahPeserta = 0;
-    for (const [username, user] of Object.entries(dataPeserta)) {
-      if (user.role === 'admin') continue;
-      jumlahPeserta++;
-      if (user.nilaiMatematika !== null && user.nilaiMatematika !== undefined) {
-        totalMat += user.nilaiMatematika;
-        countMat++;
-      }
-      if (user.nilaiBahasa !== null && user.nilaiBahasa !== undefined) {
-        totalBhs += user.nilaiBahasa;
-        countBhs++;
-      }
-    }
-    const rataMat = countMat > 0 ? (totalMat / countMat).toFixed(1) : 0;
-    const rataBhs = countBhs > 0 ? (totalBhs / countBhs).toFixed(1) : 0;
-    const rataTotal = (parseFloat(rataMat) + parseFloat(rataBhs)) / 2;
-    document.getElementById('rataMatematika').innerHTML = rataMat;
-    document.getElementById('rataBahasa').innerHTML = rataBhs;
-    document.getElementById('rataKeseluruhan').innerHTML = rataTotal.toFixed(1);
-    document.getElementById('jumlahPeserta').innerHTML = jumlahPeserta;
-  }
-
-  // Fungsi Navigasi
-  function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-  }
-
-  function backToBeranda() {
-    document.getElementById('mainApp').style.display = 'block';
-    document.getElementById('mapelPage').classList.remove('active');
-    document.getElementById('ujianPage').classList.remove('active');
-    document.getElementById('hasilUjianPage').classList.remove('active');
-    document.getElementById('pengumumanPage').classList.remove('active');
-    document.getElementById('dataPesertaPage').classList.remove('active');
-    document.getElementById('dataNilaiPage').classList.remove('active');
-  }
-
-  function goToUjian() {
-    if (currentUser.role === 'admin') {
-      alert('⚠️ Admin tidak dapat mengikuti ujian! Silakan login sebagai peserta.');
-      return;
-    }
-    showLoading();
-    setTimeout(() => {
-      document.getElementById('mainApp').style.display = 'none';
-      updateRiwayat();
-      showPage('mapelPage');
-      hideLoading();
-    }, 600);
-  }
-
-  function goToPengumuman() {
-    showLoading();
-    setTimeout(() => {
-      document.getElementById('mainApp').style.display = 'none';
-      document.getElementById('hasilPengumuman').innerHTML = '';
-      document.getElementById('nisnInput').value = '';
-      document.getElementById('tglLahirInput').value = '';
-      if (currentUser.role === 'admin') {
-        loadPesertaDropdown();
-        document.getElementById('adminEditKelulusan').style.display = 'block';
-      } else {
-        document.getElementById('adminEditKelulusan').style.display = 'none';
-      }
-      showPage('pengumumanPage');
-      hideLoading();
-    }, 600);
-  }
-
-  function goToDataPeserta() {
-    if (currentUser.role !== 'admin') {
-      alert('⚠️ Hanya Admin yang dapat mengakses halaman ini!');
-      return;
-    }
-    showLoading();
-    setTimeout(() => {
-      document.getElementById('mainApp').style.display = 'none';
-      renderTabelDataPeserta();
-      showPage('dataPesertaPage');
-      hideLoading();
-    }, 600);
-  }
-
-  function goToDataNilai() {
-    if (currentUser.role !== 'admin') {
-      alert('⚠️ Hanya Admin yang dapat mengakses halaman ini!');
-      return;
-    }
-    showLoading();
-    setTimeout(() => {
-      document.getElementById('mainApp').style.display = 'none';
-      renderTabelDataNilai();
-      hitungRataRata();
-      showPage('dataNilaiPage');
-      hideLoading();
-    }, 600);
-  }
-
-  // RENDER TABEL DATA PESERTA
-  function renderTabelDataPeserta() {
-    let html = '';
-    let no = 1;
-    for (const [username, user] of Object.entries(dataPeserta)) {
-      if (user.role === 'admin') continue;
-      html += `
-        <tr>
-          <td>${no++}</td>
-          <td>${user.nama}</td>
-          <td>${user.noPeserta}</td>
-          <td>${user.instansi}</td>
-          <td><strong>${username}</strong></td>
-          <td style="font-family: monospace;">${user.password}</td>
-          <td style="text-align: center;">
-            <button class="action-btn edit-btn" onclick="openEditPesertaModal('${username}')" title="Edit Data"><i class="fas fa-edit"></i></button>
-            <button class="action-btn delete-btn" onclick="deleteUser('${username}')" title="Hapus Peserta"><i class="fas fa-trash"></i></button>
-          </td>
-        </tr>
-      `;
-    }
-    document.getElementById('tabelDataPeserta').innerHTML = html;
-  }
-
-  // RENDER TABEL DATA NILAI
-  function renderTabelDataNilai() {
-    let html = '';
-    let no = 1;
-    const kkm = 70;
-    for (const [username, user] of Object.entries(dataPeserta)) {
-      if (user.role === 'admin') continue;
-      const nilaiMat = user.nilaiMatematika !== null ? user.nilaiMatematika : '-';
-      const nilaiBhs = user.nilaiBahasa !== null ? user.nilaiBahasa : '-';
-      let statusLulus = '-', statusClass = '';
-      if (user.nilaiMatematika !== null && user.nilaiBahasa !== null) {
-        if (user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm) {
-          statusLulus = '✅ LULUS';
-          statusClass = 'style="color: #058d4e; font-weight: bold;"';
-        } else {
-          statusLulus = '❌ TIDAK LULUS';
-          statusClass = 'style="color: #e53e3e; font-weight: bold;"';
-        }
-      } else {
-        statusLulus = '⏳ Belum ujian';
-        statusClass = 'style="color: #f4a261; font-weight: bold;"';
-      }
-      html += `
-        <tr>
-          <td>${no++}</td>
-          <td>${user.nama}</td>
-          <td>${user.noPeserta}</td>
-          <td>${user.instansi}</td>
-          <td style="text-align: center;">${nilaiMat}</td>
-          <td style="text-align: center;">${nilaiBhs}</td>
-          <td style="text-align: center;" ${statusClass}>${statusLulus}</td>
-          <td style="text-align: center;">
-            <button class="action-btn edit-btn" onclick="openEditNilaiModal('${username}')" title="Edit Nilai"><i class="fas fa-edit"></i></button>
-          </td>
-        </tr>
-      `;
-    }
-    document.getElementById('tabelDataNilai').innerHTML = html;
-  }
-
-  // EDIT PESERTA
-  function openEditPesertaModal(username) {
-    const user = dataPeserta[username];
-    document.getElementById('editUsername').value = username;
-    document.getElementById('editNama').value = user.nama;
-    document.getElementById('editNisn').value = user.noPeserta;
-    document.getElementById('editInstansi').value = user.instansi;
-    document.getElementById('editTtl').value = user.ttl;
-    document.getElementById('editUsernameField').value = username;
-    document.getElementById('editPassword').value = user.password;
-    document.getElementById('modalEditPeserta').style.display = 'flex';
-  }
-
-  function closeModalEditPeserta() {
-    document.getElementById('modalEditPeserta').style.display = 'none';
-  }
-
-  document.getElementById('btnSimpanEditPeserta').addEventListener('click', () => {
-    const oldUsername = document.getElementById('editUsername').value;
-    const newUsername = document.getElementById('editUsernameField').value.trim();
-    const user = dataPeserta[oldUsername];
-    if (user) {
-      const updatedUser = { ...user,
-        nama: document.getElementById('editNama').value,
-        noPeserta: document.getElementById('editNisn').value,
-        instansi: document.getElementById('editInstansi').value,
-        ttl: document.getElementById('editTtl').value,
-        password: document.getElementById('editPassword').value
+  // Tab Navigation
+  function initTabs() {
+    document.querySelectorAll('.nav-item').forEach(tab => {
+      tab.removeEventListener('click', tab._listener);
+      tab._listener = () => {
+        document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        const tabName = tab.getAttribute('data-tab');
+        if (tabName === 'ujian') document.getElementById('tabKompetisi').style.display = 'block';
+        else if (tabName === 'riwayat') { document.getElementById('tabRiwayat').style.display = 'block'; renderRiwayat(); }
+        else if (tabName === 'rekapan') { document.getElementById('tabRekapan').style.display = 'block'; renderRekapan(); }
+        else if (tabName === 'pengumuman') document.getElementById('tabPengumuman').style.display = 'block';
+        else if (tabName === 'dokumen') document.getElementById('tabDokumen').style.display = 'block';
+        else if (tabName === 'profil') { document.getElementById('tabProfil').style.display = 'block'; updateProfileTab(); }
       };
-      if (newUsername !== oldUsername) {
-        if (dataPeserta[newUsername]) { alert('❌ Username baru sudah digunakan!'); return; }
-        delete dataPeserta[oldUsername];
-        dataPeserta[newUsername] = updatedUser;
-      } else {
-        dataPeserta[oldUsername] = updatedUser;
-      }
-      closeModalEditPeserta();
-      renderTabelDataPeserta();
-      alert('✅ Data peserta berhasil disimpan!');
-    }
+      tab.addEventListener('click', tab._listener);
+    });
+  }
+
+  function updateProfileTab() { if (currentUser) { document.getElementById('profileNama').innerText = currentUser.nama; document.getElementById('profileUsername').innerText = currentUser.username; document.getElementById('profileNisn').innerText = currentUser.noPeserta; document.getElementById('profileInstansi').innerText = currentUser.instansi; document.getElementById('profileTtl').innerText = currentUser.ttl; } }
+  function showProfileModal() { if (currentUser) { document.getElementById('modalNama').innerText = currentUser.nama; document.getElementById('modalUsername').innerText = currentUser.username; document.getElementById('modalNisn').innerText = currentUser.noPeserta; document.getElementById('modalInstansi').innerText = currentUser.instansi; document.getElementById('modalTtl').innerText = currentUser.ttl; document.getElementById('modalRole').innerText = currentUser.role === 'admin' ? 'Administrator' : 'Peserta'; document.getElementById('profileModal').style.display = 'flex'; } }
+  function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+
+  function renderRiwayat() {
+    const riwayat = dataPeserta[currentUser.username]?.riwayatUjian || [];
+    const container = document.getElementById('riwayatContainer');
+    if (!riwayat.length) { container.innerHTML = '<div class="kompetisi-card"><p style="text-align:center;">Belum ada riwayat ujian.</p></div>'; return; }
+    container.innerHTML = riwayat.map(r => `<div class="riwayat-card"><div class="card-title">📝 ${r.mapel}</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> ${r.tanggal}</span></div><p>Nilai: <strong>${r.nilai}</strong> | ${r.lulus ? '<span style="color:#058d4e;">✅ LULUS</span>' : '<span style="color:#e53e3e;">❌ TIDAK LULUS</span>'}</p></div>`).join('');
+  }
+
+  function renderRekapan() {
+    const nilaiMapel = dataPeserta[currentUser.username]?.nilaiPerMapel || {};
+    const mapelList = ['Bahasa Arab', 'Fisika Terintegrasi', 'Kimia Terintegrasi', 'Biologi Terintegrasi', 'Matematika Terintegrasi'];
+    let totalNilai = 0, count = 0;
+    let html = '<div class="rekapan-card"><h4>📊 Rekapan Nilai Per Mata Pelajaran</h4><div class="rekapan-nilai">';
+    mapelList.forEach(m => {
+      const nilai = nilaiMapel[m];
+      if (nilai !== undefined) { totalNilai += nilai; count++; }
+      html += `<div class="rekapan-item"><div class="label">${m}</div><div class="value">${nilai !== undefined ? nilai : '-'}</div><div>${nilai !== undefined ? (nilai >= 70 ? '✅ Lulus' : '❌ Tidak') : 'Belum ujian'}</div></div>`;
+    });
+    const rata = count > 0 ? (totalNilai / count).toFixed(1) : 0;
+    html += `</div><div class="rekapan-nilai" style="margin-top:1rem; border-top:1px solid #e2edf2; padding-top:1rem;"><div class="rekapan-item"><div class="label">📈 Rata-rata</div><div class="value">${rata}</div></div><div class="rekapan-item"><div class="label">🎯 Status</div><div class="value">${rata >= 70 ? '✅ LULUS' : '⏳ Belum lengkap'}</div></div></div></div>`;
+    document.getElementById('rekapanContainer').innerHTML = html;
+  }
+
+  function startUjian(mapel, soal) {
+    selectedSoalData = { mapel, soal };
+    document.getElementById('petunjukWaktu').innerText = soal.length === 10 ? "30 menit" : "30 menit";
+    showPage('petunjukPage');
+  }
+
+  document.getElementById('btnMulaiUjian').addEventListener('click', () => {
+    if (!selectedSoalData) return;
+    const { mapel, soal } = selectedSoalData;
+    currentUjian = { mapel, soal, jawabanUser: new Array(soal.length).fill(null), statusRagu: new Array(soal.length).fill(false), currentIndex: 0, timerInterval: null, waktuMulai: Date.now() };
+    let waktu = 30 * 60;
+    document.getElementById('ujianMapelTitle').innerHTML = mapel;
+    renderSoalUjian();
+    renderNomorSoal();
+    if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
+    currentUjian.timerInterval = setInterval(() => { if (waktu <= 0) { clearInterval(currentUjian.timerInterval); alert('⏰ Waktu habis! Ujian akan dikirim.'); kirimUjian(); } else { waktu--; let menit = Math.floor(waktu / 60); let detik = waktu % 60; document.getElementById('timer').innerHTML = `${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`; } }, 1000);
+    showPage('ujianPage');
   });
 
-  // EDIT NILAI
-  function openEditNilaiModal(username) {
-    const user = dataPeserta[username];
-    document.getElementById('editNilaiUsername').value = username;
-    document.getElementById('editNilaiNama').value = user.nama;
-    document.getElementById('editNilaiNisn').value = user.noPeserta;
-    document.getElementById('editNilaiMat').value = user.nilaiMatematika !== null ? user.nilaiMatematika : '';
-    document.getElementById('editNilaiBhs').value = user.nilaiBahasa !== null ? user.nilaiBahasa : '';
-    document.getElementById('modalEditNilai').style.display = 'flex';
+  function renderSoalUjian() {
+    const soal = currentUjian.soal[currentUjian.currentIndex];
+    document.getElementById('soalText').innerHTML = `${currentUjian.currentIndex + 1}. ${soal.text}`;
+    let opsiHtml = '';
+    soal.options.forEach((opt, idx) => {
+      const isChecked = currentUjian.jawabanUser[currentUjian.currentIndex] === opt;
+      opsiHtml += `<div class="opsi-item" onclick="document.getElementById('opsi${idx}').click()"><input type="radio" name="opsi" id="opsi${idx}" value="${opt}" ${isChecked ? 'checked' : ''}><label for="opsi${idx}">${String.fromCharCode(65+idx)}. ${opt}</label></div>`;
+    });
+    document.getElementById('opsiContainer').innerHTML = opsiHtml;
+    document.querySelectorAll('input[name="opsi"]').forEach(radio => radio.addEventListener('change', (e) => { currentUjian.jawabanUser[currentUjian.currentIndex] = e.target.value; renderNomorSoal(); }));
+    renderNomorSoal();
   }
 
-  function closeModalEditNilai() {
-    document.getElementById('modalEditNilai').style.display = 'none';
+  function renderNomorSoal() {
+    const grid = document.getElementById('nomorGrid');
+    grid.innerHTML = '';
+    currentUjian.soal.forEach((_, idx) => {
+      const btn = document.createElement('div');
+      btn.className = 'nomor-soal-btn';
+      if (currentUjian.jawabanUser[idx] !== null) btn.classList.add('answered');
+      if (currentUjian.statusRagu[idx]) btn.classList.add('ragu');
+      if (idx === currentUjian.currentIndex) btn.classList.add('current');
+      btn.innerText = idx + 1;
+      btn.onclick = () => { currentUjian.currentIndex = idx; renderSoalUjian(); };
+      grid.appendChild(btn);
+    });
   }
 
-  document.getElementById('btnSimpanEditNilai').addEventListener('click', () => {
-    const username = document.getElementById('editNilaiUsername').value;
-    const user = dataPeserta[username];
-    if (user) {
-      const nilaiMat = document.getElementById('editNilaiMat').value;
-      const nilaiBhs = document.getElementById('editNilaiBhs').value;
-      user.nilaiMatematika = nilaiMat !== '' ? Number(nilaiMat) : null;
-      user.nilaiBahasa = nilaiBhs !== '' ? Number(nilaiBhs) : null;
-      updateStatusKelulusan(username);
-      closeModalEditNilai();
-      renderTabelDataNilai();
-      hitungRataRata();
-      alert('✅ Nilai berhasil disimpan!');
-    }
-  });
+  document.getElementById('btnRagu').addEventListener('click', () => { currentUjian.statusRagu[currentUjian.currentIndex] = !currentUjian.statusRagu[currentUjian.currentIndex]; renderNomorSoal(); alert(currentUjian.statusRagu[currentUjian.currentIndex] ? 'Soal ini ditandai ragu' : 'Tanda ragu dihapus'); });
+  document.getElementById('prevSoal').addEventListener('click', () => { if (currentUjian.currentIndex > 0) { currentUjian.currentIndex--; renderSoalUjian(); } });
+  document.getElementById('nextSoal').addEventListener('click', () => { if (currentUjian.currentIndex < currentUjian.soal.length - 1) { currentUjian.currentIndex++; renderSoalUjian(); } });
+  document.getElementById('btnKirimUjian').addEventListener('click', () => { if (confirm('Apakah Anda yakin ingin mengirim ujian?')) kirimUjian(); });
 
-  // TAMBAH PESERTA
-  function openTambahPesertaModal() {
-    document.getElementById('tambahNama').value = '';
-    document.getElementById('tambahNisn').value = '';
-    document.getElementById('tambahInstansi').value = '';
-    document.getElementById('tambahTtl').value = '';
-    document.getElementById('tambahUsername').value = '';
-    document.getElementById('tambahPassword').value = '123456';
-    document.getElementById('modalTambahPeserta').style.display = 'flex';
-  }
-
-  function closeTambahPesertaModal() {
-    document.getElementById('modalTambahPeserta').style.display = 'none';
-  }
-
-  document.getElementById('btnSimpanTambah').addEventListener('click', () => {
-    const nama = document.getElementById('tambahNama').value.trim();
-    const nisn = document.getElementById('tambahNisn').value.trim();
-    const instansi = document.getElementById('tambahInstansi').value.trim();
-    const ttl = document.getElementById('tambahTtl').value;
-    const username = document.getElementById('tambahUsername').value.trim();
-    const password = document.getElementById('tambahPassword').value.trim();
-    if (!nama || !nisn || !instansi || !ttl || !username) { alert('❌ Semua field harus diisi!'); return; }
-    if (dataPeserta[username]) { alert('❌ Username sudah digunakan!'); return; }
-    dataPeserta[username] = {
-      nama, noPeserta: nisn, instansi, ttl, password: password || '123456',
-      nilaiMatematika: null, nilaiBahasa: null, role: 'peserta',
-      ujianMatematikaSelesai: false, ujianBahasaSelesai: false
-    };
-    dataSiswaKelulusan.push({ nisn, tglLahir: ttl, nama, lulus: false, keterangan: 'Belum mengikuti ujian' });
-    closeTambahPesertaModal();
-    renderTabelDataPeserta();
-    alert('✅ Peserta berhasil ditambahkan!');
-  });
-
-  // HAPUS PESERTA
-  function deleteUser(username) {
-    if (username === 'admin') { alert('⚠️ Akun Admin tidak dapat dihapus!'); return; }
-    if (confirm(`Yakin ingin menghapus data ${dataPeserta[username].nama}?`)) {
-      const nisn = dataPeserta[username].noPeserta;
-      delete dataPeserta[username];
-      const index = dataSiswaKelulusan.findIndex(s => s.nisn === nisn);
-      if (index !== -1) dataSiswaKelulusan.splice(index, 1);
-      renderTabelDataPeserta();
-      renderTabelDataNilai();
-      alert('✅ Data berhasil dihapus!');
-    }
-  }
-
-  // LOAD PESERTA DROPDOWN UNTUK ADMIN
-  function loadPesertaDropdown() {
-    const select = document.getElementById('adminPilihPeserta');
-    if (!select) return;
-    select.innerHTML = '<option value="">-- Pilih Peserta --</option>';
-    for (const [username, user] of Object.entries(dataPeserta)) {
-      if (user.role === 'admin') continue;
-      select.innerHTML += `<option value="${username}" data-nisn="${user.noPeserta}" data-ttl="${user.ttl}">${user.nama} (${user.noPeserta})</option>`;
-    }
-  }
-
-  // ADMIN SET KELULUSAN
-  document.getElementById('btnAdminSetLulus')?.addEventListener('click', () => {
-    const select = document.getElementById('adminPilihPeserta');
-    const username = select.value;
-    if (!username) { alert('Pilih peserta terlebih dahulu!'); return; }
-    const user = dataPeserta[username];
-    const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
-    if (index !== -1) {
-      dataSiswaKelulusan[index].lulus = true;
-      dataSiswaKelulusan[index].keterangan = `LULUS (ditetapkan admin) - Nilai Matematika: ${user.nilaiMatematika || '-'}, Bahasa: ${user.nilaiBahasa || '-'}`;
-      alert(`✅ ${user.nama} dinyatakan LULUS!`);
-    }
-  });
-
-  document.getElementById('btnAdminSetTidakLulus')?.addEventListener('click', () => {
-    const select = document.getElementById('adminPilihPeserta');
-    const username = select.value;
-    if (!username) { alert('Pilih peserta terlebih dahulu!'); return; }
-    const user = dataPeserta[username];
-    const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
-    if (index !== -1) {
-      dataSiswaKelulusan[index].lulus = false;
-      dataSiswaKelulusan[index].keterangan = `TIDAK LULUS (ditetapkan admin) - Nilai Matematika: ${user.nilaiMatematika || '-'}, Bahasa: ${user.nilaiBahasa || '-'}`;
-      alert(`❌ ${user.nama} dinyatakan TIDAK LULUS!`);
-    }
-  });
-
-  function backToMapel() { showPage('mapelPage'); }
-
-  function startUjian(mapel) {
-    if (mapel === 'matematika' && currentUser.ujianMatematikaSelesai) {
-      alert('⚠️ Anda sudah mengerjakan ujian Matematika! Tidak bisa mengulang.');
-      return;
-    }
-    if (mapel === 'bahasa' && currentUser.ujianBahasaSelesai) {
-      alert('⚠️ Anda sudah mengerjakan ujian Bahasa Indonesia! Tidak bisa mengulang.');
-      return;
-    }
-    showLoading();
-    setTimeout(() => {
-      currentMapel = mapel;
-      const title = mapel === 'matematika' ? '📐 Matematika' : '📖 Bahasa Indonesia';
-      const soal = mapel === 'matematika' ? soalMatematika : soalBahasa;
-      document.getElementById('mapelTitle').innerHTML = title;
-      let html = '';
-      soal.forEach((soalItem, idx) => {
-        html += `
-          <div class="soal-item">
-            <h4>${idx + 1}. ${soalItem.text}</h4>
-            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[0]}" id="q${idx}a"><label for="q${idx}a">A. ${soalItem.options[0]}</label></div>
-            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[1]}" id="q${idx}b"><label for="q${idx}b">B. ${soalItem.options[1]}</label></div>
-            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[2]}" id="q${idx}c"><label for="q${idx}c">C. ${soalItem.options[2]}</label></div>
-            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[3]}" id="q${idx}d"><label for="q${idx}d">D. ${soalItem.options[3]}</label></div>
-          </div>
-        `;
-      });
-      document.getElementById('soalContainer').innerHTML = html;
-      showPage('ujianPage');
-      hideLoading();
-    }, 500);
-  }
-
-  // Selesai Ujian
-  document.getElementById('btnSelesaiUjian').addEventListener('click', () => {
-    const soal = currentMapel === 'matematika' ? soalMatematika : soalBahasa;
-    let nilai = 0;
-    for (let i = 0; i < soal.length; i++) {
-      const selected = document.querySelector(`input[name="q${i}"]:checked`);
-      if (selected && selected.value === soal[i].jawaban) nilai += 20;
-    }
-    if (currentMapel === 'matematika') {
-      dataPeserta[currentUser.username].nilaiMatematika = nilai;
-      dataPeserta[currentUser.username].ujianMatematikaSelesai = true;
-      currentUser.ujianMatematikaSelesai = true;
-      currentUser.nilaiMatematika = nilai;
-    } else {
-      dataPeserta[currentUser.username].nilaiBahasa = nilai;
-      dataPeserta[currentUser.username].ujianBahasaSelesai = true;
-      currentUser.ujianBahasaSelesai = true;
-      currentUser.nilaiBahasa = nilai;
-    }
-    updateStatusKelulusan(currentUser.username);
-    if (currentUser.role === 'admin') { renderTabelDataNilai(); hitungRataRata(); }
-    const mapelName = currentMapel === 'matematika' ? 'Matematika' : 'Bahasa Indonesia';
-    document.getElementById('hasilUjianContainer').innerHTML = `
-      <div class="result-card">
-        <h3>✅ Selamat, Anda sudah mengerjakan ujian!</h3>
-        <p><strong>Mata Pelajaran:</strong> ${mapelName}</p>
-        <p><strong>Nama Peserta:</strong> ${currentUser.nama}</p>
-        <p><strong>NISN:</strong> ${currentUser.noPeserta}</p>
-        <div class="nilai">Nilai Akhir: ${nilai}</div>
-        <p>KKM: 70</p>
-        <p>${nilai >= 70 ? '🎉 Anda dinyatakan LULUS untuk mata pelajaran ini!' : '📚 Mohon maaf, Anda belum mencapai KKM.'}</p>
-      </div>
-    `;
+  function kirimUjian() {
+    if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
+    let benar = 0;
+    currentUjian.jawabanUser.forEach((jawab, idx) => { if (jawab === currentUjian.soal[idx].jawaban) benar++; });
+    let nilai = (benar / currentUjian.soal.length) * 100;
+    nilai = Math.round(nilai);
+    const lulus = nilai >= 70;
+    const tanggal = new Date().toLocaleDateString('id-ID');
+    const riwayatBaru = { mapel: currentUjian.mapel, nilai, lulus, tanggal };
+    dataPeserta[currentUser.username].riwayatUjian.push(riwayatBaru);
+    dataPeserta[currentUser.username].nilaiPerMapel[currentUjian.mapel] = nilai;
+    document.getElementById('hasilMapel').innerHTML = currentUjian.mapel;
+    document.getElementById('nilaiAkhir').innerHTML = nilai;
+    document.getElementById('statusKelulusan').innerHTML = lulus ? '<div class="status-lulus">✅ SELAMAT! ANDA LULUS</div>' : '<div class="status-tidak">❌ MOHON MAAF, ANDA TIDAK LULUS</div>';
+    let detailHtml = `<p><strong>Detail Jawaban:</strong></p><ul>`;
+    currentUjian.jawabanUser.forEach((jawab, idx) => { const isBenar = jawab === currentUjian.soal[idx].jawaban; detailHtml += `<li>Soal ${idx+1}: ${isBenar ? '✅ Benar' : '❌ Salah'} (Jawaban Anda: ${jawab || '-'}, Kunci: ${currentUjian.soal[idx].jawaban})</li>`; });
+    detailHtml += `</ul><p><strong>Benar:</strong> ${benar} dari ${currentUjian.soal.length} soal</p>`;
+    document.getElementById('detailJawaban').innerHTML = detailHtml;
     showPage('hasilUjianPage');
-  });
-
-  // Cek Kelulusan (Pengumuman)
-  function cariSiswaByNisnDanTgl(nisn, tglLahir) {
-    if (!nisn || !tglLahir) return null;
-    return dataSiswaKelulusan.find(s => s.nisn === nisn.trim() && s.tglLahir === tglLahir);
   }
-  function formatTanggal(tgl) { if (!tgl) return "-"; let parts = tgl.split("-"); return `${parts[2]}/${parts[1]}/${parts[0]}`; }
 
-  document.getElementById('btnCekKelulusan').addEventListener('click', () => {
-    const nisn = document.getElementById('nisnInput').value.trim();
-    const tglLahir = document.getElementById('tglLahirInput').value;
-    const hasilDiv = document.getElementById('hasilPengumuman');
-    if (!nisn) { hasilDiv.innerHTML = `<div class="error-message">⚠️ NISN tidak boleh kosong!</div>`; return; }
-    if (!tglLahir) { hasilDiv.innerHTML = `<div class="error-message">⚠️ Tanggal lahir harus dipilih!</div>`; return; }
-    const siswa = cariSiswaByNisnDanTgl(nisn, tglLahir);
-    if (!siswa) { hasilDiv.innerHTML = `<div class="error-message">⚠️ Data tidak ditemukan! Pastikan NISN dan Tanggal Lahir sesuai.</div>`; return; }
-    if (siswa.lulus) {
-      hasilDiv.innerHTML = `<div class="card-lulus"><h3>🎉 SELAMAT! 🎉</h3><div style="font-size:1.5rem; font-weight:800; color:#0f6e3f;">ANDA DINYATAKAN LULUS</div><div class="badge-success">STATUS : LULUS</div><div class="info-siswa-pengumuman"><p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p><p><strong>NISN</strong> <span>${siswa.nisn}</span></p><p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p><p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p></div><div style="margin-top:12px;">✨ Selamat melanjutkan ke jenjang pendidikan selanjutnya ✨</div></div>`;
-    } else {
-      hasilDiv.innerHTML = `<div class="card-tidak"><h3>💔 MOHON MAAF 💔</h3><div style="font-size:1.5rem; font-weight:800; color:#bc5727;">ANDA TIDAK LULUS</div><div class="badge-failed">STATUS : TIDAK LULUS</div><div class="info-siswa-pengumuman"><p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p><p><strong>NISN</strong> <span>${siswa.nisn}</span></p><p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p><p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p></div><div style="margin-top:12px;">📖 Tetap semangat, perbaiki nilai dan ikuti program ujian susulan 📖</div></div>`;
-    }
-  });
-
-  // Data Diri Modal
-  function showDataDiri() {
-    if (currentUser) {
-      document.getElementById('modalNama').innerText = currentUser.nama;
-      document.getElementById('modalNisn').innerText = currentUser.noPeserta;
-      document.getElementById('modalUsername').innerText = currentUser.username;
-      document.getElementById('modalInstansi').innerText = currentUser.instansi;
-      document.getElementById('modalTtl').innerText = currentUser.ttl;
-      document.getElementById('modalRole').innerText = currentUser.role === 'admin' ? 'Administrator' : 'Peserta';
-      document.getElementById('dataDiriModal').style.display = 'flex';
-    }
-  }
-  function closeModal() { document.getElementById('dataDiriModal').style.display = 'none'; }
-
-  // DAFTAR
-  function goToDaftar() {
-    document.getElementById('loginPage').classList.remove('active');
-    document.getElementById('daftarPage').classList.add('active');
-    document.getElementById('daftarNama').value = ''; document.getElementById('daftarTtl').value = '';
-    document.getElementById('daftarNisn').value = ''; document.getElementById('daftarSekolah').value = '';
-    document.getElementById('daftarUsername').value = ''; document.getElementById('daftarPassword').value = '';
-    document.getElementById('daftarErrorMsg').style.display = 'none'; document.getElementById('daftarSuccessMsg').style.display = 'none';
-  }
-  function backToLoginFromDaftar() {
-    document.getElementById('daftarPage').classList.remove('active');
-    document.getElementById('loginPage').classList.add('active');
-    document.getElementById('daftarErrorMsg').style.display = 'none'; document.getElementById('daftarSuccessMsg').style.display = 'none';
-  }
-  document.getElementById('btnDaftar').addEventListener('click', () => {
-    const nama = document.getElementById('daftarNama').value.trim(), ttl = document.getElementById('daftarTtl').value;
-    const nisn = document.getElementById('daftarNisn').value.trim(), sekolah = document.getElementById('daftarSekolah').value.trim();
-    const username = document.getElementById('daftarUsername').value.trim(), password = document.getElementById('daftarPassword').value.trim();
-    const errorDiv = document.getElementById('daftarErrorMsg'), successDiv = document.getElementById('daftarSuccessMsg');
-    if (!nama || !ttl || !nisn || !sekolah || !username || !password) {
-      errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Semua field harus diisi!'; successDiv.style.display = 'none';
-      setTimeout(() => errorDiv.style.display = 'none', 3000); return;
-    }
-    if (nisn.length < 5) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ NISN tidak valid! Minimal 5 digit.'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
-    if (password.length < 4) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Password minimal 4 karakter!'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
-    if (dataPeserta[username]) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username sudah digunakan!'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
-    dataPeserta[username] = { nama, noPeserta: nisn, instansi: sekolah, ttl, password, nilaiMatematika: null, nilaiBahasa: null, role: 'peserta', ujianMatematikaSelesai: false, ujianBahasaSelesai: false };
-    dataSiswaKelulusan.push({ nisn, tglLahir: ttl, nama, lulus: false, keterangan: 'Belum mengikuti ujian' });
-    successDiv.style.display = 'block'; successDiv.innerHTML = '✅ Pendaftaran berhasil! Silakan login.'; errorDiv.style.display = 'none';
-    document.getElementById('daftarNama').value = ''; document.getElementById('daftarTtl').value = ''; document.getElementById('daftarNisn').value = '';
-    document.getElementById('daftarSekolah').value = ''; document.getElementById('daftarUsername').value = ''; document.getElementById('daftarPassword').value = '';
-    setTimeout(() => backToLoginFromDaftar(), 2000);
-  });
+  document.getElementById('btnKembaliKeDashboard').addEventListener('click', () => { showPage('dashboardPage'); renderRiwayat(); renderRekapan(); });
 
   // LOGIN
   document.getElementById('btnLogin').addEventListener('click', () => {
-    const username = document.getElementById('loginUsername').value.trim();
+    const username = document.getElementById('loginUsername').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
     const user = dataPeserta[username];
     if (user && user.password === password) {
       currentUser = { ...user, username: username };
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      document.getElementById('userFullName').innerText = user.nama;
-      document.getElementById('userInfo').innerHTML = `NISN: ${user.noPeserta} | Asal Sekolah: ${user.instansi}`;
-      document.getElementById('navbarUser').innerHTML = `👤 ${user.nama} ${user.role === 'admin' ? '(Admin)' : ''}`;
-      if (user.role === 'admin') { document.getElementById('menuDataPeserta').style.display = 'block'; document.getElementById('menuDataNilai').style.display = 'block'; }
-      else { document.getElementById('menuDataPeserta').style.display = 'none'; document.getElementById('menuDataNilai').style.display = 'none'; }
-      document.getElementById('mainApp').style.display = 'block';
-      document.getElementById('loginPage').classList.remove('active');
-    } else {
-      const errorDiv = document.getElementById('loginErrorMsg');
-      errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!';
-      setTimeout(() => errorDiv.style.display = 'none', 3000);
-    }
+      document.getElementById('userName').innerHTML = user.nama;
+      document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
+      const inisial = user.nama.split(' ').map(n => n[0]).join('');
+      document.getElementById('userAvatar').innerHTML = inisial;
+      initTabs();
+      showPage('dashboardPage');
+    } else { const errorDiv = document.getElementById('loginErrorMsg'); errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!'; setTimeout(() => errorDiv.style.display = 'none', 3000); }
   });
 
-  // LOGOUT
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('currentUser'); currentUser = null;
-    document.getElementById('mainApp').style.display = 'none';
-    document.getElementById('loginPage').classList.add('active');
-    document.getElementById('loginUsername').value = ''; document.getElementById('loginPassword').value = '';
-    closeModal();
-  });
+  document.getElementById('logoutBtnDashboard').addEventListener('click', () => { localStorage.removeItem('currentUser'); currentUser = null; showPage('loginPage'); document.getElementById('loginUsername').value = ''; document.getElementById('loginPassword').value = ''; });
 
-  // CHECK SESSION
   function checkSession() {
     const saved = localStorage.getItem('currentUser');
     if (saved) {
       currentUser = JSON.parse(saved);
       const user = dataPeserta[currentUser.username];
       if (user) {
-        document.getElementById('userFullName').innerText = user.nama;
-        document.getElementById('userInfo').innerHTML = `NISN: ${user.noPeserta} | Asal Sekolah: ${user.instansi}`;
-        document.getElementById('navbarUser').innerHTML = `👤 ${user.nama} ${user.role === 'admin' ? '(Admin)' : ''}`;
-        if (user.role === 'admin') { document.getElementById('menuDataPeserta').style.display = 'block'; document.getElementById('menuDataNilai').style.display = 'block'; }
-        else { document.getElementById('menuDataPeserta').style.display = 'none'; document.getElementById('menuDataNilai').style.display = 'none'; }
-        document.getElementById('mainApp').style.display = 'block';
-        document.getElementById('loginPage').classList.remove('active');
-      } else { document.getElementById('mainApp').style.display = 'none'; document.getElementById('loginPage').classList.add('active'); }
-    } else { document.getElementById('mainApp').style.display = 'none'; document.getElementById('loginPage').classList.add('active'); }
+        document.getElementById('userName').innerHTML = user.nama;
+        document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
+        document.getElementById('userAvatar').innerHTML = user.nama.split(' ').map(n => n[0]).join('');
+        initTabs();
+        showPage('dashboardPage');
+      } else showPage('loginPage');
+    } else showPage('loginPage');
   }
   checkSession();
+
 </script>
 </body>
 </html>
