@@ -17,6 +17,12 @@
       font-family: 'Inter', sans-serif;
       background: #f5f7fa;
       color: #1a2c3e;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
     /* ========== BACKGROUND LOGIN ELEGAN ========== */
@@ -251,6 +257,22 @@
       display: flex;
       gap: 1.5rem;
       align-items: center;
+    }
+
+    .fullscreen-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #1a4d5f;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      transition: 0.2s;
+      background: #eef2f5;
+    }
+
+    .fullscreen-btn:hover {
+      background: #d4e2ec;
     }
 
     .user-name-click {
@@ -539,7 +561,51 @@
       background: #fee2e2;
     }
 
-    /* Modal Edit */
+    /* Statistik Card */
+    .statistik-card {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+
+    .stat-item .label {
+      font-size: 0.7rem;
+      color: #2c4c6c;
+      font-weight: 600;
+    }
+
+    .stat-item .value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #058d4e;
+    }
+
+    .stat-item .value small {
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    .jumlah-peserta {
+      background: #058d4e;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-weight: 600;
+    }
+
+    /* Modal */
     .modal-edit {
       display: none;
       position: fixed;
@@ -562,7 +628,59 @@
       animation: fadeInUp 0.3s ease;
     }
 
-    /* PENGUMUMAN KELULUSAN ELEGAN */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 2rem;
+      max-width: 450px;
+      width: 90%;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .modal-content h3 {
+      color: #1a4d5f;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-content .info-row {
+      margin: 0.8rem 0;
+      text-align: left;
+      padding: 0.5rem;
+      border-bottom: 1px solid #e2edf2;
+    }
+
+    .modal-content .info-row strong {
+      display: inline-block;
+      width: 110px;
+      color: #058d4e;
+    }
+
+    .close-modal {
+      background: #058d4e;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    /* PENGUMUMAN KELULUSAN */
     .pengumuman-card {
       max-width: 550px;
       margin: 0 auto;
@@ -687,59 +805,6 @@
       margin-top: 12px;
     }
 
-    /* Data Diri Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 2rem;
-      max-width: 450px;
-      width: 90%;
-      padding: 2rem;
-      text-align: center;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .modal-content h3 {
-      color: #1a4d5f;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-content .info-row {
-      margin: 0.8rem 0;
-      text-align: left;
-      padding: 0.5rem;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    .modal-content .info-row strong {
-      display: inline-block;
-      width: 110px;
-      color: #058d4e;
-    }
-
-    .close-modal {
-      background: #058d4e;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-
     /* LOADING SCREEN */
     .loading-overlay {
       position: fixed;
@@ -786,6 +851,17 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Full Screen */
+    :-webkit-full-screen {
+      background: #f5f7fa;
+    }
+    :-moz-full-screen {
+      background: #f5f7fa;
+    }
+    :fullscreen {
+      background: #f5f7fa;
+    }
+
     @media (max-width: 768px) {
       .dashboard-container {
         padding: 1rem;
@@ -801,6 +877,9 @@
       th, td {
         padding: 6px;
         font-size: 0.7rem;
+      }
+      .statistik-card {
+        flex-direction: column;
       }
     }
   </style>
@@ -829,37 +908,96 @@
   </div>
 </div>
 
-<!-- MODAL EDIT DATA (ADMIN) -->
-<div id="modalEdit" class="modal-edit">
+<!-- MODAL EDIT PESERTA (ADMIN) -->
+<div id="modalEditPeserta" class="modal-edit">
   <div class="modal-edit-content">
     <h3>✏️ Edit Data Peserta</h3>
     <input type="hidden" id="editUsername">
     <div class="form-group">
       <label>Nama Lengkap</label>
-      <input type="text" id="editNama" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <input type="text" id="editNama" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
     <div class="form-group">
       <label>NISN</label>
-      <input type="text" id="editNisn" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <input type="text" id="editNisn" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
     <div class="form-group">
       <label>Asal Sekolah</label>
-      <input type="text" id="editInstansi" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <input type="text" id="editInstansi" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
     <div class="form-group">
       <label>Tanggal Lahir</label>
-      <input type="date" id="editTtl" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <input type="date" id="editTtl" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
     <div class="form-group">
-      <label>Nilai Matematika</label>
-      <input type="number" id="editNilaiMat" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <label>Username</label>
+      <input type="text" id="editUsernameField" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
     <div class="form-group">
-      <label>Nilai Bahasa Indonesia</label>
-      <input type="number" id="editNilaiBhs" class="input-with-icon" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+      <label>Password</label>
+      <input type="text" id="editPassword" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
     </div>
-    <button class="btn btn-secondary" id="btnSimpanEdit" style="width:100%; margin-top:0.5rem;">💾 Simpan Perubahan</button>
-    <button class="btn btn-outline" onclick="closeModalEdit()" style="width:100%; margin-top:0.5rem;">Batal</button>
+    <button class="btn btn-secondary" id="btnSimpanEditPeserta" style="width:100%; margin-top:0.5rem;">💾 Simpan Perubahan</button>
+    <button class="btn btn-outline" onclick="closeModalEditPeserta()" style="width:100%; margin-top:0.5rem;">Batal</button>
+  </div>
+</div>
+
+<!-- MODAL TAMBAH PESERTA (ADMIN) -->
+<div id="modalTambahPeserta" class="modal-edit">
+  <div class="modal-edit-content">
+    <h3>➕ Tambah Peserta Baru</h3>
+    <div class="form-group">
+      <label>Nama Lengkap</label>
+      <input type="text" id="tambahNama" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+    </div>
+    <div class="form-group">
+      <label>NISN</label>
+      <input type="text" id="tambahNisn" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+    </div>
+    <div class="form-group">
+      <label>Asal Sekolah</label>
+      <input type="text" id="tambahInstansi" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+    </div>
+    <div class="form-group">
+      <label>Tanggal Lahir</label>
+      <input type="date" id="tambahTtl" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;">
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="tambahUsername" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="Buat username">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="text" id="tambahPassword" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="Password (default: 123456)" value="123456">
+    </div>
+    <button class="btn btn-secondary" id="btnSimpanTambah" style="width:100%; margin-top:0.5rem;">💾 Simpan Peserta</button>
+    <button class="btn btn-outline" onclick="closeTambahPesertaModal()" style="width:100%; margin-top:0.5rem;">Batal</button>
+  </div>
+</div>
+
+<!-- MODAL EDIT NILAI (ADMIN) -->
+<div id="modalEditNilai" class="modal-edit">
+  <div class="modal-edit-content">
+    <h3>✏️ Edit Nilai Peserta</h3>
+    <input type="hidden" id="editNilaiUsername">
+    <div class="form-group">
+      <label>Nama Peserta</label>
+      <input type="text" id="editNilaiNama" disabled style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8; background:#f5f7fa;">
+    </div>
+    <div class="form-group">
+      <label>NISN</label>
+      <input type="text" id="editNilaiNisn" disabled style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8; background:#f5f7fa;">
+    </div>
+    <div class="form-group">
+      <label>📐 Nilai Matematika</label>
+      <input type="number" id="editNilaiMat" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="0-100">
+    </div>
+    <div class="form-group">
+      <label>📖 Nilai Bahasa Indonesia</label>
+      <input type="number" id="editNilaiBhs" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;" placeholder="0-100">
+    </div>
+    <button class="btn btn-secondary" id="btnSimpanEditNilai" style="width:100%; margin-top:0.5rem;">💾 Simpan Nilai</button>
+    <button class="btn btn-outline" onclick="closeModalEditNilai()" style="width:100%; margin-top:0.5rem;">Batal</button>
   </div>
 </div>
 
@@ -976,6 +1114,9 @@
         <span class="logo-text">FASA OFFICIAL</span>
       </div>
       <div class="nav-links">
+        <button id="fullscreenBtn" class="fullscreen-btn" onclick="toggleFullScreen()">
+          <i class="fas fa-expand"></i>
+        </button>
         <span id="navbarUser" class="user-name-click" onclick="showDataDiri()"></span>
         <button id="logoutBtn" class="logout-btn">LOGOUT</button>
       </div>
@@ -1003,9 +1144,14 @@
         <p>Lihat hasil kelulusan Anda</p>
       </div>
       <div id="menuDataPeserta" class="menu-card" onclick="goToDataPeserta()" style="display: none;">
-        <i class="fas fa-database"></i>
-        <h3>📊 Data Peserta</h3>
-        <p>Kelola data dan hasil ujian (Admin)</p>
+        <i class="fas fa-users"></i>
+        <h3>📋 Data Peserta</h3>
+        <p>Kelola data diri peserta (Admin)</p>
+      </div>
+      <div id="menuDataNilai" class="menu-card" onclick="goToDataNilai()" style="display: none;">
+        <i class="fas fa-chart-line"></i>
+        <h3>📊 Data Nilai</h3>
+        <p>Kelola nilai ujian peserta (Admin)</p>
       </div>
     </div>
 
@@ -1015,9 +1161,18 @@
   </div>
 </div>
 
-<!-- HALAMAN PILIH MAPEL -->
+<!-- HALAMAN PILIH MAPEL + RIWAYAT -->
 <div id="mapelPage" class="page">
   <div class="dashboard-container">
+    <!-- Riwayat Ujian -->
+    <div class="card" id="riwayatUjian" style="margin-bottom: 1rem;">
+      <h3>📜 Riwayat Ujian Anda</h3>
+      <div id="riwayatContainer">
+        <p>📐 Matematika: <span id="riwayatMat">⏳ Belum dikerjakan</span></p>
+        <p>📖 Bahasa Indonesia: <span id="riwayatBhs">⏳ Belum dikerjakan</span></p>
+      </div>
+    </div>
+    
     <div class="card">
       <h2>📚 Pilih Mata Pelajaran</h2>
       <div class="mapel-grid">
@@ -1085,6 +1240,19 @@
         </div>
         <button class="btn-cek-pengumuman" id="btnCekKelulusan">CEK</button>
         <div id="hasilPengumuman" style="margin-top: 20px;"></div>
+        
+        <!-- Admin Edit Kelulusan -->
+        <div id="adminEditKelulusan" style="display: none; margin-top: 1rem;">
+          <hr style="margin: 1rem 0;">
+          <h4>🔧 Admin: Edit Status Kelulusan</h4>
+          <div class="form-group">
+            <label>Pilih Peserta</label>
+            <select id="adminPilihPeserta" style="width:100%; padding:0.8rem; border-radius:1rem; border:1px solid #d4e0e8;"></select>
+          </div>
+          <button class="btn" id="btnAdminSetLulus" style="background:#058d4e; margin-bottom:0.5rem;">✅ Set Lulus</button>
+          <button class="btn btn-danger" id="btnAdminSetTidakLulus">❌ Set Tidak Lulus</button>
+        </div>
+        
         <button class="btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="backToBeranda()">← Kembali ke Beranda</button>
       </div>
     </div>
@@ -1095,18 +1263,22 @@
 <div id="dataPesertaPage" class="page">
   <div class="dashboard-container">
     <div class="card">
-      <h2>📊 Data Seluruh Peserta & Hasil Ujian</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <h2>📋 Data Seluruh Peserta</h2>
+        <button class="btn btn-secondary" onclick="openTambahPesertaModal()" style="padding: 0.5rem 1rem;">
+          <i class="fas fa-plus"></i> Tambah Peserta
+        </button>
+      </div>
       <div class="table-wrapper">
         <table>
           <thead>
-            <tr>
+            <tr style="background: #058d4e; color: white;">
               <th>No</th>
               <th>Nama</th>
               <th>NISN</th>
               <th>Asal Sekolah</th>
-              <th>Nilai Matematika</th>
-              <th>Nilai Bahasa</th>
-              <th>Status</th>
+              <th>Username</th>
+              <th>Password</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -1118,7 +1290,128 @@
   </div>
 </div>
 
+<!-- HALAMAN DATA NILAI (ADMIN ONLY) -->
+<div id="dataNilaiPage" class="page">
+  <div class="dashboard-container">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <h2>📊 Data Nilai & Kelulusan Peserta</h2>
+      </div>
+      
+      <!-- Statistik Rata-rata -->
+      <div class="statistik-card" id="statistikNilai">
+        <div class="stat-item">
+          <div class="label">📊 Rata-rata Matematika</div>
+          <div class="value" id="rataMatematika">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">📖 Rata-rata Bahasa Indonesia</div>
+          <div class="value" id="rataBahasa">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">📈 Rata-rata Keseluruhan</div>
+          <div class="value" id="rataKeseluruhan">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="label">👥 Jumlah Peserta</div>
+          <div class="value jumlah-peserta" id="jumlahPeserta">0</div>
+        </div>
+      </div>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr style="background: #058d4e; color: white;">
+              <th>No</th>
+              <th>Nama</th>
+              <th>NISN</th>
+              <th>Asal Sekolah</th>
+              <th>Nilai Matematika</th>
+              <th>Nilai Bahasa</th>
+              <th>Status Kelulusan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabelDataNilai"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="backToBeranda()">← Kembali ke Beranda</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ========== ANTI SCREENSHOT ==========
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'PrintScreen') {
+      e.preventDefault();
+      alert('📸 Screenshot dilarang!');
+      return false;
+    }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+      e.preventDefault();
+      alert('🔧 Inspect Element dilarang!');
+      return false;
+    }
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+      e.preventDefault();
+      alert('📄 View Source dilarang!');
+      return false;
+    }
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+      alert('💾 Save page dilarang!');
+      return false;
+    }
+    if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) {
+      e.preventDefault();
+      alert('🖨️ Print dilarang!');
+      return false;
+    }
+    if (e.key === 'F11') {
+      e.preventDefault();
+      toggleFullScreen();
+    }
+  });
+
+  // ========== FUNGSI FULL SCREEN ==========
+  function toggleFullScreen() {
+    const doc = document.documentElement;
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
+      if (doc.requestFullscreen) doc.requestFullscreen();
+      else if (doc.webkitRequestFullscreen) doc.webkitRequestFullscreen();
+      else if (doc.msRequestFullscreen) doc.msRequestFullscreen();
+      if (fullscreenBtn) fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+      if (fullscreenBtn) fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+    }
+  }
+
+  document.addEventListener('fullscreenchange', updateFullscreenIcon);
+  document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+  document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
+
+  function updateFullscreenIcon() {
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    if (fullscreenBtn) {
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+        fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+      } else {
+        fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+      }
+    }
+  }
+
   // ========== FUNGSI LOADING SCREEN ==========
   function showLoading() {
     document.getElementById('loadingOverlay').classList.add('show');
@@ -1137,7 +1430,9 @@
       password: "admin123",
       nilaiMatematika: null,
       nilaiBahasa: null,
-      role: "admin"
+      role: "admin",
+      ujianMatematikaSelesai: false,
+      ujianBahasaSelesai: false
     },
     "peserta001": {
       nama: "Ahmad Fadillah",
@@ -1147,7 +1442,9 @@
       password: "123456",
       nilaiMatematika: null,
       nilaiBahasa: null,
-      role: "peserta"
+      role: "peserta",
+      ujianMatematikaSelesai: false,
+      ujianBahasaSelesai: false
     },
     "peserta002": {
       nama: "Siti Nurhaliza",
@@ -1155,9 +1452,11 @@
       instansi: "SMA Negeri 2 Semarang",
       ttl: "2005-08-20",
       password: "123456",
-      nilaiMatematika: null,
-      nilaiBahasa: null,
-      role: "peserta"
+      nilaiMatematika: 85,
+      nilaiBahasa: 90,
+      role: "peserta",
+      ujianMatematikaSelesai: true,
+      ujianBahasaSelesai: true
     }
   };
 
@@ -1166,8 +1465,8 @@
     { nisn: "0051234567", tglLahir: "2009-05-12", nama: "Ahmad Faiz Al Farisi", lulus: true, keterangan: "Nilai rapor & ujian madrasah memenuhi KKM." },
     { nisn: "0051245678", tglLahir: "2009-11-03", nama: "Raka Septian Wijaya", lulus: false, keterangan: "Nilai beberapa mata pelajaran di bawah standar kelulusan." },
     { nisn: "0051298765", tglLahir: "2009-12-30", nama: "Siti Khadijah binti Umar", lulus: true, keterangan: "Lulus, silakan melanjutkan ke jenjang berikutnya." },
-    { nisn: "2024001", tglLahir: "2005-05-15", nama: "Ahmad Fadillah", lulus: true, keterangan: "Lulus dengan predikat Memuaskan." },
-    { nisn: "2024002", tglLahir: "2005-08-20", nama: "Siti Nurhaliza", lulus: false, keterangan: "Nilai akademik belum memenuhi standar." }
+    { nisn: "2024001", tglLahir: "2005-05-15", nama: "Ahmad Fadillah", lulus: false, keterangan: "Belum mengikuti ujian" },
+    { nisn: "2024002", tglLahir: "2005-08-20", nama: "Siti Nurhaliza", lulus: true, keterangan: "Lulus dengan nilai baik." }
   ];
 
   let currentUser = null;
@@ -1193,17 +1492,50 @@
   // Fungsi update status kelulusan ke dataSiswaKelulusan
   function updateStatusKelulusan(username) {
     const user = dataPeserta[username];
-    if (user && user.nilaiMatematika !== null && user.nilaiBahasa !== null && user.role === 'peserta') {
+    if (user && user.role === 'peserta') {
       const kkm = 70;
-      const lulus = (user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm);
+      const lulus = (user.nilaiMatematika !== null && user.nilaiBahasa !== null && user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm);
       const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
       if (index !== -1) {
         dataSiswaKelulusan[index].lulus = lulus;
         dataSiswaKelulusan[index].keterangan = lulus ? 
           `Lulus dengan nilai Matematika: ${user.nilaiMatematika}, Bahasa Indonesia: ${user.nilaiBahasa}` : 
-          `Tidak lulus. Nilai Matematika: ${user.nilaiMatematika}, Bahasa Indonesia: ${user.nilaiBahasa}`;
+          `Nilai Matematika: ${user.nilaiMatematika || 'belum'}, Bahasa: ${user.nilaiBahasa || 'belum'}`;
       }
     }
+  }
+
+  // Fungsi update riwayat ujian
+  function updateRiwayat() {
+    if (!currentUser) return;
+    const matStatus = currentUser.ujianMatematikaSelesai ? `✅ Selesai (Nilai: ${currentUser.nilaiMatematika ?? '-'})` : '⏳ Belum dikerjakan';
+    const bhsStatus = currentUser.ujianBahasaSelesai ? `✅ Selesai (Nilai: ${currentUser.nilaiBahasa ?? '-'})` : '⏳ Belum dikerjakan';
+    document.getElementById('riwayatMat').innerHTML = matStatus;
+    document.getElementById('riwayatBhs').innerHTML = bhsStatus;
+  }
+
+  // Fungsi hitung rata-rata
+  function hitungRataRata() {
+    let totalMat = 0, totalBhs = 0, countMat = 0, countBhs = 0, jumlahPeserta = 0;
+    for (const [username, user] of Object.entries(dataPeserta)) {
+      if (user.role === 'admin') continue;
+      jumlahPeserta++;
+      if (user.nilaiMatematika !== null && user.nilaiMatematika !== undefined) {
+        totalMat += user.nilaiMatematika;
+        countMat++;
+      }
+      if (user.nilaiBahasa !== null && user.nilaiBahasa !== undefined) {
+        totalBhs += user.nilaiBahasa;
+        countBhs++;
+      }
+    }
+    const rataMat = countMat > 0 ? (totalMat / countMat).toFixed(1) : 0;
+    const rataBhs = countBhs > 0 ? (totalBhs / countBhs).toFixed(1) : 0;
+    const rataTotal = (parseFloat(rataMat) + parseFloat(rataBhs)) / 2;
+    document.getElementById('rataMatematika').innerHTML = rataMat;
+    document.getElementById('rataBahasa').innerHTML = rataBhs;
+    document.getElementById('rataKeseluruhan').innerHTML = rataTotal.toFixed(1);
+    document.getElementById('jumlahPeserta').innerHTML = jumlahPeserta;
   }
 
   // Fungsi Navigasi
@@ -1219,6 +1551,7 @@
     document.getElementById('hasilUjianPage').classList.remove('active');
     document.getElementById('pengumumanPage').classList.remove('active');
     document.getElementById('dataPesertaPage').classList.remove('active');
+    document.getElementById('dataNilaiPage').classList.remove('active');
   }
 
   function goToUjian() {
@@ -1229,6 +1562,7 @@
     showLoading();
     setTimeout(() => {
       document.getElementById('mainApp').style.display = 'none';
+      updateRiwayat();
       showPage('mapelPage');
       hideLoading();
     }, 600);
@@ -1241,6 +1575,12 @@
       document.getElementById('hasilPengumuman').innerHTML = '';
       document.getElementById('nisnInput').value = '';
       document.getElementById('tglLahirInput').value = '';
+      if (currentUser.role === 'admin') {
+        loadPesertaDropdown();
+        document.getElementById('adminEditKelulusan').style.display = 'block';
+      } else {
+        document.getElementById('adminEditKelulusan').style.display = 'none';
+      }
       showPage('pengumumanPage');
       hideLoading();
     }, 600);
@@ -1260,45 +1600,38 @@
     }, 600);
   }
 
+  function goToDataNilai() {
+    if (currentUser.role !== 'admin') {
+      alert('⚠️ Hanya Admin yang dapat mengakses halaman ini!');
+      return;
+    }
+    showLoading();
+    setTimeout(() => {
+      document.getElementById('mainApp').style.display = 'none';
+      renderTabelDataNilai();
+      hitungRataRata();
+      showPage('dataNilaiPage');
+      hideLoading();
+    }, 600);
+  }
+
+  // RENDER TABEL DATA PESERTA
   function renderTabelDataPeserta() {
     let html = '';
     let no = 1;
-    const kkm = 70;
-    
     for (const [username, user] of Object.entries(dataPeserta)) {
-      const nilaiMat = user.nilaiMatematika !== null ? user.nilaiMatematika : '-';
-      const nilaiBhs = user.nilaiBahasa !== null ? user.nilaiBahasa : '-';
-      
-      let statusLulus = '-';
-      let statusClass = '';
-      if (user.role === 'peserta' && user.nilaiMatematika !== null && user.nilaiBahasa !== null) {
-        if (user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm) {
-          statusLulus = '✅ LULUS';
-          statusClass = 'style="color: #058d4e; font-weight: bold;"';
-        } else {
-          statusLulus = '❌ TIDAK LULUS';
-          statusClass = 'style="color: #e53e3e; font-weight: bold;"';
-        }
-      } else if (user.role === 'peserta') {
-        statusLulus = '⏳ Belum ujian';
-        statusClass = 'style="color: #f4a261; font-weight: bold;"';
-      } else if (user.role === 'admin') {
-        statusLulus = '👑 Admin';
-        statusClass = 'style="color: #058d4e; font-weight: bold;"';
-      }
-      
+      if (user.role === 'admin') continue;
       html += `
         <tr>
           <td>${no++}</td>
-          <td>${user.nama} ${user.role === 'admin' ? '<span class="badge-admin" style="font-size:0.6rem;">Admin</span>' : ''}</td>
+          <td>${user.nama}</td>
           <td>${user.noPeserta}</td>
           <td>${user.instansi}</td>
-          <td style="text-align: center;">${nilaiMat}</td>
-          <td style="text-align: center;">${nilaiBhs}</td>
-          <td style="text-align: center;" ${statusClass}>${statusLulus}</td>
+          <td><strong>${username}</strong></td>
+          <td style="font-family: monospace;">${user.password}</td>
           <td style="text-align: center;">
-            <button class="action-btn edit-btn" onclick="openEditModal('${username}')" title="Edit"><i class="fas fa-edit"></i></button>
-            ${username !== 'admin' ? `<button class="action-btn delete-btn" onclick="deleteUser('${username}')" title="Hapus"><i class="fas fa-trash"></i></button>` : ''}
+            <button class="action-btn edit-btn" onclick="openEditPesertaModal('${username}')" title="Edit Data"><i class="fas fa-edit"></i></button>
+            <button class="action-btn delete-btn" onclick="deleteUser('${username}')" title="Hapus Peserta"><i class="fas fa-trash"></i></button>
           </td>
         </tr>
       `;
@@ -1306,94 +1639,232 @@
     document.getElementById('tabelDataPeserta').innerHTML = html;
   }
 
-  function openEditModal(username) {
+  // RENDER TABEL DATA NILAI
+  function renderTabelDataNilai() {
+    let html = '';
+    let no = 1;
+    const kkm = 70;
+    for (const [username, user] of Object.entries(dataPeserta)) {
+      if (user.role === 'admin') continue;
+      const nilaiMat = user.nilaiMatematika !== null ? user.nilaiMatematika : '-';
+      const nilaiBhs = user.nilaiBahasa !== null ? user.nilaiBahasa : '-';
+      let statusLulus = '-', statusClass = '';
+      if (user.nilaiMatematika !== null && user.nilaiBahasa !== null) {
+        if (user.nilaiMatematika >= kkm && user.nilaiBahasa >= kkm) {
+          statusLulus = '✅ LULUS';
+          statusClass = 'style="color: #058d4e; font-weight: bold;"';
+        } else {
+          statusLulus = '❌ TIDAK LULUS';
+          statusClass = 'style="color: #e53e3e; font-weight: bold;"';
+        }
+      } else {
+        statusLulus = '⏳ Belum ujian';
+        statusClass = 'style="color: #f4a261; font-weight: bold;"';
+      }
+      html += `
+        <tr>
+          <td>${no++}</td>
+          <td>${user.nama}</td>
+          <td>${user.noPeserta}</td>
+          <td>${user.instansi}</td>
+          <td style="text-align: center;">${nilaiMat}</td>
+          <td style="text-align: center;">${nilaiBhs}</td>
+          <td style="text-align: center;" ${statusClass}>${statusLulus}</td>
+          <td style="text-align: center;">
+            <button class="action-btn edit-btn" onclick="openEditNilaiModal('${username}')" title="Edit Nilai"><i class="fas fa-edit"></i></button>
+          </td>
+        </tr>
+      `;
+    }
+    document.getElementById('tabelDataNilai').innerHTML = html;
+  }
+
+  // EDIT PESERTA
+  function openEditPesertaModal(username) {
     const user = dataPeserta[username];
     document.getElementById('editUsername').value = username;
     document.getElementById('editNama').value = user.nama;
     document.getElementById('editNisn').value = user.noPeserta;
     document.getElementById('editInstansi').value = user.instansi;
     document.getElementById('editTtl').value = user.ttl;
-    document.getElementById('editNilaiMat').value = user.nilaiMatematika !== null ? user.nilaiMatematika : '';
-    document.getElementById('editNilaiBhs').value = user.nilaiBahasa !== null ? user.nilaiBahasa : '';
-    document.getElementById('modalEdit').style.display = 'flex';
+    document.getElementById('editUsernameField').value = username;
+    document.getElementById('editPassword').value = user.password;
+    document.getElementById('modalEditPeserta').style.display = 'flex';
   }
 
-  function closeModalEdit() {
-    document.getElementById('modalEdit').style.display = 'none';
+  function closeModalEditPeserta() {
+    document.getElementById('modalEditPeserta').style.display = 'none';
   }
 
-  document.getElementById('btnSimpanEdit').addEventListener('click', () => {
-    const username = document.getElementById('editUsername').value;
-    const user = dataPeserta[username];
+  document.getElementById('btnSimpanEditPeserta').addEventListener('click', () => {
+    const oldUsername = document.getElementById('editUsername').value;
+    const newUsername = document.getElementById('editUsernameField').value.trim();
+    const user = dataPeserta[oldUsername];
     if (user) {
-      user.nama = document.getElementById('editNama').value;
-      user.noPeserta = document.getElementById('editNisn').value;
-      user.instansi = document.getElementById('editInstansi').value;
-      user.ttl = document.getElementById('editTtl').value;
-      user.nilaiMatematika = document.getElementById('editNilaiMat').value ? Number(document.getElementById('editNilaiMat').value) : null;
-      user.nilaiBahasa = document.getElementById('editNilaiBhs').value ? Number(document.getElementById('editNilaiBhs').value) : null;
-      
-      // Update data kelulusan
-      if (user.role === 'peserta') {
-        updateStatusKelulusan(username);
+      const updatedUser = { ...user,
+        nama: document.getElementById('editNama').value,
+        noPeserta: document.getElementById('editNisn').value,
+        instansi: document.getElementById('editInstansi').value,
+        ttl: document.getElementById('editTtl').value,
+        password: document.getElementById('editPassword').value
+      };
+      if (newUsername !== oldUsername) {
+        if (dataPeserta[newUsername]) { alert('❌ Username baru sudah digunakan!'); return; }
+        delete dataPeserta[oldUsername];
+        dataPeserta[newUsername] = updatedUser;
+      } else {
+        dataPeserta[oldUsername] = updatedUser;
       }
-      
-      closeModalEdit();
-      if (document.getElementById('dataPesertaPage').classList.contains('active')) {
-        renderTabelDataPeserta();
-      }
-      alert('✅ Data berhasil disimpan!');
+      closeModalEditPeserta();
+      renderTabelDataPeserta();
+      alert('✅ Data peserta berhasil disimpan!');
     }
   });
 
-  function deleteUser(username) {
-    if (username === 'admin') {
-      alert('⚠️ Akun Admin tidak dapat dihapus!');
-      return;
+  // EDIT NILAI
+  function openEditNilaiModal(username) {
+    const user = dataPeserta[username];
+    document.getElementById('editNilaiUsername').value = username;
+    document.getElementById('editNilaiNama').value = user.nama;
+    document.getElementById('editNilaiNisn').value = user.noPeserta;
+    document.getElementById('editNilaiMat').value = user.nilaiMatematika !== null ? user.nilaiMatematika : '';
+    document.getElementById('editNilaiBhs').value = user.nilaiBahasa !== null ? user.nilaiBahasa : '';
+    document.getElementById('modalEditNilai').style.display = 'flex';
+  }
+
+  function closeModalEditNilai() {
+    document.getElementById('modalEditNilai').style.display = 'none';
+  }
+
+  document.getElementById('btnSimpanEditNilai').addEventListener('click', () => {
+    const username = document.getElementById('editNilaiUsername').value;
+    const user = dataPeserta[username];
+    if (user) {
+      const nilaiMat = document.getElementById('editNilaiMat').value;
+      const nilaiBhs = document.getElementById('editNilaiBhs').value;
+      user.nilaiMatematika = nilaiMat !== '' ? Number(nilaiMat) : null;
+      user.nilaiBahasa = nilaiBhs !== '' ? Number(nilaiBhs) : null;
+      updateStatusKelulusan(username);
+      closeModalEditNilai();
+      renderTabelDataNilai();
+      hitungRataRata();
+      alert('✅ Nilai berhasil disimpan!');
     }
+  });
+
+  // TAMBAH PESERTA
+  function openTambahPesertaModal() {
+    document.getElementById('tambahNama').value = '';
+    document.getElementById('tambahNisn').value = '';
+    document.getElementById('tambahInstansi').value = '';
+    document.getElementById('tambahTtl').value = '';
+    document.getElementById('tambahUsername').value = '';
+    document.getElementById('tambahPassword').value = '123456';
+    document.getElementById('modalTambahPeserta').style.display = 'flex';
+  }
+
+  function closeTambahPesertaModal() {
+    document.getElementById('modalTambahPeserta').style.display = 'none';
+  }
+
+  document.getElementById('btnSimpanTambah').addEventListener('click', () => {
+    const nama = document.getElementById('tambahNama').value.trim();
+    const nisn = document.getElementById('tambahNisn').value.trim();
+    const instansi = document.getElementById('tambahInstansi').value.trim();
+    const ttl = document.getElementById('tambahTtl').value;
+    const username = document.getElementById('tambahUsername').value.trim();
+    const password = document.getElementById('tambahPassword').value.trim();
+    if (!nama || !nisn || !instansi || !ttl || !username) { alert('❌ Semua field harus diisi!'); return; }
+    if (dataPeserta[username]) { alert('❌ Username sudah digunakan!'); return; }
+    dataPeserta[username] = {
+      nama, noPeserta: nisn, instansi, ttl, password: password || '123456',
+      nilaiMatematika: null, nilaiBahasa: null, role: 'peserta',
+      ujianMatematikaSelesai: false, ujianBahasaSelesai: false
+    };
+    dataSiswaKelulusan.push({ nisn, tglLahir: ttl, nama, lulus: false, keterangan: 'Belum mengikuti ujian' });
+    closeTambahPesertaModal();
+    renderTabelDataPeserta();
+    alert('✅ Peserta berhasil ditambahkan!');
+  });
+
+  // HAPUS PESERTA
+  function deleteUser(username) {
+    if (username === 'admin') { alert('⚠️ Akun Admin tidak dapat dihapus!'); return; }
     if (confirm(`Yakin ingin menghapus data ${dataPeserta[username].nama}?`)) {
+      const nisn = dataPeserta[username].noPeserta;
       delete dataPeserta[username];
-      // Hapus juga dari data kelulusan
-      const index = dataSiswaKelulusan.findIndex(s => s.nisn === dataPeserta[username]?.noPeserta);
+      const index = dataSiswaKelulusan.findIndex(s => s.nisn === nisn);
       if (index !== -1) dataSiswaKelulusan.splice(index, 1);
       renderTabelDataPeserta();
+      renderTabelDataNilai();
       alert('✅ Data berhasil dihapus!');
     }
   }
 
-  function backToMapel() {
-    showPage('mapelPage');
+  // LOAD PESERTA DROPDOWN UNTUK ADMIN
+  function loadPesertaDropdown() {
+    const select = document.getElementById('adminPilihPeserta');
+    if (!select) return;
+    select.innerHTML = '<option value="">-- Pilih Peserta --</option>';
+    for (const [username, user] of Object.entries(dataPeserta)) {
+      if (user.role === 'admin') continue;
+      select.innerHTML += `<option value="${username}" data-nisn="${user.noPeserta}" data-ttl="${user.ttl}">${user.nama} (${user.noPeserta})</option>`;
+    }
   }
 
+  // ADMIN SET KELULUSAN
+  document.getElementById('btnAdminSetLulus')?.addEventListener('click', () => {
+    const select = document.getElementById('adminPilihPeserta');
+    const username = select.value;
+    if (!username) { alert('Pilih peserta terlebih dahulu!'); return; }
+    const user = dataPeserta[username];
+    const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
+    if (index !== -1) {
+      dataSiswaKelulusan[index].lulus = true;
+      dataSiswaKelulusan[index].keterangan = `LULUS (ditetapkan admin) - Nilai Matematika: ${user.nilaiMatematika || '-'}, Bahasa: ${user.nilaiBahasa || '-'}`;
+      alert(`✅ ${user.nama} dinyatakan LULUS!`);
+    }
+  });
+
+  document.getElementById('btnAdminSetTidakLulus')?.addEventListener('click', () => {
+    const select = document.getElementById('adminPilihPeserta');
+    const username = select.value;
+    if (!username) { alert('Pilih peserta terlebih dahulu!'); return; }
+    const user = dataPeserta[username];
+    const index = dataSiswaKelulusan.findIndex(s => s.nisn === user.noPeserta);
+    if (index !== -1) {
+      dataSiswaKelulusan[index].lulus = false;
+      dataSiswaKelulusan[index].keterangan = `TIDAK LULUS (ditetapkan admin) - Nilai Matematika: ${user.nilaiMatematika || '-'}, Bahasa: ${user.nilaiBahasa || '-'}`;
+      alert(`❌ ${user.nama} dinyatakan TIDAK LULUS!`);
+    }
+  });
+
+  function backToMapel() { showPage('mapelPage'); }
+
   function startUjian(mapel) {
+    if (mapel === 'matematika' && currentUser.ujianMatematikaSelesai) {
+      alert('⚠️ Anda sudah mengerjakan ujian Matematika! Tidak bisa mengulang.');
+      return;
+    }
+    if (mapel === 'bahasa' && currentUser.ujianBahasaSelesai) {
+      alert('⚠️ Anda sudah mengerjakan ujian Bahasa Indonesia! Tidak bisa mengulang.');
+      return;
+    }
     showLoading();
     setTimeout(() => {
       currentMapel = mapel;
       const title = mapel === 'matematika' ? '📐 Matematika' : '📖 Bahasa Indonesia';
       const soal = mapel === 'matematika' ? soalMatematika : soalBahasa;
       document.getElementById('mapelTitle').innerHTML = title;
-      
       let html = '';
       soal.forEach((soalItem, idx) => {
         html += `
           <div class="soal-item">
             <h4>${idx + 1}. ${soalItem.text}</h4>
-            <div class="option">
-              <input type="radio" name="q${idx}" value="${soalItem.options[0]}" id="q${idx}a">
-              <label for="q${idx}a">A. ${soalItem.options[0]}</label>
-            </div>
-            <div class="option">
-              <input type="radio" name="q${idx}" value="${soalItem.options[1]}" id="q${idx}b">
-              <label for="q${idx}b">B. ${soalItem.options[1]}</label>
-            </div>
-            <div class="option">
-              <input type="radio" name="q${idx}" value="${soalItem.options[2]}" id="q${idx}c">
-              <label for="q${idx}c">C. ${soalItem.options[2]}</label>
-            </div>
-            <div class="option">
-              <input type="radio" name="q${idx}" value="${soalItem.options[3]}" id="q${idx}d">
-              <label for="q${idx}d">D. ${soalItem.options[3]}</label>
-            </div>
+            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[0]}" id="q${idx}a"><label for="q${idx}a">A. ${soalItem.options[0]}</label></div>
+            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[1]}" id="q${idx}b"><label for="q${idx}b">B. ${soalItem.options[1]}</label></div>
+            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[2]}" id="q${idx}c"><label for="q${idx}c">C. ${soalItem.options[2]}</label></div>
+            <div class="option"><input type="radio" name="q${idx}" value="${soalItem.options[3]}" id="q${idx}d"><label for="q${idx}d">D. ${soalItem.options[3]}</label></div>
           </div>
         `;
       });
@@ -1409,19 +1880,21 @@
     let nilai = 0;
     for (let i = 0; i < soal.length; i++) {
       const selected = document.querySelector(`input[name="q${i}"]:checked`);
-      if (selected && selected.value === soal[i].jawaban) {
-        nilai += 20;
-      }
+      if (selected && selected.value === soal[i].jawaban) nilai += 20;
     }
-    
     if (currentMapel === 'matematika') {
       dataPeserta[currentUser.username].nilaiMatematika = nilai;
+      dataPeserta[currentUser.username].ujianMatematikaSelesai = true;
+      currentUser.ujianMatematikaSelesai = true;
+      currentUser.nilaiMatematika = nilai;
     } else {
       dataPeserta[currentUser.username].nilaiBahasa = nilai;
+      dataPeserta[currentUser.username].ujianBahasaSelesai = true;
+      currentUser.ujianBahasaSelesai = true;
+      currentUser.nilaiBahasa = nilai;
     }
-    
     updateStatusKelulusan(currentUser.username);
-    
+    if (currentUser.role === 'admin') { renderTabelDataNilai(); hitungRataRata(); }
     const mapelName = currentMapel === 'matematika' ? 'Matematika' : 'Bahasa Indonesia';
     document.getElementById('hasilUjianContainer').innerHTML = `
       <div class="result-card">
@@ -1442,64 +1915,20 @@
     if (!nisn || !tglLahir) return null;
     return dataSiswaKelulusan.find(s => s.nisn === nisn.trim() && s.tglLahir === tglLahir);
   }
-
-  function formatTanggal(tgl) {
-    if (!tgl) return "-";
-    let parts = tgl.split("-");
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-  }
+  function formatTanggal(tgl) { if (!tgl) return "-"; let parts = tgl.split("-"); return `${parts[2]}/${parts[1]}/${parts[0]}`; }
 
   document.getElementById('btnCekKelulusan').addEventListener('click', () => {
     const nisn = document.getElementById('nisnInput').value.trim();
     const tglLahir = document.getElementById('tglLahirInput').value;
     const hasilDiv = document.getElementById('hasilPengumuman');
-    
-    if (!nisn) {
-      hasilDiv.innerHTML = `<div class="error-message" style="background:#fff1ed; color:#c0392b; padding:14px; border-radius:60px; text-align:center;">⚠️ NISN tidak boleh kosong!</div>`;
-      return;
-    }
-    if (!tglLahir) {
-      hasilDiv.innerHTML = `<div class="error-message" style="background:#fff1ed; color:#c0392b; padding:14px; border-radius:60px; text-align:center;">⚠️ Tanggal lahir harus dipilih!</div>`;
-      return;
-    }
-    
+    if (!nisn) { hasilDiv.innerHTML = `<div class="error-message">⚠️ NISN tidak boleh kosong!</div>`; return; }
+    if (!tglLahir) { hasilDiv.innerHTML = `<div class="error-message">⚠️ Tanggal lahir harus dipilih!</div>`; return; }
     const siswa = cariSiswaByNisnDanTgl(nisn, tglLahir);
-    
-    if (!siswa) {
-      hasilDiv.innerHTML = `<div class="error-message" style="background:#fff1ed; color:#c0392b; padding:14px; border-radius:60px; text-align:center;">⚠️ Data tidak ditemukan! Pastikan NISN dan Tanggal Lahir sesuai.</div>`;
-      return;
-    }
-    
+    if (!siswa) { hasilDiv.innerHTML = `<div class="error-message">⚠️ Data tidak ditemukan! Pastikan NISN dan Tanggal Lahir sesuai.</div>`; return; }
     if (siswa.lulus) {
-      hasilDiv.innerHTML = `
-        <div class="card-lulus">
-          <h3>🎉 SELAMAT! 🎉</h3>
-          <div style="font-size:1.5rem; font-weight:800; color:#0f6e3f;">ANDA DINYATAKAN LULUS</div>
-          <div class="badge-success">✅ STATUS : LULUS</div>
-          <div class="info-siswa-pengumuman">
-            <p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p>
-            <p><strong>NISN</strong> <span>${siswa.nisn}</span></p>
-            <p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p>
-            <p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p>
-          </div>
-          <div style="margin-top:12px;">✨ Selamat melanjutkan ke jenjang pendidikan selanjutnya ✨</div>
-        </div>
-      `;
+      hasilDiv.innerHTML = `<div class="card-lulus"><h3>🎉 SELAMAT! 🎉</h3><div style="font-size:1.5rem; font-weight:800; color:#0f6e3f;">ANDA DINYATAKAN LULUS</div><div class="badge-success">✅ STATUS : LULUS</div><div class="info-siswa-pengumuman"><p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p><p><strong>NISN</strong> <span>${siswa.nisn}</span></p><p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p><p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p></div><div style="margin-top:12px;">✨ Selamat melanjutkan ke jenjang pendidikan selanjutnya ✨</div></div>`;
     } else {
-      hasilDiv.innerHTML = `
-        <div class="card-tidak">
-          <h3>💔 MOHON MAAF 💔</h3>
-          <div style="font-size:1.5rem; font-weight:800; color:#bc5727;">ANDA TIDAK LULUS</div>
-          <div class="badge-failed">❌ STATUS : TIDAK LULUS</div>
-          <div class="info-siswa-pengumuman">
-            <p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p>
-            <p><strong>NISN</strong> <span>${siswa.nisn}</span></p>
-            <p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p>
-            <p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p>
-          </div>
-          <div style="margin-top:12px;">📖 Tetap semangat, perbaiki nilai dan ikuti program ujian susulan 📖</div>
-        </div>
-      `;
+      hasilDiv.innerHTML = `<div class="card-tidak"><h3>💔 MOHON MAAF 💔</h3><div style="font-size:1.5rem; font-weight:800; color:#bc5727;">ANDA TIDAK LULUS</div><div class="badge-failed">❌ STATUS : TIDAK LULUS</div><div class="info-siswa-pengumuman"><p><strong>Nama Lengkap</strong> <span>${siswa.nama}</span></p><p><strong>NISN</strong> <span>${siswa.nisn}</span></p><p><strong>Tanggal Lahir</strong> <span>${formatTanggal(siswa.tglLahir)}</span></p><p><strong>Keterangan</strong> <span>${siswa.keterangan}</span></p></div><div style="margin-top:12px;">📖 Tetap semangat, perbaiki nilai dan ikuti program ujian susulan 📖</div></div>`;
     }
   });
 
@@ -1515,109 +1944,40 @@
       document.getElementById('dataDiriModal').style.display = 'flex';
     }
   }
+  function closeModal() { document.getElementById('dataDiriModal').style.display = 'none'; }
 
-  function closeModal() {
-    document.getElementById('dataDiriModal').style.display = 'none';
-  }
-
-  // ========== FUNGSI DAFTAR ==========
+  // DAFTAR
   function goToDaftar() {
     document.getElementById('loginPage').classList.remove('active');
     document.getElementById('daftarPage').classList.add('active');
-    document.getElementById('daftarNama').value = '';
-    document.getElementById('daftarTtl').value = '';
-    document.getElementById('daftarNisn').value = '';
-    document.getElementById('daftarSekolah').value = '';
-    document.getElementById('daftarUsername').value = '';
-    document.getElementById('daftarPassword').value = '';
-    document.getElementById('daftarErrorMsg').style.display = 'none';
-    document.getElementById('daftarSuccessMsg').style.display = 'none';
+    document.getElementById('daftarNama').value = ''; document.getElementById('daftarTtl').value = '';
+    document.getElementById('daftarNisn').value = ''; document.getElementById('daftarSekolah').value = '';
+    document.getElementById('daftarUsername').value = ''; document.getElementById('daftarPassword').value = '';
+    document.getElementById('daftarErrorMsg').style.display = 'none'; document.getElementById('daftarSuccessMsg').style.display = 'none';
   }
-
   function backToLoginFromDaftar() {
     document.getElementById('daftarPage').classList.remove('active');
     document.getElementById('loginPage').classList.add('active');
-    document.getElementById('daftarErrorMsg').style.display = 'none';
-    document.getElementById('daftarSuccessMsg').style.display = 'none';
+    document.getElementById('daftarErrorMsg').style.display = 'none'; document.getElementById('daftarSuccessMsg').style.display = 'none';
   }
-
-  // Proses pendaftaran
   document.getElementById('btnDaftar').addEventListener('click', () => {
-    const nama = document.getElementById('daftarNama').value.trim();
-    const ttl = document.getElementById('daftarTtl').value;
-    const nisn = document.getElementById('daftarNisn').value.trim();
-    const sekolah = document.getElementById('daftarSekolah').value.trim();
-    const username = document.getElementById('daftarUsername').value.trim();
-    const password = document.getElementById('daftarPassword').value.trim();
-    
-    const errorDiv = document.getElementById('daftarErrorMsg');
-    const successDiv = document.getElementById('daftarSuccessMsg');
-    
+    const nama = document.getElementById('daftarNama').value.trim(), ttl = document.getElementById('daftarTtl').value;
+    const nisn = document.getElementById('daftarNisn').value.trim(), sekolah = document.getElementById('daftarSekolah').value.trim();
+    const username = document.getElementById('daftarUsername').value.trim(), password = document.getElementById('daftarPassword').value.trim();
+    const errorDiv = document.getElementById('daftarErrorMsg'), successDiv = document.getElementById('daftarSuccessMsg');
     if (!nama || !ttl || !nisn || !sekolah || !username || !password) {
-      errorDiv.style.display = 'block';
-      errorDiv.innerHTML = '❌ Semua field harus diisi!';
-      successDiv.style.display = 'none';
-      setTimeout(() => errorDiv.style.display = 'none', 3000);
-      return;
+      errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Semua field harus diisi!'; successDiv.style.display = 'none';
+      setTimeout(() => errorDiv.style.display = 'none', 3000); return;
     }
-    
-    if (nisn.length < 5) {
-      errorDiv.style.display = 'block';
-      errorDiv.innerHTML = '❌ NISN tidak valid! Minimal 5 digit.';
-      successDiv.style.display = 'none';
-      setTimeout(() => errorDiv.style.display = 'none', 3000);
-      return;
-    }
-    
-    if (password.length < 4) {
-      errorDiv.style.display = 'block';
-      errorDiv.innerHTML = '❌ Password minimal 4 karakter!';
-      successDiv.style.display = 'none';
-      setTimeout(() => errorDiv.style.display = 'none', 3000);
-      return;
-    }
-    
-    if (dataPeserta[username]) {
-      errorDiv.style.display = 'block';
-      errorDiv.innerHTML = '❌ Username sudah digunakan! Silakan pilih username lain.';
-      successDiv.style.display = 'none';
-      setTimeout(() => errorDiv.style.display = 'none', 3000);
-      return;
-    }
-    
-    dataPeserta[username] = {
-      nama: nama,
-      noPeserta: nisn,
-      instansi: sekolah,
-      ttl: ttl,
-      password: password,
-      nilaiMatematika: null,
-      nilaiBahasa: null,
-      role: "peserta"
-    };
-    
-    dataSiswaKelulusan.push({
-      nisn: nisn,
-      tglLahir: ttl,
-      nama: nama,
-      lulus: false,
-      keterangan: "Belum mengikuti ujian"
-    });
-    
-    successDiv.style.display = 'block';
-    successDiv.innerHTML = '✅ Pendaftaran berhasil! Silakan login dengan username dan password Anda.';
-    errorDiv.style.display = 'none';
-    
-    document.getElementById('daftarNama').value = '';
-    document.getElementById('daftarTtl').value = '';
-    document.getElementById('daftarNisn').value = '';
-    document.getElementById('daftarSekolah').value = '';
-    document.getElementById('daftarUsername').value = '';
-    document.getElementById('daftarPassword').value = '';
-    
-    setTimeout(() => {
-      backToLoginFromDaftar();
-    }, 2000);
+    if (nisn.length < 5) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ NISN tidak valid! Minimal 5 digit.'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
+    if (password.length < 4) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Password minimal 4 karakter!'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
+    if (dataPeserta[username]) { errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username sudah digunakan!'; setTimeout(() => errorDiv.style.display = 'none', 3000); return; }
+    dataPeserta[username] = { nama, noPeserta: nisn, instansi: sekolah, ttl, password, nilaiMatematika: null, nilaiBahasa: null, role: 'peserta', ujianMatematikaSelesai: false, ujianBahasaSelesai: false };
+    dataSiswaKelulusan.push({ nisn, tglLahir: ttl, nama, lulus: false, keterangan: 'Belum mengikuti ujian' });
+    successDiv.style.display = 'block'; successDiv.innerHTML = '✅ Pendaftaran berhasil! Silakan login.'; errorDiv.style.display = 'none';
+    document.getElementById('daftarNama').value = ''; document.getElementById('daftarTtl').value = ''; document.getElementById('daftarNisn').value = '';
+    document.getElementById('daftarSekolah').value = ''; document.getElementById('daftarUsername').value = ''; document.getElementById('daftarPassword').value = '';
+    setTimeout(() => backToLoginFromDaftar(), 2000);
   });
 
   // LOGIN
@@ -1625,44 +1985,29 @@
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
     const user = dataPeserta[username];
-    
     if (user && user.password === password) {
       currentUser = { ...user, username: username };
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
       document.getElementById('userFullName').innerText = user.nama;
       document.getElementById('userInfo').innerHTML = `NISN: ${user.noPeserta} | Asal Sekolah: ${user.instansi}`;
       document.getElementById('navbarUser').innerHTML = `👤 ${user.nama} ${user.role === 'admin' ? '(Admin)' : ''}`;
-      
-      // Tampilkan menu admin hanya jika role = admin
-      if (user.role === 'admin') {
-        document.getElementById('menuDataPeserta').style.display = 'block';
-      } else {
-        document.getElementById('menuDataPeserta').style.display = 'none';
-      }
-      
+      if (user.role === 'admin') { document.getElementById('menuDataPeserta').style.display = 'block'; document.getElementById('menuDataNilai').style.display = 'block'; }
+      else { document.getElementById('menuDataPeserta').style.display = 'none'; document.getElementById('menuDataNilai').style.display = 'none'; }
       document.getElementById('mainApp').style.display = 'block';
       document.getElementById('loginPage').classList.remove('active');
-      document.getElementById('mapelPage').classList.remove('active');
-      document.getElementById('ujianPage').classList.remove('active');
-      document.getElementById('hasilUjianPage').classList.remove('active');
-      document.getElementById('pengumumanPage').classList.remove('active');
-      document.getElementById('dataPesertaPage').classList.remove('active');
     } else {
       const errorDiv = document.getElementById('loginErrorMsg');
-      errorDiv.style.display = 'block';
-      errorDiv.innerHTML = '❌ Username atau password salah!';
+      errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!';
       setTimeout(() => errorDiv.style.display = 'none', 3000);
     }
   });
 
   // LOGOUT
   document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('currentUser');
-    currentUser = null;
+    localStorage.removeItem('currentUser'); currentUser = null;
     document.getElementById('mainApp').style.display = 'none';
     document.getElementById('loginPage').classList.add('active');
-    document.getElementById('loginUsername').value = '';
-    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginUsername').value = ''; document.getElementById('loginPassword').value = '';
     closeModal();
   });
 
@@ -1676,25 +2021,13 @@
         document.getElementById('userFullName').innerText = user.nama;
         document.getElementById('userInfo').innerHTML = `NISN: ${user.noPeserta} | Asal Sekolah: ${user.instansi}`;
         document.getElementById('navbarUser').innerHTML = `👤 ${user.nama} ${user.role === 'admin' ? '(Admin)' : ''}`;
-        
-        if (user.role === 'admin') {
-          document.getElementById('menuDataPeserta').style.display = 'block';
-        } else {
-          document.getElementById('menuDataPeserta').style.display = 'none';
-        }
-        
+        if (user.role === 'admin') { document.getElementById('menuDataPeserta').style.display = 'block'; document.getElementById('menuDataNilai').style.display = 'block'; }
+        else { document.getElementById('menuDataPeserta').style.display = 'none'; document.getElementById('menuDataNilai').style.display = 'none'; }
         document.getElementById('mainApp').style.display = 'block';
         document.getElementById('loginPage').classList.remove('active');
-      } else {
-        document.getElementById('mainApp').style.display = 'none';
-        document.getElementById('loginPage').classList.add('active');
-      }
-    } else {
-      document.getElementById('mainApp').style.display = 'none';
-      document.getElementById('loginPage').classList.add('active');
-    }
+      } else { document.getElementById('mainApp').style.display = 'none'; document.getElementById('loginPage').classList.add('active'); }
+    } else { document.getElementById('mainApp').style.display = 'none'; document.getElementById('loginPage').classList.add('active'); }
   }
-
   checkSession();
 </script>
 </body>
