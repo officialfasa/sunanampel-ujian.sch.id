@@ -1047,7 +1047,7 @@
   </div>
 </div>
 
-<!-- DASHBOARD POSI -->
+<!-- DASHBOARD FASA -->
 <div id="dashboardPage" class="page">
   <div class="top-navbar">
     <div class="logo-area">
@@ -1097,8 +1097,7 @@
     <!-- Tab Pengumuman -->
     <div id="tabPengumuman" class="tab-content" style="display: none;">
       <div class="section-header"><h3>📢 Pengumuman</h3></div>
-      <div class="kompetisi-card"><div class="card-title">Pengumuman Ujian MASCO 2026</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 15 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Jadwal ujian telah dirilis. Silakan cek jadwal masing-masing mata pelajaran.</p></div>
-      <div class="kompetisi-card"><div class="card-title">Perpanjangan Masa Pendaftaran</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 10 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Pendaftaran MASCO diperpanjang hingga 25 April 2026.</p></div>
+      <div class="kompetisi-card"><div class="card-title">HASIL UJIAN UAS 2026</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 15 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Jadwal ujian telah dirilis. Silakan cek jadwal masing-masing mata pelajaran.</p></div>
     </div>
 
     <!-- Tab Dokumen -->
@@ -1206,7 +1205,7 @@
 <div id="hasilUjianPage" class="page">
   <div class="hasil-ujian-page" style="display: flex;">
     <div class="hasil-card">
-      <h2>📊 Hasil Ujian</h2>
+      <h2>HASIL UJIAN</h2>
       <div id="hasilMapel" style="font-size: 1.2rem; font-weight: 600;"></div>
       <div class="nilai-akhir" id="nilaiAkhir">0</div>
       <div id="statusKelulusan"></div>
@@ -1229,7 +1228,7 @@
   // ========== DATABASE PESERTA ==========
   const dataPeserta = {
     "achmad": { nama: "Achmad Muqorrobin", noPeserta: "2504030064", instansi: "Universitas Negeri Semarang", ttl: "2005-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
-    "ahmad": { nama: "Ahmad Fadillah", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmad": { nama: "Ahmad Muqorrobin", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
     "admin": { nama: "Administrator", noPeserta: "ADMIN001", instansi: "FASA Official", ttl: "1990-01-01", password: "admin123", role: "admin", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} }
   };
 
@@ -1297,10 +1296,10 @@
 
   const daftarKompetisi = [
     { mapel: "Bahasa Arab", soal: soalBahasaArab, icon: "📘", tanggal: "Sab, 18 Apr 2026", waktu: "10:00 - 11:00" },
-    { mapel: "Fisika Terintegrasi", soal: soalFisika, icon: "⚛️", tanggal: "Min, 19 Apr 2026", waktu: "11:15 - 12:15" },
-    { mapel: "Kimia Terintegrasi", soal: soalKimia, icon: "🧪", tanggal: "Min, 19 Apr 2026", waktu: "13:00 - 14:00" },
-    { mapel: "Biologi Terintegrasi", soal: soalBiologi, icon: "🔬", tanggal: "Min, 19 Apr 2026", waktu: "14:15 - 15:15" },
-    { mapel: "Matematika Terintegrasi", soal: soalMatematika, icon: "📐", tanggal: "Min, 19 Apr 2026", waktu: "15:30 - 16:30" }
+    { mapel: "Fisika Terintegrasi", soal: soalFisika, icon: "⚛️", tanggal: "Sab, 18 Apr 2026", waktu: "11:15 - 12:15" },
+    { mapel: "Kimia Terintegrasi", soal: soalKimia, icon: "🧪", tanggal: "Sab, 18 Apr 2026", waktu: "13:00 - 14:00" },
+    { mapel: "Biologi Terintegrasi", soal: soalBiologi, icon: "🔬", tanggal: "Sab, 18 Apr 2026", waktu: "14:15 - 15:15" },
+    { mapel: "Matematika Terintegrasi", soal: soalMatematika, icon: "📐", tanggal: "Sab, 18 Apr 2026", waktu: "15:20 - 16:30" }
   ];
 
   let currentUser = null;
@@ -1313,14 +1312,39 @@
   // ========== CEK SUDAH UJIAN ==========
   function cekSudahUjian(mapel) {
     if (!currentUser) return false;
-    const userData = dataPeserta[currentUser.username];
-    if (userData?.ujianSelesai?.[mapel] === true) return true;
-    const sudahDiRiwayat = userData?.riwayatUjian?.some(r => r.mapel === mapel);
-    if (sudahDiRiwayat && userData && !userData.ujianSelesai[mapel]) {
-      userData.ujianSelesai[mapel] = true;
+    
+    // CEK DARI currentUser (sudah sinkron)
+    if (currentUser.ujianSelesai && currentUser.ujianSelesai[mapel] === true) {
+        console.log(`✅ ${mapel}: sudah pernah ujian (dari ujianSelesai)`);
+        return true;
     }
-    return sudahDiRiwayat;
-  }
+    
+    // CEK DARI riwayat
+    if (currentUser.riwayatUjian && currentUser.riwayatUjian.some(r => r.mapel === mapel)) {
+        console.log(`✅ ${mapel}: sudah pernah ujian (dari riwayat)`);
+        // Sync ke ujianSelesai jika belum
+        if (currentUser.ujianSelesai) {
+            currentUser.ujianSelesai[mapel] = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+        return true;
+    }
+    
+    // CEK DARI dataPeserta (backup)
+    const userData = dataPeserta[currentUser.username];
+    if (userData && userData.ujianSelesai && userData.ujianSelesai[mapel] === true) {
+        console.log(`✅ ${mapel}: sudah pernah ujian (dari database)`);
+        // Sync ke currentUser
+        if (currentUser) {
+            if (!currentUser.ujianSelesai) currentUser.ujianSelesai = {};
+            currentUser.ujianSelesai[mapel] = true;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+        return true;
+    }
+    
+    return false;
+}
 
   // ========== SIDEBAR FUNCTIONS ==========
   function toggleSidebar() {
@@ -1372,7 +1396,12 @@
     
     // CEK APAKAH UJIAN SUDAH BERAKHIR
     if (now > endDate) {
-        return { expired: true, ended: true, text: "⏰ Ujian telah berakhir" };
+        return { expired: false, ended: true, canStart: false, text: "⏰ Ujian telah berakhir" };
+    }
+    
+    // CEK APAKAH UJIAN SEDANG BERLANGSUNG (bisa dimulai)
+    if (now >= startDate && now <= endDate) {
+        return { expired: true, ended: false, canStart: true, text: "✅ Ujian tersedia!" };
     }
     
     // CEK APAKAH UJIAN BELUM DIMULAI
@@ -1382,17 +1411,18 @@
         const jamSisa = Math.floor((selisih % (86400000)) / (3600000));
         const menitSisa = Math.floor((selisih % 3600000) / 60000);
         const detikSisa = Math.floor((selisih % 60000) / 1000);
-        return { expired: false, ended: false, text: `${hari} hari ${jamSisa} jam ${menitSisa} menit ${detikSisa} detik` };
+        return { expired: false, ended: false, canStart: false, text: `${hari} hari ${jamSisa} jam ${menitSisa} menit ${detikSisa} detik` };
     }
     
-    // UJIAN SEDANG BERLANGSUNG
-    return { expired: true, ended: false, text: "✅ Ujian tersedia!" };
+    return { expired: false, ended: false, canStart: false, text: "Ujian tidak tersedia" };
 }
 
   function renderKompetisiGrid() {
     const grid = document.getElementById('kompetisiGrid');
     if (!grid) return;
-    const userData = dataPeserta[currentUser?.username];
+    
+    // Ambil data dari currentUser (sudah sinkron)
+    const userData = currentUser;
     
     grid.innerHTML = daftarKompetisi.map(k => {
         const sudahSelesai = cekSudahUjian(k.mapel);
@@ -1401,22 +1431,21 @@
         const countdown = hitungMundurKeUjian(k.tanggal, waktuMulai, waktuSelesai);
         const countdownId = `countdown-${k.mapel.replace(/\s/g, '')}`;
         
-        // CEK APAKAH UJIAN SUDAH BERAKHIR
-        const sudahBerakhir = countdown.ended === true;
+        const bisaMulai = !sudahSelesai && countdown.canStart === true;
         
         return `
             <div class="kompetisi-card">
-                <div class="card-title">MADRASAH SCIENCE COMPETITION (MASCO) TAHUN 2026</div>
-                <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓 Mahasiswa</span></div>
+                <div class="card-title">UAS 2026</div>
+                <div class="card-badges"><span class="badge-mapel">${k.icon} ${k.mapel}</span><span class="badge-kategori">🎓 SMP/MTs</span></div>
                 <div class="card-date"><span><i class="far fa-calendar-alt"></i> ${k.tanggal}</span><span><i class="far fa-clock"></i> ${k.waktu}</span></div>
                 <div class="countdown-box">
                     <i class="fas fa-hourglass-half"></i> 
-                    <span id="${countdownId}" class="countdown-text" style="${sudahBerakhir ? 'color: #e53e3e;' : ''}">
-                        ${sudahSelesai ? '✓ Telah dikerjakan' : (sudahBerakhir ? '⏰ Ujian telah berakhir' : (countdown.expired ? '✅ Ujian tersedia!' : countdown.text))}
+                    <span id="${countdownId}" class="countdown-text" style="${countdown.ended ? 'color: #e53e3e;' : ''}">
+                        ${sudahSelesai ? '✓ Telah dikerjakan' : (countdown.ended ? '⏰ Ujian telah berakhir' : countdown.text)}
                     </span>
                 </div>
-                <button class="btn-mulai" onclick="startUjian('${k.mapel}')" ${sudahSelesai || !countdown.expired || sudahBerakhir ? 'disabled' : ''}>
-                    ${sudahSelesai ? '✓ Sudah Dikerjakan' : (sudahBerakhir ? '⏰ Ujian berakhir' : (countdown.expired ? 'Mulai Ujian →' : '⏳ Belum tersedia'))}
+                <button class="btn-mulai" onclick="startUjian('${k.mapel}')" ${!bisaMulai ? 'disabled' : ''}>
+                    ${sudahSelesai ? '✓ Sudah Dikerjakan' : (countdown.ended ? '⏰ Ujian berakhir' : (bisaMulai ? 'Mulai Ujian →' : '⏳ Belum tersedia'))}
                 </button>
             </div>
         `;
@@ -1433,33 +1462,32 @@
             const waktuMulai = k.waktu.split(' - ')[0];
             const waktuSelesai = k.waktu.split(' - ')[1];
             const countdown = hitungMundurKeUjian(k.tanggal, waktuMulai, waktuSelesai);
-            const sudahBerakhir = countdown.ended === true;
             
             if (sudahSelesai) {
                 element.textContent = '✓ Telah dikerjakan';
                 element.style.color = '#058d4e';
-            } else if (sudahBerakhir) {
+            } else if (countdown.ended) {
                 element.textContent = '⏰ Ujian telah berakhir';
                 element.style.color = '#e53e3e';
             } else {
-                element.textContent = countdown.expired ? '✅ Ujian tersedia!' : countdown.text;
+                element.textContent = countdown.text;
                 element.style.color = '#058d4e';
             }
             
             const card = element.closest('.kompetisi-card');
             const button = card?.querySelector('.btn-mulai');
-            if (button && !cekSudahUjian(k.mapel)) {
-                if (sudahBerakhir) {
-                    button.disabled = true;
-                    button.textContent = '⏰ Ujian berakhir';
-                } else if (countdown.expired) {
+            if (button && !sudahSelesai) {
+                if (countdown.canStart) {
                     button.disabled = false;
                     button.textContent = 'Mulai Ujian →';
+                } else if (countdown.ended) {
+                    button.disabled = true;
+                    button.textContent = '⏰ Ujian berakhir';
                 } else {
                     button.disabled = true;
                     button.textContent = '⏳ Belum tersedia';
                 }
-            } else if (button && cekSudahUjian(k.mapel)) {
+            } else if (button && sudahSelesai) {
                 button.disabled = true;
                 button.textContent = '✓ Sudah Dikerjakan';
             }
@@ -1491,41 +1519,243 @@
   function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
 
   function renderRiwayat() {
-    const riwayat = dataPeserta[currentUser.username]?.riwayatUjian || [];
+    // Ambil dari currentUser (bukan dari dataPeserta)
+    const riwayat = currentUser?.riwayatUjian || [];
     const container = document.getElementById('riwayatContainer');
-    if (!riwayat.length) { container.innerHTML = '<div class="kompetisi-card"><p style="text-align:center;">Belum ada riwayat ujian.</p></div>'; return; }
+    if (!riwayat.length) { 
+        container.innerHTML = '<div class="kompetisi-card"><p style="text-align:center;">Belum ada riwayat ujian.</p></div>'; 
+        return; 
+    }
     container.innerHTML = riwayat.map(r => `<div class="riwayat-card"><div class="card-title">📝 ${r.mapel}</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> ${r.tanggal}</span></div><p>Nilai: <strong>${r.nilai}</strong> | ${r.lulus ? '<span style="color:#058d4e;">✅ LULUS</span>' : '<span style="color:#e53e3e;">❌ TIDAK LULUS</span>'}</p><p><small>Benar: ${r.benar || r.nilai/10} dari ${r.total || 10} soal</small></p></div>`).join('');
-  }
+}
 
-  function renderRekapan() {
-    const nilaiMapel = dataPeserta[currentUser.username]?.nilaiPerMapel || {};
-    let totalNilai = 0, count = 0, jumlahLulus = 0, jumlahTidakLulus = 0;
-    let listHtml = '';
-    daftarKompetisi.forEach(k => {
-      const nilai = nilaiMapel[k.mapel];
-      if (nilai !== undefined) { totalNilai += nilai; count++; }
-      const lulus = nilai !== undefined && nilai >= 70;
-      if (nilai !== undefined) { if (lulus) jumlahLulus++; else jumlahTidakLulus++; }
-      listHtml += `<div class="rekapan-item-row"><span class="mapel">${k.icon} ${k.mapel}</span><span class="nilai">${nilai !== undefined ? nilai : '-'}</span><span>${nilai !== undefined ? (lulus ? '✅ Lulus' : '❌ Tidak') : '⏳ Belum'}</span></div>`;
+ // ========== FUNGSI UNTUK ADMIN ==========
+function renderAdminDashboard() {
+    if (!currentUser || currentUser.role !== 'admin') return;
+    
+    const container = document.getElementById('kompetisiGrid');
+    if (!container) return;
+    
+    // Kumpulkan data semua peserta
+    const semuaPeserta = [];
+    for (const [username, data] of Object.entries(dataPeserta)) {
+        if (data.role === 'peserta') {
+            semuaPeserta.push({
+                username: username,
+                nama: data.nama,
+                noPeserta: data.noPeserta,
+                instansi: data.instansi,
+                riwayatUjian: data.riwayatUjian || [],
+                nilaiPerMapel: data.nilaiPerMapel || {}
+            });
+        }
+    }
+    
+    // Hitung statistik
+    let totalSiswa = semuaPeserta.length;
+    let totalUjianSelesai = 0;
+    let totalNilaiSemua = 0;
+    let countNilai = 0;
+    
+    semuaPeserta.forEach(siswa => {
+        totalUjianSelesai += siswa.riwayatUjian.length;
+        Object.values(siswa.nilaiPerMapel).forEach(nilai => {
+            totalNilaiSemua += nilai;
+            countNilai++;
+        });
     });
-    const rata = count > 0 ? (totalNilai / count).toFixed(1) : 0;
-    const html = `
-      <div class="statistik-box">
-        <div class="stat-item"><div class="label">📊 Rata-rata Nilai</div><div class="value">${rata}</div></div>
-        <div class="stat-item"><div class="label">✅ Jumlah Lulus</div><div class="value">${jumlahLulus}</div></div>
-        <div class="stat-item"><div class="label">❌ Jumlah Tidak Lulus</div><div class="value">${jumlahTidakLulus}</div></div>
-        <div class="stat-item"><div class="label">📚 Total Mapel</div><div class="value">${daftarKompetisi.length}</div></div>
-      </div>
-      <div class="rekapan-list">${listHtml}</div>
+    
+    const rataRataSemua = countNilai > 0 ? (totalNilaiSemua / countNilai).toFixed(1) : 0;
+    
+    // Tampilan dashboard admin
+    container.innerHTML = `
+        <div class="kompetisi-card" style="grid-column: span 2;">
+            <div class="card-title">📊 STATISTIK PESERTA</div>
+            <div class="statistik-box" style="margin-top: 0.5rem;">
+                <div class="stat-item"><div class="label">👥 Total Peserta</div><div class="value">${totalSiswa}</div></div>
+                <div class="stat-item"><div class="label">📝 Total Ujian Selesai</div><div class="value">${totalUjianSelesai}</div></div>
+                <div class="stat-item"><div class="label">📊 Rata-rata Nilai</div><div class="value">${rataRataSemua}</div></div>
+            </div>
+        </div>
+        <div class="kompetisi-card" style="grid-column: span 2;">
+            <div class="card-title">📋 DAFTAR NILAI PESERTA</div>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem;">
+                    <thead>
+                        <tr style="background: #e8f5e9; border-bottom: 1px solid #c8e6d9;">
+                            <th style="padding: 0.5rem; text-align: left;">No</th>
+                            <th style="padding: 0.5rem; text-align: left;">Nama</th>
+                            <th style="padding: 0.5rem; text-align: left;">NISN</th>
+                            ${daftarKompetisi.map(k => `<th style="padding: 0.5rem; text-align: center;">${k.icon}</th>`).join('')}
+                            <th style="padding: 0.5rem; text-align: center;">Rata-rata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${semuaPeserta.map((siswa, idx) => {
+                            let totalNilai = 0;
+                            let countMapel = 0;
+                            const nilaiPerMapel = daftarKompetisi.map(k => {
+                                const nilai = siswa.nilaiPerMapel[k.mapel];
+                                if (nilai !== undefined) {
+                                    totalNilai += nilai;
+                                    countMapel++;
+                                    return `<td style="padding: 0.5rem; text-align: center; color: #058d4e; font-weight: bold;">${nilai}</td>`;
+                                }
+                                return `<td style="padding: 0.5rem; text-align: center; color: #999;">-</td>`;
+                            }).join('');
+                            const rata = countMapel > 0 ? (totalNilai / countMapel).toFixed(1) : '-';
+                            return `
+                                <tr style="border-bottom: 1px solid #e2edf2;">
+                                    <td style="padding: 0.5rem;">${idx + 1}</td>
+                                    <td style="padding: 0.5rem;">${siswa.nama}</td>
+                                    <td style="padding: 0.5rem;">${siswa.noPeserta}</td>
+                                    ${nilaiPerMapel}
+                                    <td style="padding: 0.5rem; text-align: center; font-weight: bold;">${rata !== '-' ? rata : '-'}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     `;
-    document.getElementById('rekapanContainer').innerHTML = html;
-  }
+}
+
+// MODIFIKASI selectSidebarTab untuk admin
+const originalSelectSidebarTab = selectSidebarTab;
+window.selectSidebarTab = function(tabName) {
+    document.querySelectorAll('.nav-item-sidebar').forEach(item => item.classList.remove('active'));
+    document.querySelector(`.nav-item-sidebar[data-tab="${tabName}"]`).classList.add('active');
+    
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    
+    if (currentUser?.role === 'admin') {
+        // Admin view
+        if (tabName === 'kompetisi') {
+            document.getElementById('tabKompetisi').style.display = 'block';
+            renderAdminDashboard();
+        } else if (tabName === 'riwayat') {
+            document.getElementById('tabRiwayat').style.display = 'block';
+            renderAdminRiwayat();
+        } else if (tabName === 'rekapan') {
+            document.getElementById('tabRekapan').style.display = 'block';
+            renderAdminRekapan();
+        } else if (tabName === 'pengumuman') {
+            document.getElementById('tabPengumuman').style.display = 'block';
+        } else if (tabName === 'dokumen') {
+            document.getElementById('tabDokumen').style.display = 'block';
+        } else if (tabName === 'profil') {
+            document.getElementById('tabProfil').style.display = 'block';
+            updateProfileTab();
+        }
+    } else {
+        // Peserta view
+        if (tabName === 'kompetisi') document.getElementById('tabKompetisi').style.display = 'block';
+        else if (tabName === 'riwayat') { document.getElementById('tabRiwayat').style.display = 'block'; renderRiwayat(); }
+        else if (tabName === 'rekapan') { document.getElementById('tabRekapan').style.display = 'block'; renderRekapan(); }
+        else if (tabName === 'pengumuman') document.getElementById('tabPengumuman').style.display = 'block';
+        else if (tabName === 'dokumen') document.getElementById('tabDokumen').style.display = 'block';
+        else if (tabName === 'profil') { document.getElementById('tabProfil').style.display = 'block'; updateProfileTab(); }
+    }
+    
+    closeSidebar();
+};
+
+// Fungsi admin untuk lihat riwayat semua peserta
+function renderAdminRiwayat() {
+    const container = document.getElementById('riwayatContainer');
+    let html = '<div class="section-header"><h3>📜 Riwayat Ujian Semua Peserta</h3></div>';
+    
+    for (const [username, data] of Object.entries(dataPeserta)) {
+        if (data.role === 'peserta' && data.riwayatUjian.length > 0) {
+            html += `<div class="riwayat-card" style="margin-top: 1rem;">
+                        <div class="card-title">👤 ${data.nama} (${username})</div>`;
+            data.riwayatUjian.forEach(r => {
+                html += `<div style="padding: 0.5rem; border-bottom: 1px solid #e2edf2;">
+                            <strong>${r.mapel}</strong> - Nilai: ${r.nilai} | ${r.lulus ? '✅ LULUS' : '❌ TIDAK LULUS'} | Tanggal: ${r.tanggal}
+                         </div>`;
+            });
+            html += `</div>`;
+        }
+    }
+    
+    if (html === '<div class="section-header"><h3>📜 Riwayat Ujian Semua Peserta</h3></div>') {
+        html += '<div class="kompetisi-card"><p style="text-align:center;">Belum ada riwayat ujian.</p></div>';
+    }
+    
+    container.innerHTML = html;
+}
+
+// Fungsi admin untuk lihat rekapan semua peserta
+function renderAdminRekapan() {
+    const container = document.getElementById('rekapanContainer');
+    let semuaData = [];
+    let totalNilaiSemua = 0;
+    let countNilai = 0;
+    
+    for (const [username, data] of Object.entries(dataPeserta)) {
+        if (data.role === 'peserta') {
+            let totalNilai = 0;
+            let count = 0;
+            daftarKompetisi.forEach(k => {
+                const nilai = data.nilaiPerMapel[k.mapel];
+                if (nilai !== undefined) {
+                    totalNilai += nilai;
+                    count++;
+                    totalNilaiSemua += nilai;
+                    countNilai++;
+                }
+            });
+            const rata = count > 0 ? (totalNilai / count).toFixed(1) : 0;
+            semuaData.push({
+                nama: data.nama,
+                username: username,
+                rata: rata,
+                nilaiPerMapel: data.nilaiPerMapel
+            });
+        }
+    }
+    
+    semuaData.sort((a, b) => b.rata - a.rata);
+    
+    let html = `<div class="statistik-box">
+                    <div class="stat-item"><div class="label">📊 Rata-rata Semua</div><div class="value">${countNilai > 0 ? (totalNilaiSemua / countNilai).toFixed(1) : 0}</div></div>
+                    <div class="stat-item"><div class="label">👥 Total Peserta</div><div class="value">${semuaData.length}</div></div>
+                </div>
+                <div class="rekapan-list">
+                    <div class="rekapan-item-row" style="background: #e8f5e9; font-weight: bold;">
+                        <span>Peringkat</span>
+                        <span>Nama</span>
+                        <span>Rata-rata</span>
+                    </div>`;
+    
+    semuaData.forEach((siswa, idx) => {
+        html += `<div class="rekapan-item-row">
+                    <span>${idx + 1}</span>
+                    <span>${siswa.nama}</span>
+                    <span style="color: #058d4e; font-weight: bold;">${siswa.rata}</span>
+                </div>`;
+    });
+    
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+// MODIFIKASI renderKompetisiGrid untuk admin
+const originalRenderKompetisiGrid = renderKompetisiGrid;
+window.renderKompetisiGrid = function() {
+    if (currentUser?.role === 'admin') {
+        renderAdminDashboard();
+    } else {
+        originalRenderKompetisiGrid();
+    }
+};
 
   function startUjian(mapel) {
     // CEK SUDAH PERNAH UJIAN
     if (cekSudahUjian(mapel)) {
-      alert('⚠️ Anda sudah pernah mengerjakan ujian ' + mapel + '!\nTidak dapat mengulang ujian.');
-      return;
+        alert('⚠️ Anda sudah pernah mengerjakan ujian ' + mapel + '!\nTidak dapat mengulang ujian.');
+        return;
     }
     
     if (countdownInterval) clearInterval(countdownInterval);
@@ -1533,12 +1763,20 @@
     const kompetisi = daftarKompetisi.find(k => k.mapel === mapel);
     if (!kompetisi) return;
     
-    // Cek waktu ujian
     const waktuMulai = kompetisi.waktu.split(' - ')[0];
-    const countdown = hitungMundurKeUjian(kompetisi.tanggal, waktuMulai);
-    if (!countdown.expired) {
-      alert('⏰ Ujian belum dimulai! Silakan tunggu hingga jadwal ujian tiba.');
-      return;
+    const waktuSelesai = kompetisi.waktu.split(' - ')[1];
+    const countdown = hitungMundurKeUjian(kompetisi.tanggal, waktuMulai, waktuSelesai);
+    
+    // CEK APAKAH UJIAN SUDAH BERAKHIR
+    if (countdown.ended === true) {
+        alert('⏰ Maaf, waktu ujian sudah berakhir!\nAnda tidak dapat mengakses ujian ini lagi.');
+        return;
+    }
+    
+    // CEK APAKAH UJIAN BISA DIMULAI
+    if (!countdown.canStart) {
+        alert('⏰ Ujian belum dimulai! Silakan tunggu hingga jadwal ujian tiba.');
+        return;
     }
     
     selectedSoalData = { mapel, soal: kompetisi.soal };
@@ -1546,35 +1784,69 @@
     document.getElementById('setujuJujur').checked = false;
     document.getElementById('btnMulaiUjian').disabled = true;
     showPage('petunjukPage');
-  }
+}
 
-  document.getElementById('setujuJujur')?.addEventListener('change', (e) => {
-    document.getElementById('btnMulaiUjian').disabled = !e.target.checked;
-  });
+ // ========== EVENT UNTUK HALAMAN PETUNJUK ==========
+const cbJujur = document.getElementById('setujuJujur');
+const btnMulai = document.getElementById('btnMulaiUjian');
 
-  document.getElementById('btnMulaiUjian').addEventListener('click', () => {
-    if (!selectedSoalData) return;
+if (cbJujur && btnMulai) {
+    cbJujur.checked = false;
+    btnMulai.disabled = true;
     
-    // CEK LAGI SEBELUM MULAI
-    if (cekSudahUjian(selectedSoalData.mapel)) {
-      alert('⚠️ Anda sudah pernah mengerjakan ujian ini!');
-      showPage('dashboardPage');
-      return;
-    }
+    cbJujur.addEventListener('change', function() {
+        btnMulai.disabled = !this.checked;
+        console.log('Checkbox:', this.checked); // Cek di console
+    });
     
-    const { mapel, soal } = selectedSoalData;
-    currentUjian = { mapel, soal, jawabanUser: new Array(soal.length).fill(null), statusRagu: new Array(soal.length).fill(false), currentIndex: 0, timerInterval: null, waktuMulai: Date.now() };
-    let waktu = 30 * 60;
-    document.getElementById('ujianMapelTitle').innerHTML = mapel;
-    renderSoalUjian();
-    renderNomorSoal();
-    if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
-    currentUjian.timerInterval = setInterval(() => { 
-      if (waktu <= 0) { clearInterval(currentUjian.timerInterval); alert('⏰ Waktu habis! Ujian akan dikirim.'); kirimUjian(); } 
-      else { waktu--; let menit = Math.floor(waktu / 60); let detik = waktu % 60; document.getElementById('timer').innerHTML = `${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`; } 
-    }, 1000);
-    showPage('ujianPage');
-  });
+    btnMulai.addEventListener('click', function() {
+        console.log('Tombol mulai ditekan, selectedSoalData:', selectedSoalData); // Cek di console
+        
+        if (!selectedSoalData) {
+            alert('Silakan pilih ujian terlebih dahulu!');
+            showPage('dashboardPage');
+            return;
+        }
+        
+        if (cekSudahUjian(selectedSoalData.mapel)) {
+            alert('⚠️ Anda sudah pernah mengerjakan ujian ini!');
+            showPage('dashboardPage');
+            return;
+        }
+        
+        const { mapel, soal } = selectedSoalData;
+        currentUjian = { 
+            mapel: mapel, 
+            soal: soal, 
+            jawabanUser: new Array(soal.length).fill(null), 
+            statusRagu: new Array(soal.length).fill(false), 
+            currentIndex: 0, 
+            timerInterval: null, 
+            waktuMulai: Date.now() 
+        };
+        
+        let waktu = 30 * 60;
+        document.getElementById('ujianMapelTitle').innerHTML = mapel;
+        renderSoalUjian();
+        renderNomorSoal();
+        
+        if (currentUjian.timerInterval) clearInterval(currentUjian.timerInterval);
+        currentUjian.timerInterval = setInterval(() => { 
+            if (waktu <= 0) { 
+                clearInterval(currentUjian.timerInterval); 
+                alert('⏰ Waktu habis! Ujian akan dikirim.'); 
+                kirimUjian(); 
+            } else { 
+                waktu--; 
+                let menit = Math.floor(waktu / 60); 
+                let detik = waktu % 60; 
+                document.getElementById('timer').innerHTML = `${menit.toString().padStart(2,'0')}:${detik.toString().padStart(2,'0')}`; 
+            } 
+        }, 1000);
+        
+        showPage('ujianPage');
+    });
+}
 
   function renderSoalUjian() {
     const soal = currentUjian.soal[currentUjian.currentIndex];
@@ -1614,9 +1886,9 @@
     
     // CEK LAGI SEBELUM MENYIMPAN
     if (cekSudahUjian(currentUjian.mapel)) {
-      alert('⚠️ Anda sudah pernah mengerjakan ujian ini!');
-      showPage('dashboardPage');
-      return;
+        alert('⚠️ Anda sudah pernah mengerjakan ujian ini!');
+        showPage('dashboardPage');
+        return;
     }
     
     let benar = 0;
@@ -1627,93 +1899,167 @@
     const waktuSelesai = new Date().toLocaleTimeString('id-ID');
     
     const riwayatBaru = { 
-      mapel: currentUjian.mapel, 
-      nilai: nilai, 
-      lulus: lulus, 
-      tanggal: tanggal,
-      waktu: waktuSelesai,
-      benar: benar,
-      total: currentUjian.soal.length
+        mapel: currentUjian.mapel, 
+        nilai: nilai, 
+        lulus: lulus, 
+        tanggal: tanggal,
+        waktu: waktuSelesai,
+        benar: benar,
+        total: currentUjian.soal.length
     };
     
+    // UPDATE dataPeserta (database utama)
     const userData = dataPeserta[currentUser.username];
+    
+    // INISIALISASI jika belum ada
+    if (!userData.riwayatUjian) userData.riwayatUjian = [];
+    if (!userData.nilaiPerMapel) userData.nilaiPerMapel = {};
+    if (!userData.ujianSelesai) userData.ujianSelesai = {};
     
     // PASTIKAN BELUM ADA
     const sudahAda = userData.riwayatUjian.some(r => r.mapel === currentUjian.mapel);
     if (!sudahAda) {
-      userData.riwayatUjian.push(riwayatBaru);
-      userData.nilaiPerMapel[currentUjian.mapel] = nilai;
-      userData.ujianSelesai[currentUjian.mapel] = true;
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        // Simpan ke database
+        userData.riwayatUjian.push(riwayatBaru);
+        userData.nilaiPerMapel[currentUjian.mapel] = nilai;
+        userData.ujianSelesai[currentUjian.mapel] = true;
+        
+        // UPDATE currentUser (sinkron)
+        currentUser.riwayatUjian = [...userData.riwayatUjian];
+        currentUser.nilaiPerMapel = {...userData.nilaiPerMapel};
+        currentUser.ujianSelesai = {...userData.ujianSelesai};
+        
+        // SIMPAN ke localStorage
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        
+        // DEBUG
+        console.log('✅ Data tersimpan:', {
+            mapel: currentUjian.mapel,
+            nilai: nilai,
+            riwayat: currentUser.riwayatUjian,
+            ujianSelesai: currentUser.ujianSelesai
+        });
+        
+        alert('✅ Ujian selesai! Data telah tersimpan.');
     }
     
+    // TAMPILAN HASIL AKHIR
     document.getElementById('hasilMapel').innerHTML = currentUjian.mapel;
-    document.getElementById('nilaiAkhir').innerHTML = nilai;
-    document.getElementById('statusKelulusan').innerHTML = lulus ? '<div class="status-lulus">✅ SELAMAT! ANDA LULUS</div>' : '<div class="status-tidak">❌ MOHON MAAF, ANDA TIDAK LULUS</div>';
     
-    // VERSI SEDERHANA - HANYA NILAI
     let detailHtml = `
-      <div style="text-align: center; padding: 1rem;">
-        <p>Terima kasih telah mengerjakan ujian.</p>
-        <p>Nilai Anda: <strong style="font-size: 1.5rem; color: #058d4e;">${nilai}</strong></p>
-        <p>${lulus ? 'Selamat Anda dinyatakan LULUS!' : 'Maaf Anda belum mencapai KKM. Tetap semangat!'}</p>
-      </div>
+        <div style="text-align: center; padding: 1.5rem;">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: #058d4e; margin-bottom: 1rem;"></i>
+            <h3 style="color: #058d4e;">Terima Kasih!</h3>
+            <p style="margin: 1rem 0; font-size: 1rem;">Jawaban Anda telah kami terima.</p>
+            <p style="margin: 1rem 0; font-size: 1rem; color: #1a4d5f;">📢 Hasil ujian akan diumumkan sesuai jadwal yang telah ditentukan.</p>
+            <div style="background: #e8f5e9; padding: 1rem; border-radius: 1rem; margin-top: 1rem;">
+                <i class="fas fa-graduation-cap"></i> Tetap semangat belajar!
+            </div>
+        </div>
     `;
     document.getElementById('detailJawaban').innerHTML = detailHtml;
     
     renderKompetisiGrid();
     showPage('hasilUjianPage');
-  }
-
-  document.getElementById('btnKembaliKeDashboard')?.addEventListener('click', () => { showPage('dashboardPage'); renderRiwayat(); renderRekapan(); renderKompetisiGrid(); });
-
-  // LOGIN
-  document.getElementById('btnLogin').addEventListener('click', () => {
+}
+// LOGIN
+document.getElementById('btnLogin').addEventListener('click', () => {
     const username = document.getElementById('loginUsername').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
     const user = dataPeserta[username];
     if (user && user.password === password) {
-      currentUser = { ...user, username: username };
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      document.getElementById('userName').innerHTML = user.nama;
-      document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
-      const inisial = user.nama.split(' ').map(n => n[0]).join('');
-      document.getElementById('userAvatar').innerHTML = inisial;
-      if (!user.ujianSelesai) user.ujianSelesai = {};
-      if (!user.riwayatUjian) user.riwayatUjian = [];
-      if (!user.nilaiPerMapel) user.nilaiPerMapel = {};
-      renderKompetisiGrid();
-      showPage('dashboardPage');
-    } else { const errorDiv = document.getElementById('loginErrorMsg'); errorDiv.style.display = 'block'; errorDiv.innerHTML = '❌ Username atau password salah!'; setTimeout(() => errorDiv.style.display = 'none', 3000); }
-  });
+        currentUser = { ...user, username: username };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        document.getElementById('userName').innerHTML = user.nama;
+        document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
+        const inisial = user.nama.split(' ').map(n => n[0]).join('');
+        document.getElementById('userAvatar').innerHTML = inisial;
+        if (!user.ujianSelesai) user.ujianSelesai = {};
+        if (!user.riwayatUjian) user.riwayatUjian = [];
+        if (!user.nilaiPerMapel) user.nilaiPerMapel = {};
+        renderKompetisiGrid();
+        showPage('dashboardPage');
+    } else { 
+        const errorDiv = document.getElementById('loginErrorMsg'); 
+        errorDiv.style.display = 'block'; 
+        errorDiv.innerHTML = '❌ Username atau password salah!'; 
+        setTimeout(() => errorDiv.style.display = 'none', 3000); 
+    }
+});
 
-  document.getElementById('logoutBtnDashboard').addEventListener('click', () => { 
+document.getElementById('logoutBtnDashboard').addEventListener('click', () => { 
     localStorage.removeItem('currentUser'); 
     currentUser = null; 
     if (countdownInterval) clearInterval(countdownInterval);
     showPage('loginPage'); 
     document.getElementById('loginUsername').value = ''; 
     document.getElementById('loginPassword').value = ''; 
-  });
+});
+
+// Panggil checkSession saat halaman dimuat
+checkSession();
 
   function checkSession() {
     const saved = localStorage.getItem('currentUser');
     if (saved) {
-      currentUser = JSON.parse(saved);
-      const user = dataPeserta[currentUser.username];
-      if (user) {
-        document.getElementById('userName').innerHTML = user.nama;
-        document.getElementById('welcomeName').innerHTML = user.nama.split(' ')[0];
-        document.getElementById('userAvatar').innerHTML = user.nama.split(' ').map(n => n[0]).join('');
-        if (!user.ujianSelesai) user.ujianSelesai = {};
-        if (!user.riwayatUjian) user.riwayatUjian = [];
-        if (!user.nilaiPerMapel) user.nilaiPerMapel = {};
-        renderKompetisiGrid();
-        showPage('dashboardPage');
-      } else showPage('loginPage');
-    } else showPage('loginPage');
-  }
-  checkSession();
+        const savedUser = JSON.parse(saved);
+        const userFromDatabase = dataPeserta[savedUser.username];
+        
+        if (userFromDatabase) {
+            if (savedUser.riwayatUjian && savedUser.riwayatUjian.length > 0) {
+                userFromDatabase.riwayatUjian = savedUser.riwayatUjian;
+            }
+            if (savedUser.nilaiPerMapel && Object.keys(savedUser.nilaiPerMapel).length > 0) {
+                userFromDatabase.nilaiPerMapel = savedUser.nilaiPerMapel;
+            }
+            if (savedUser.ujianSelesai && Object.keys(savedUser.ujianSelesai).length > 0) {
+                userFromDatabase.ujianSelesai = savedUser.ujianSelesai;
+            }
+            
+            if (!userFromDatabase.riwayatUjian) userFromDatabase.riwayatUjian = [];
+            if (!userFromDatabase.nilaiPerMapel) userFromDatabase.nilaiPerMapel = {};
+            if (!userFromDatabase.ujianSelesai) userFromDatabase.ujianSelesai = {};
+            
+            currentUser = { 
+                ...userFromDatabase, 
+                username: savedUser.username,
+                riwayatUjian: userFromDatabase.riwayatUjian,
+                nilaiPerMapel: userFromDatabase.nilaiPerMapel,
+                ujianSelesai: userFromDatabase.ujianSelesai
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            document.getElementById('userName').innerHTML = currentUser.nama;
+            document.getElementById('welcomeName').innerHTML = currentUser.nama.split(' ')[0];
+            const inisial = currentUser.nama.split(' ').map(n => n[0]).join('');
+            document.getElementById('userAvatar').innerHTML = inisial;
+            
+            // Panggil render yang sesuai dengan role
+            if (currentUser.role === 'admin') {
+                renderAdminDashboard();
+            } else {
+                renderKompetisiGrid();
+            }
+            
+            showPage('dashboardPage');
+        } else {
+            showPage('loginPage');
+        }
+    } else {
+        showPage('loginPage');
+    }
+}
+
+// Fungsi untuk debugging (letakkan di luar checkSession)
+function lihatData() {
+    console.log('=== DATA TERSIMPAN ===');
+    console.log('dataPeserta.achmad:', dataPeserta.achmad);
+    console.log('currentUser:', currentUser);
+    if (localStorage.getItem('currentUser')) {
+        console.log('localStorage:', JSON.parse(localStorage.getItem('currentUser')));
+    }
+}
 
   // Modal Profile tambahan
   const modalHtml = `<div id="profileModal" class="modal"><div class="modal-content"><h3>👤 PROFIL PENGGUNA</h3><div class="info-row"><strong>Nama Lengkap:</strong> <span id="modalNama"></span></div><div class="info-row"><strong>Username:</strong> <span id="modalUsername"></span></div><div class="info-row"><strong>NISN:</strong> <span id="modalNisn"></span></div><div class="info-row"><strong>Asal Sekolah:</strong> <span id="modalInstansi"></span></div><div class="info-row"><strong>Tanggal Lahir:</strong> <span id="modalTtl"></span></div><div class="info-row"><strong>Sebagai:</strong> <span id="modalRole"></span></div><button class="close-modal" onclick="closeProfileModal()">Tutup</button></div></div>`;
