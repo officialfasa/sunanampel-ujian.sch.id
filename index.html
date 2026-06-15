@@ -1,1237 +1,179 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FASA Learning Center | FASA Official</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f0f2f5;
-      color: #1a2c3e;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    /* ========== BACKGROUND LOGIN ELEGAN ========== */
-    .login-container {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #7fa081 0%, #058d4e 50%, #015331 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .login-container::before {
-      content: '';
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-      animation: rotate 20s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .login-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 2rem;
-      width: 100%;
-      max-width: 450px;
-      padding: 2.5rem;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      animation: fadeInUp 0.6s ease;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .login-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .login-header .logo-login {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 100%;
-      margin-bottom: 1rem;
-      border: 3px solid #ffffff;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .login-header h1 {
-      font-size: 1.8rem;
-      color: #1a4d5f;
-      margin-bottom: 0.5rem;
-    }
-
-    .login-header p {
-      color: #6c7e91;
-      font-size: 0.85rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      font-size: 0.8rem;
-      display: block;
-      margin-bottom: 0.4rem;
-      color: #2c4c6c;
-    }
-
-    .input-with-icon {
-      position: relative;
-    }
-
-    .input-with-icon i {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9aaebf;
-      font-size: 1rem;
-    }
-
-    .input-with-icon input {
-      width: 100%;
-      padding: 0.8rem 1rem 0.8rem 2.8rem;
-      border: 1px solid #d4e0e8;
-      border-radius: 1rem;
-      font-size: 0.9rem;
-      transition: 0.2s;
-    }
-
-    .input-with-icon input:focus {
-      outline: none;
-      border-color: #058d4e;
-      box-shadow: 0 0 0 3px rgba(5, 141, 78, 0.2);
-    }
-
-    .btn-login {
-      background: linear-gradient(135deg, #058d4e, #015331);
-      color: white;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1rem;
-      transition: 0.3s;
-    }
-
-    .btn-login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(5, 141, 78, 0.4);
-    }
-
-    .error-message {
-      background: #fee2e2;
-      color: #d9534f;
-      padding: 0.7rem;
-      border-radius: 1rem;
-      font-size: 0.75rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      display: none;
-    }
-
-    .divider {
-      text-align: center;
-      margin: 1.2rem 0;
-      position: relative;
-    }
-
-    .divider::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 100%;
-      height: 1px;
-      background: #e2edf2;
-    }
-
-    .divider span {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 0 1rem;
-      position: relative;
-      font-size: 0.75rem;
-      color: #8ba0b0;
-    }
-
-    .register-link {
-      text-align: center;
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-    }
-
-    .register-link a {
-      color: #058d4e;
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .register-link a:hover {
-      text-decoration: underline;
-    }
-
-    /* ========== DASHBOARD STYLE ========== */
-    .dashboard-page {
-      display: none;
-    }
-
-    /* Navbar Atas */
-    .top-navbar {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      padding: 0.8rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-img {
-      height: 40px;
-      width: auto;
-      border-radius: 8px;
-    }
-
-    .logo-text {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #058d4e;
-    }
-
-    .user-area {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: #eef2f5;
-      padding: 0.3rem 1rem;
-      border-radius: 2rem;
-      cursor: pointer;
-    }
-
-    .user-avatar {
-      width: 35px;
-      height: 35px;
-      background: #058d4e;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-    }
-
-    .user-name {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #1a4d5f;
-    }
-
-    .logout-btn {
-      background: #1e4663;
-      color: white;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 0.8rem;
-    }
-
-    /* Hamburger Menu */
-    .hamburger-menu {
-      background: #eef2f5;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-left: 0.5rem;
-    }
-
-    .hamburger-menu:hover {
-      background: #e0e5ec;
-    }
-
-    .hamburger-menu i {
-      font-size: 1.2rem;
-      color: #1a4d5f;
-    }
-
-    /* Sidebar Navigasi */
-    .sidebar-nav {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 280px;
-      height: 100%;
-      background: white;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 200;
-      transition: right 0.3s ease;
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .sidebar-nav.open {
-      right: 0;
-    }
-
-    .sidebar-nav .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e2edf2;
-      margin-bottom: 1rem;
-    }
-
-    .sidebar-nav .sidebar-header h4 {
-      color: #1a4d5f;
-      font-size: 1.2rem;
-    }
-
-    .sidebar-nav .close-sidebar {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #6c7e91;
-    }
-
-    .sidebar-nav .nav-item-sidebar {
-      padding: 0.8rem 1rem;
-      border-radius: 1rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      color: #4a627a;
-    }
-
-    .sidebar-nav .nav-item-sidebar:hover {
-      background: #f0f4fa;
-      color: #058d4e;
-    }
-
-    .sidebar-nav .nav-item-sidebar.active {
-      background: #e8f5e9;
-      color: #058d4e;
-      font-weight: 600;
-    }
-
-    /* Overlay */
-    .sidebar-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 199;
-      display: none;
-    }
-
-    .sidebar-overlay.show {
-      display: block;
-    }
-
-    /* Welcome Banner */
-    .welcome-banner {
-      background: linear-gradient(135deg, #058d4e, #015331);
-      margin: 1.5rem 2rem 0 2rem;
-      padding: 1.5rem 2rem;
-      border-radius: 1.5rem;
-      color: white;
-    }
-
-    .welcome-banner h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .welcome-banner p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    /* Main Content */
-    .main-content {
-      padding: 1.5rem 2rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .section-header h3 {
-      font-size: 1.2rem;
-      color: #1a4d5f;
-    }
-
-    .info-text {
-      font-size: 0.7rem;
-      color: #8ba0b0;
-    }
-
-    /* Grid Kompetisi */
-    .kompetisi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .kompetisi-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 1.2rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: 0.2s;
-      border: 1px solid #e2edf2;
-    }
-
-    .kompetisi-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: #c8e6d9;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1a4d5f;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-badges {
-      display: flex;
-      gap: 0.8rem;
-      margin-bottom: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .badge-mapel {
-      background: #e8f5e9;
-      color: #058d4e;
-      padding: 0.2rem 0.8rem;
-      border-radius: 2rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    .badge-kategori {
-      background: #fff8e1;
-      color: #f4a261;
-      padding: 0.2rem 0.8rem;
-      border-radius: 2rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    .card-date {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 0.75rem;
-      color: #6c7e91;
-      margin-bottom: 0.8rem;
-    }
-
-    .card-date i {
-      width: 16px;
-      color: #058d4e;
-    }
-
-    .btn-mulai {
-      background: #058d4e;
-      color: white;
-      border: none;
-      padding: 0.4rem 1.2rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: 0.2s;
-      width: 100%;
-    }
-
-    .btn-mulai:disabled {
-      background: #c8e6d9;
-      cursor: not-allowed;
-    }
-
-    .btn-mulai:hover:not(:disabled) {
-      background: #015331;
-    }
-
-    /* Countdown Style */
-    .countdown-box {
-      background: #e8f5e9;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      margin: 0.5rem 0;
-      text-align: center;
-    }
+ad": { nama: "Abd Rosid", noPeserta: "2019001", angkatan: "2019", ttl: "2006-04-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "achmadmuqorrobin": { nama: "Achmad Muqorrobin", noPeserta: "2019002", angkatan: "2019", ttl: "2006-09-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "achrohandi": { nama: "Ach Rohandi", noPeserta: "2019003", angkatan: "2019", ttl: "2006-08-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmuhlisin": { nama: "Ah Muhlisin", noPeserta: "2019004", angkatan: "2019", ttl: "2006-05-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "alfareza": { nama: "Alfareza Zaki Darustan", noPeserta: "2019005", angkatan: "2019", ttl: "2007-02-20", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ameliabalkis": { nama: "Amelia Balkis", noPeserta: "2019006", angkatan: "2019", ttl: "2007-05-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "annasilham": { nama: "Annas Ilham", noPeserta: "2019007", angkatan: "2019", ttl: "2006-08-02", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "dimaspratama": { nama: "Dimas Pratama", noPeserta: "2019008", angkatan: "2019", ttl: "2006-04-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "hafizulkhoiri": { nama: "Hafizul Khoiri", noPeserta: "2019009", angkatan: "2019", ttl: "2007-01-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "juwitasri": { nama: "Juwita Sri Wahyuningsih", noPeserta: "2019010", angkatan: "2019", ttl: "2007-01-27", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "luqysaputra": { nama: "Luqy Saputra", noPeserta: "2019011", angkatan: "2019", ttl: "2006-05-06", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "maulidiyah": { nama: "Maulidiyah Azzahra", noPeserta: "2019012", angkatan: "2019", ttl: "2006-04-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rizqiwahyudi": { nama: "Rizqi Wahyudi", noPeserta: "2019013", angkatan: "2019", ttl: "2006-10-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "salman": { nama: "Salman", noPeserta: "2019014", angkatan: "2019", ttl: "2006-07-31", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitimardiana": { nama: "Siti Mardiana Rukmana", noPeserta: "2019015", angkatan: "2019", ttl: "2006-11-13", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitipur": { nama: "Siti Nur Fadilah", noPeserta: "2019016", angkatan: "2019", ttl: "2007-01-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ayunisartika": { nama: "Ayuni Sartika Dewi", noPeserta: "2019017", angkatan: "2019", ttl: "2006-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "deriananda": { nama: "Deri Ananda Laputra", noPeserta: "2019018", angkatan: "2019", ttl: "2006-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "fikruhakim": { nama: "Fikru Hakim", noPeserta: "2019019", angkatan: "2019", ttl: "2006-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "holilah": { nama: "Holilah", noPeserta: "2019020", angkatan: "2019", ttl: "2006-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ikrimatus": { nama: "Ikrimatus Sholehah", noPeserta: "2019021", angkatan: "2019", ttl: "2006-10-31", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "munawaroh": { nama: "Munawaroh", noPeserta: "2019022", angkatan: "2019", ttl: "2006-11-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sainiyatul": { nama: "Sainiyatul Qomariyah", noPeserta: "2019023", angkatan: "2019", ttl: "2006-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "zarkasyh": { nama: "Zarkasyh", noPeserta: "2019024", angkatan: "2019", ttl: "2007-02-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
     
-    .countdown-box i {
-      margin-right: 0.3rem;
-    }
+    // ==================== ANGKATAN 2020 (LULUS MTs 2020) ====================
+    "abdhalim": { nama: "Abd Halim", noPeserta: "2020001", angkatan: "2020", ttl: "2007-01-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "abdulmalik": { nama: "Abdul Malik", noPeserta: "2020002", angkatan: "2020", ttl: "2006-11-27", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "adidirwansa": { nama: "Adid Irwansa", noPeserta: "2020003", angkatan: "2020", ttl: "2006-12-05", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "andhikaazwar": { nama: "Andhika Azwar Anas", noPeserta: "2020004", angkatan: "2020", ttl: "2008-02-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "anisatun": { nama: "Anisatun Nadhiro", noPeserta: "2020005", angkatan: "2020", ttl: "2007-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "andisaputra": { nama: "Andi Saputra", noPeserta: "2020006", angkatan: "2020", ttl: "2007-03-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "firdaelok": { nama: "Firda Elok Putri Pratama", noPeserta: "2020007", angkatan: "2020", ttl: "2007-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "karima": { nama: "Karima", noPeserta: "2020008", angkatan: "2020", ttl: "2006-08-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "lukmanhakim": { nama: "Lukman Hakim", noPeserta: "2020009", angkatan: "2020", ttl: "2007-02-22", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mahrusali": { nama: "Mahrus Ali", noPeserta: "2020010", angkatan: "2020", ttl: "2005-07-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mayafebriyanti": { nama: "Maya Febriyanti", noPeserta: "2020011", angkatan: "2020", ttl: "2007-09-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mufidah": { nama: "Mufidah", noPeserta: "2020012", angkatan: "2020", ttl: "2008-03-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mimamulwafa": { nama: "Muhammad Im'amul Wafa", noPeserta: "2020013", angkatan: "2020", ttl: "2006-12-29", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "muhfajar": { nama: "Muh Fajar Alfani", noPeserta: "2020014", angkatan: "2020", ttl: "2007-12-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "napisatul": { nama: "Napisatul Mutma'inah", noPeserta: "2020015", angkatan: "2020", ttl: "2007-08-30", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "raudhotuljannah": { nama: "Raudhotul Jannah", noPeserta: "2020016", angkatan: "2020", ttl: "2006-08-30", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "renyfarizkah": { nama: "Reny Farizkah", noPeserta: "2020017", angkatan: "2020", ttl: "2007-11-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rofidotul": { nama: "Rofidotul Hasanah", noPeserta: "2020018", angkatan: "2020", ttl: "2008-01-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "salafudinfais": { nama: "Salafudin Fa'is", noPeserta: "2020019", angkatan: "2020", ttl: "2007-10-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitisirohmah": { nama: "Siti Rohmah", noPeserta: "2020020", angkatan: "2020", ttl: "2008-01-25", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "achprayoga": { nama: "Ach Prayoga", noPeserta: "2020021", angkatan: "2020", ttl: "2007-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "fairuzzabadia": { nama: "Fairuz Zabadia Tasya", noPeserta: "2020022", angkatan: "2020", ttl: "2007-07-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
     
-    .countdown-text {
-      font-weight: 700;
-      color: #058d4e;
-      font-size: 0.75rem;
-    }
-
-    /* Help Card */
-    .help-card {
-      background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      margin: 1rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .help-card p {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #1a4d5f;
-    }
-
-    .help-card button {
-      background: #058d4e;
-      color: white;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 2rem;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    /* Footer */
-    .footer-note {
-      text-align: center;
-      margin: 2rem 2rem 1rem;
-      font-size: 0.7rem;
-      color: #6c7e91;
-      border-top: 1px solid #d4e2ec;
-      padding-top: 1rem;
-    }
-
-    /* ========== HALAMAN UJIAN ========== */
-    .ujian-page {
-      display: none;
-      min-height: 100vh;
-      background: #f0f2f5;
-    }
-
-    .ujian-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .ujian-header {
-      background: white;
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .ujian-judul {
-      font-weight: 700;
-      color: #1a4d5f;
-    }
-
-    .ujian-waktu {
-      background: #e8f5e9;
-      padding: 0.3rem 1rem;
-      border-radius: 2rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #058d4e;
-    }
-
-    .ujian-layout {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .soal-sidebar {
-      width: 280px;
-      background: white;
-      border-radius: 1rem;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .soal-sidebar h4 {
-      color: #1a4d5f;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    .nomor-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0.5rem;
-    }
-
-    .nomor-soal-btn {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: 0.2s;
-      border: 1px solid #e2edf2;
-      background: white;
-      color: #1a2c3e;
-    }
-
-    .nomor-soal-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .nomor-soal-btn.answered {
-      background: #058d4e;
-      color: white;
-      border-color: #058d4e;
-    }
-
-    .nomor-soal-btn.current {
-      background: #f4a261;
-      color: white;
-      border-color: #f4a261;
-      box-shadow: 0 0 0 2px #f4a261;
-    }
-
-    .nomor-soal-btn.ragu {
-      background: #e53e3e;
-      color: white;
-      border-color: #e53e3e;
-    }
-
-    .soal-konten {
-      flex: 1;
-      background: white;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .soal-text {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-
-    .opsi-item {
-      margin: 0.8rem 0;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.5rem;
-      border-radius: 0.8rem;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .opsi-item:hover {
-      background: #f0f4fa;
-    }
-
-    .opsi-item input {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-
-    .opsi-item label {
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .soal-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e2edf2;
-    }
-
-    .soal-nav button {
-      background: #eef2f5;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .soal-nav button:hover {
-      background: #e2edf2;
-    }
-
-    .btn-kirim {
-      background: #058d4e !important;
-      color: white;
-      width: 100%;
-      margin-top: 1rem;
-      padding: 0.7rem;
-    }
-
-    .btn-kirim:hover {
-      background: #015331 !important;
-    }
-
-    /* Petunjuk Pengerjaan */
-    .petunjuk-page {
-      display: none;
-      min-height: 100vh;
-      background: #f0f2f5;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .petunjuk-card {
-      background: white;
-      border-radius: 1.5rem;
-      max-width: 500px;
-      width: 100%;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
-    }
-
-    .petunjuk-card h2 {
-      color: #1a4d5f;
-      margin-bottom: 1rem;
-    }
-
-    .petunjuk-card ul {
-      text-align: left;
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-
-    .petunjuk-card li {
-      margin: 0.5rem 0;
-    }
-
-    .doa-box {
-      background: #e8f5e9;
-      padding: 1rem;
-      border-radius: 1rem;
-      margin: 1rem 0;
-      font-style: italic;
-      color: #058d4e;
-    }
-
-    .persetujuan {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 1rem 0;
-      padding: 0.5rem;
-      background: #f9fbfe;
-      border-radius: 0.5rem;
-    }
-
-    .persetujuan input {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* Hasil Ujian */
-    .hasil-ujian-page {
-      display: none;
-      min-height: 100vh;
-      background: #f0f2f5;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .hasil-card {
-      background: white;
-      border-radius: 1.5rem;
-      max-width: 600px;
-      width: 100%;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
-    }
-
-    .nilai-akhir {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #058d4e;
-      margin: 1rem 0;
-    }
-
-    .status-lulus {
-      background: #d4edda;
-      color: #155724;
-      padding: 0.5rem;
-      border-radius: 2rem;
-      font-weight: 600;
-    }
-
-    .status-tidak {
-      background: #f8d7da;
-      color: #721c24;
-      padding: 0.5rem;
-      border-radius: 2rem;
-      font-weight: 600;
-    }
-
-    /* Riwayat & Rekapan */
-    .riwayat-card, .rekapan-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 1.2rem;
-      margin-bottom: 1rem;
-      border: 1px solid #e2edf2;
-    }
-
-    .rekapan-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .rekapan-item-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    .rekapan-item-row .mapel {
-      font-weight: 600;
-    }
-
-    .rekapan-item-row .nilai {
-      font-weight: 700;
-      color: #058d4e;
-    }
-
-    .statistik-box {
-      background: #e8f5e9;
-      border-radius: 1rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-item .label {
-      font-size: 0.7rem;
-      color: #6c7e91;
-    }
-
-    .stat-item .value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #058d4e;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    /* Modal Profile */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 2rem;
-      max-width: 450px;
-      width: 90%;
-      padding: 2rem;
-      text-align: center;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .modal-content h3 {
-      color: #1a4d5f;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-content .info-row {
-      margin: 0.8rem 0;
-      text-align: left;
-      padding: 0.5rem;
-      border-bottom: 1px solid #e2edf2;
-    }
-
-    .modal-content .info-row strong {
-      display: inline-block;
-      width: 110px;
-      color: #058d4e;
-    }
-
-    .close-modal {
-      background: #058d4e;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-    .countdown-box .expired {
-    color: #e53e3e !important;
-    font-weight: bold;
-    } 
-
-    @media (max-width: 768px) {
-      .top-navbar {
-        flex-direction: column;
-        padding: 0.8rem 1rem;
-      }
-      .welcome-banner {
-        margin: 1rem;
-      }
-      .main-content {
-        padding: 1rem;
-      }
-      .kompetisi-grid {
-        grid-template-columns: 1fr;
-      }
-      .ujian-layout {
-        flex-direction: column;
-      }
-      .soal-sidebar {
-        width: 100%;
-        position: static;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<!-- HALAMAN LOGIN -->
-<div id="loginPage" class="page active">
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-header">
-        <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA Logo" class="logo-login">
-        <h1>FASA Learning Center</h1>
-        <p>Masuk ke akun Anda</p>
-      </div>
-      <div id="loginErrorMsg" class="error-message"></div>
-      <div class="form-group">
-        <label>Username / NISN</label>
-        <div class="input-with-icon">
-          <i class="fas fa-user"></i>
-          <input type="text" id="loginUsername" placeholder="Masukkan username">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <div class="input-with-icon">
-          <i class="fas fa-lock"></i>
-          <input type="password" id="loginPassword" placeholder="Masukkan password">
-        </div>
-      </div>
-      <button class="btn-login" id="btnLogin">Masuk</button>
-      
-      <div class="divider"><span>ATAU</span></div>
-        <div class="register-link">Belum punya akun? <a onclick="showRegisterForm()">Daftar Sekarang</a></div>      <div style="text-align: center; margin-top: 1rem; font-size: 0.7rem; color: #6c7e91;">
-        @2026 | FASA Learning Center - FASA Official
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DASHBOARD FASA -->
-<div id="dashboardPage" class="page">
-  <div class="top-navbar">
-    <div class="logo-area">
-      <img src="https://res.cloudinary.com/dobtafzwo/image/upload/v1776478581/LOGO_FASA_ieuiay.jpg" alt="FASA Logo" class="logo-img">
-      <span class="logo-text">FASA Dashboard</span>
-    </div>
-    <div class="user-area">
-      <div class="user-info" onclick="showProfileModal()">
-        <div class="user-avatar" id="userAvatar">AM</div>
-        <span class="user-name" id="userName">Achmad Muqorrobin</span>
-        <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
-      </div>
-      <button id="logoutBtnDashboard" class="logout-btn">LOGOUT</button>
-      <div class="hamburger-menu" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-      </div>
-    </div>
-  </div>
-
-  <div class="welcome-banner">
-    <h2>Hai, <span id="welcomeName">Achmad Muqorrobin</span>!</h2>
-    <p>Selamat datang kembali di dashboard FASA. Ikuti ujian dan pantau perkembangan belajarmu.</p>
-  </div>
-
-  <div class="main-content">
-    <!-- Tab Kompetisi -->
-    <div id="tabKompetisi" class="tab-content">
-      <div class="section-header">
-        <h3>📋 Kompetisi Terdaftar</h3>
-      </div>
-      <div class="kompetisi-grid" id="kompetisiGrid"></div>
-    </div>
-
-    <!-- Tab Riwayat Ujian -->
-    <div id="tabRiwayat" class="tab-content" style="display: none;">
-      <div class="section-header"><h3>📜 Riwayat Ujian</h3></div>
-      <div id="riwayatContainer"></div>
-    </div>
-
-    <!-- Tab Rekapan Nilai -->
-    <div id="tabRekapan" class="tab-content" style="display: none;">
-      <div class="section-header"><h3>📊 Rekapan Nilai</h3></div>
-      <div id="rekapanContainer"></div>
-    </div>
-
-    <!-- Tab Pengumuman -->
-    <div id="tabPengumuman" class="tab-content" style="display: none;">
-      <div class="section-header"><h3>📢 Pengumuman</h3></div>
-      <div class="kompetisi-card"><div class="card-title">HASIL UJIAN UAS 2026</div><div class="card-date"><span><i class="far fa-calendar-alt"></i> 15 Apr 2026</span></div><p style="font-size: 0.85rem; margin-top: 0.5rem;">Jadwal ujian telah dirilis. Silakan cek jadwal masing-masing mata pelajaran.</p></div>
-    </div>
-
-    <!-- Tab Dokumen -->
-    <div id="tabDokumen" class="tab-content" style="display: none;">
-      <div class="section-header"><h3>📄 Dokumen Digital</h3></div>
-      <div class="kompetisi-card"><div class="card-title">📎 Panduan Ujian MASCO 2026</div><button class="btn-mulai" style="width: auto; padding: 0.3rem 1rem;" onclick="alert('Mengunduh dokumen...')">Download PDF</button></div>
-      <div class="kompetisi-card"><div class="card-title">📎 Sertifikat Peserta</div><button class="btn-mulai" style="width: auto; padding: 0.3rem 1rem;" onclick="alert('Mengunduh dokumen...')">Download PDF</button></div>
-    </div>
-
-    <!-- Tab Profil -->
-    <div id="tabProfil" class="tab-content" style="display: none;">
-      <div class="section-header"><h3>👤 Profil Saya</h3></div>
-      <div class="kompetisi-card"><div class="info-row" style="padding: 0.5rem 0;"><strong>Nama Lengkap:</strong> <span id="profileNama"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Username:</strong> <span id="profileUsername"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>NISN:</strong> <span id="profileNisn"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Asal Sekolah:</strong> <span id="profileInstansi"></span></div><div class="info-row" style="padding: 0.5rem 0;"><strong>Tanggal Lahir:</strong> <span id="profileTtl"></span></div></div>
-    </div>
-
-    <div class="help-card">
-      <p><i class="fas fa-question-circle"></i> Butuh bantuan dengan ujian?</p>
-      <button onclick="alert('Hubungi admin di wa.me/628123456789')">Hubungi Admin</button>
-    </div>
-  </div>
-
-  <div class="footer-note">© 2026 | FASA - Forum Alumni Sunan Ampel | FASA Official</div>
-</div>
-
-<!-- SIDEBAR OVERLAY & SIDEBAR -->
-<div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
-<div id="sidebarNav" class="sidebar-nav">
-  <div class="sidebar-header">
-    <h4><i class="fas fa-bars"></i> Menu Navigasi</h4>
-    <button class="close-sidebar" onclick="closeSidebar()">&times;</button>
-  </div>
-  <div class="nav-item-sidebar active" data-tab="kompetisi" onclick="selectSidebarTab('kompetisi')">
-    <i class="fas fa-trophy"></i> Kompetisi
-  </div>
-  <div class="nav-item-sidebar" data-tab="riwayat" onclick="selectSidebarTab('riwayat')">
-    <i class="fas fa-history"></i> Riwayat Ujian
-  </div>
-  <div class="nav-item-sidebar" data-tab="rekapan" onclick="selectSidebarTab('rekapan')">
-    <i class="fas fa-chart-line"></i> Rekapan Nilai
-  </div>
-  <div class="nav-item-sidebar" data-tab="pengumuman" onclick="selectSidebarTab('pengumuman')">
-    <i class="fas fa-bullhorn"></i> Pengumuman
-  </div>
-  <div class="nav-item-sidebar" data-tab="dokumen" onclick="selectSidebarTab('dokumen')">
-    <i class="fas fa-file-alt"></i> Dokumen
-  </div>
-  <div class="nav-item-sidebar" data-tab="profil" onclick="selectSidebarTab('profil')">
-    <i class="fas fa-user-circle"></i> Profil
-  </div>
-  <div class="nav-item-sidebar" data-tab="manajemenPaket" onclick="selectSidebarTab('manajemenPaket')">
-    <i class="fas fa-box"></i> Manajemen Paket
-  </div>
-</div>
-
-<!-- HALAMAN PETUNJUK PENGERJAAN -->
-<div id="petunjukPage" class="page">
-  <div class="petunjuk-page" style="display: flex;">
-    <div class="petunjuk-card">
-      <h2>📋 Petunjuk Pengerjaan</h2>
-      <div class="doa-box">
-        <i class="fas fa-hands-praying"></i> "Ya Allah, mudahkanlah aku dalam mengerjakan ujian ini dan berikanlah hasil terbaik. Aamiin."
-      </div>
-      <p>Silakan baca petunjuk berikut sebelum mengerjakan ujian:</p>
-      <ul>
-        <li>Ujian terdiri dari 10 soal pilihan ganda</li>
-        <li>Waktu pengerjaan: <strong id="petunjukWaktu">30 menit</strong></li>
-        <li>Klik pada nomor soal di samping untuk berpindah soal</li>
-        <li>Soal yang sudah dijawab akan berwarna <span style="color:#058d4e;">hijau</span></li>
-        <li>Soal yang diragukan bisa ditandai dengan tombol "Ragu"</li>
-        <li>Pastikan semua soal terjawab sebelum mengirim</li>
-      </ul>
-      <div class="persetujuan">
-        <input type="checkbox" id="setujuJujur">
-        <label for="setujuJujur">Saya bersedia mengerjakan ujian dengan JUJUR dan tidak bekerja sama dengan siapapun.</label>
-      </div>
-      <button class="btn-login" id="btnMulaiUjian" style="margin-top: 1rem;" disabled>✅ Mulai Ujian</button>
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN UJIAN -->
-<div id="ujianPage" class="page">
-  <div class="ujian-container">
-    <div class="ujian-header">
-      <div class="ujian-judul"><strong id="ujianMapelTitle">Mata Pelajaran</strong></div>
-      <div class="ujian-waktu"><i class="far fa-clock"></i> Sisa Waktu: <span id="timer">30:00</span></div>
-    </div>
-    <div class="ujian-layout">
-      <div class="soal-sidebar">
-        <h4>📌 Daftar Soal</h4>
-        <div class="nomor-grid" id="nomorGrid"></div>
-        <button id="btnRagu" class="btn-login" style="margin-top: 1rem; background:#e53e3e;">❓ Tandai Ragu</button>
-      </div>
-      <div class="soal-konten">
-        <div class="soal-text" id="soalText"></div>
-        <div id="opsiContainer"></div>
-        <div class="soal-nav">
-          <button id="prevSoal"><i class="fas fa-chevron-left"></i> Sebelumnya</button>
-          <button id="nextSoal">Selanjutnya <i class="fas fa-chevron-right"></i></button>
-        </div>
-        <button id="btnKirimUjian" class="btn-kirim">📤 Kirim Ujian</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HALAMAN HASIL UJIAN -->
-<div id="hasilUjianPage" class="page">
-  <div class="hasil-ujian-page" style="display: flex;">
-    <div class="hasil-card">
-      <h2>HASIL UJIAN</h2>
-      <div id="hasilMapel" style="font-size: 1.2rem; font-weight: 600;"></div>
-      <div class="nilai-akhir" id="nilaiAkhir">0</div>
-      <div id="statusKelulusan"></div>
-      <div id="detailJawaban" style="margin: 1rem 0; text-align: left;"></div>
-      <button class="btn-login" id="btnKembaliKeDashboard" style="margin-top: 1rem;">← Kembali ke Dashboard</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // ========== ANTI SCREENSHOT ==========
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    if (e.key === 'PrintScreen') { e.preventDefault(); alert('📸 Screenshot dilarang!'); return false; }
-    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); alert('🔧 Inspect Element dilarang!'); return false; }
-    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) { e.preventDefault(); alert('📄 View Source dilarang!'); return false; }
-    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); alert('💾 Save page dilarang!'); return false; }
-  });
-
-  // ========== DATABASE PESERTA ==========
-  const dataPeserta = {
-    "achmad": { nama: "Achmad Muqorrobin", noPeserta: "2504030064", instansi: "Universitas Negeri Semarang", ttl: "2005-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
-    "ahmad": { nama: "Ahmad Muqorrobin", noPeserta: "2024001", instansi: "SMA Negeri 1 Semarang", ttl: "2005-05-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
-    "admin": { nama: "Administrator", noPeserta: "ADMIN001", instansi: "FASA Official", ttl: "1990-01-01", password: "admin123", role: "admin", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} }
-  };
+    // ==================== ANGKATAN 2021 (LULUS MTs 2021) ====================
+    "abdaziz": { nama: "Abd Aziz", noPeserta: "2021001", angkatan: "2021", ttl: "2008-05-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "anggunaulia": { nama: "Anggun Aulia", noPeserta: "2021002", angkatan: "2021", ttl: "2009-02-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "dinaagustina": { nama: "Dina Agustina", noPeserta: "2021003", angkatan: "2021", ttl: "2008-08-20", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "fitrotunnafisah": { nama: "Fitrotun Nafisah", noPeserta: "2021004", angkatan: "2021", ttl: "2008-10-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "intanrobiatul": { nama: "Intan Robi'atul Fajriyah", noPeserta: "2021005", angkatan: "2021", ttl: "2008-02-19", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mochhasrul": { nama: "Moch Nasrul Hafid", noPeserta: "2021006", angkatan: "2021", ttl: "2008-06-27", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mohammadalfan": { nama: "Mohammad Alfan", noPeserta: "2021007", angkatan: "2021", ttl: "2008-02-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurmaulida": { nama: "Nur Maulida", noPeserta: "2021008", angkatan: "2021", ttl: "2009-02-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurulsahilah": { nama: "Nurul Sahilah", noPeserta: "2021009", angkatan: "2021", ttl: "2009-02-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "putrihijjatul": { nama: "Putri Hijjatul Mabruroh", noPeserta: "2021010", angkatan: "2021", ttl: "2008-12-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ramadhanfernando": { nama: "Ramadhan Fernando", noPeserta: "2021011", angkatan: "2021", ttl: "2007-12-25", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "riorandika": { nama: "Rio Randika", noPeserta: "2021012", angkatan: "2021", ttl: "2008-05-23", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rojiyafwalloh": { nama: "Rojiy Afwalloh", noPeserta: "2021013", angkatan: "2021", ttl: "2007-12-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "santicahya": { nama: "Santi Cahya Ramadhani", noPeserta: "2021014", angkatan: "2021", ttl: "2007-09-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitimutamimah": { nama: "Siti Mutamimah", noPeserta: "2021015", angkatan: "2021", ttl: "2008-08-27", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sugianto": { nama: "Sugianto", noPeserta: "2021016", angkatan: "2021", ttl: "2008-01-24", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "trymeysella": { nama: "Try Meysella", noPeserta: "2021017", angkatan: "2021", ttl: "2008-05-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "alfaqirom": { nama: "Alfa Qirom Wildani Pratama", noPeserta: "2021018", angkatan: "2021", ttl: "2009-07-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "afitatummelisa": { nama: "Afitatum Melisa", noPeserta: "2021019", angkatan: "2021", ttl: "2008-05-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "dewinawangsari": { nama: "Dewi Nawang Sari", noPeserta: "2021020", angkatan: "2021", ttl: "2007-09-27", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    
+    // ==================== ANGKATAN 2022 (LULUS MTs 2022) ====================
+    "achwafa": { nama: "Ach. Wafa Ilhami", noPeserta: "2022001", angkatan: "2022", ttl: "2009-07-09", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "adityamevlana": { nama: "Aditya Mevlana Rizky", noPeserta: "2022002", angkatan: "2022", ttl: "2010-04-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "alfirohmatika": { nama: "Alfi Rohmatika", noPeserta: "2022003", angkatan: "2022", ttl: "2009-10-29", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "auliabilqis": { nama: "Aulia Bilqis Fikrotuzahwa", noPeserta: "2022004", angkatan: "2022", ttl: "2009-06-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "andikatrihasan": { nama: "Andika Tri Hasan", noPeserta: "2022005", angkatan: "2022", ttl: "2008-12-05", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "miftahbabil": { nama: "Miftah Babil Yasar", noPeserta: "2022006", angkatan: "2022", ttl: "2009-05-23", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mrikiriofiqi": { nama: "M. Riki Rofiqi", noPeserta: "2022007", angkatan: "2022", ttl: "2009-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mochainulyakin": { nama: "Moch. Ainul Yakin", noPeserta: "2022008", angkatan: "2022", ttl: "2008-12-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rohmathidayatullah": { nama: "Rohmat Hidayatullah", noPeserta: "2022009", angkatan: "2022", ttl: "2008-06-25", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitipurandini": { nama: "Siti Nur Andini", noPeserta: "2022010", angkatan: "2022", ttl: "2009-09-29", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ardhikaarzaq": { nama: "Ardhika Arzaq", noPeserta: "2022011", angkatan: "2022", ttl: "2009-12-06", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sultonkarisma": { nama: "Sulton Karisma", noPeserta: "2022012", angkatan: "2022", ttl: "2008-07-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "hidayaturramadhani": { nama: "Hidayatur Ramadhani", noPeserta: "2022013", angkatan: "2022", ttl: "2009-09-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "hafidatulalfiyah": { nama: "Hafidatul Alfiyah", noPeserta: "2022014", angkatan: "2022", ttl: "2010-02-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sabelladzurrotun": { nama: "Sabella Dzurrotun Nafiza", noPeserta: "2022015", angkatan: "2022", ttl: "2009-06-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    
+    // ==================== ANGKATAN 2023 (LULUS MTs 2023) ====================
+    "anandakarisa": { nama: "Ananda Karisa Putri", noPeserta: "2023001", angkatan: "2023", ttl: "2010-03-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "aprinaputri": { nama: "Aprina Aulia Putri", noPeserta: "2023002", angkatan: "2023", ttl: "2011-04-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "imamwahyudi": { nama: "Imam Wahyudi", noPeserta: "2023003", angkatan: "2023", ttl: "2010-01-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "irmawati": { nama: "Irmawati", noPeserta: "2023004", angkatan: "2023", ttl: "2009-04-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "lailatuliklima": { nama: "Lailatul Iklima", noPeserta: "2023005", angkatan: "2023", ttl: "2010-08-12", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "milaramadani": { nama: "Mila Ramadani", noPeserta: "2023006", angkatan: "2023", ttl: "2010-08-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "miracahyani": { nama: "Mira Cahyani", noPeserta: "2023007", angkatan: "2023", ttl: "2010-05-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mohamadfarel": { nama: "Mohamad Farel", noPeserta: "2023008", angkatan: "2023", ttl: "2010-05-26", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mfirmanabudi": { nama: "Muhammad Firman Abudi Mayulu", noPeserta: "2023009", angkatan: "2023", ttl: "2011-02-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "msyahrulramadhan": { nama: "Muhammad Syahrul Ramadhan", noPeserta: "2023010", angkatan: "2023", ttl: "2010-08-30", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nadinnurcahyani": { nama: "Nadin Nur Cahyani", noPeserta: "2023011", angkatan: "2023", ttl: "2010-06-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "novidwiariyanti": { nama: "Novi Dwi Ariyanti", noPeserta: "2023012", angkatan: "2023", ttl: "2009-11-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "putraeka": { nama: "Putra Eka Ramadhani", noPeserta: "2023013", angkatan: "2023", ttl: "2010-08-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "qianofajar": { nama: "Qiano Fajar Al Habsi", noPeserta: "2023014", angkatan: "2023", ttl: "2009-09-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rahelumiatul": { nama: "Rahel Umiatul Aini", noPeserta: "2023015", angkatan: "2023", ttl: "2010-03-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sahrulhadi": { nama: "Sahrul Hadi", noPeserta: "2023016", angkatan: "2023", ttl: "2010-08-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "setiawan": { nama: "Setiawan", noPeserta: "2023017", angkatan: "2023", ttl: "2010-08-30", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitimaesaroh": { nama: "Siti Maesaroh", noPeserta: "2023018", angkatan: "2023", ttl: "2010-05-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sitihazizah": { nama: "Siti Nur Hazizah", noPeserta: "2023019", angkatan: "2023", ttl: "2010-11-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "suciaulia": { nama: "Suci Aulia", noPeserta: "2023020", angkatan: "2023", ttl: "2010-03-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "syafiqimunir": { nama: "Syafiqi Munir Ramadhani", noPeserta: "2023021", angkatan: "2023", ttl: "2010-08-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "wardatussholehah": { nama: "Wardatus Sholehah", noPeserta: "2023022", angkatan: "2023", ttl: "2010-10-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "yudihardiyanto": { nama: "Yudi Hardiyanto", noPeserta: "2023023", angkatan: "2023", ttl: "2010-02-05", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "zulfamashika": { nama: "Zulfa Mashika", noPeserta: "2023024", angkatan: "2023", ttl: "2010-04-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sultanpratama": { nama: "Sultan Pratama", noPeserta: "2023025", angkatan: "2023", ttl: "2010-08-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurmaulida2023": { nama: "Nur Maulida", noPeserta: "2023026", angkatan: "2023", ttl: "2010-02-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    
+    // ==================== ANGKATAN 2024 (LULUS MTs 2024) ====================
+    "ahmdafit": { nama: "Ahm. Dafit Pratama", noPeserta: "2024001", angkatan: "2024", ttl: "2009-10-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "achmadfavian": { nama: "Achmad Favian Asyiqi", noPeserta: "2024002", angkatan: "2024", ttl: "2012-04-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "achmadrosyid": { nama: "Achmad Rosyid Akbar", noPeserta: "2024003", angkatan: "2024", ttl: "2011-08-24", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "adindacitra": { nama: "Adinda Citra Ayu Lestari", noPeserta: "2024004", angkatan: "2024", ttl: "2011-02-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "adittiyarevaldo": { nama: "Adittiya Revaldo", noPeserta: "2024005", angkatan: "2024", ttl: "2011-05-05", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmadfawaidur": { nama: "Ahmad Fawaidur Rizqi", noPeserta: "2024006", angkatan: "2024", ttl: "2011-09-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ayuoktaviani": { nama: "Ayu Oktaviani", noPeserta: "2024007", angkatan: "2024", ttl: "2011-10-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "benazir": { nama: "Benazir Azzahra", noPeserta: "2024008", angkatan: "2024", ttl: "2011-02-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "fahrulhilmi": { nama: "Fahrul Hilmi", noPeserta: "2024009", angkatan: "2024", ttl: "2011-09-28", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "fujinurman": { nama: "Fuji Nurman", noPeserta: "2024010", angkatan: "2024", ttl: "2011-06-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ilhamramadhani": { nama: "Ilham Ramadhani", noPeserta: "2024011", angkatan: "2024", ttl: "2011-04-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "isniyah": { nama: "Isniyah", noPeserta: "2024012", angkatan: "2024", ttl: "2011-08-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "lidyayingsih": { nama: "Lidya Ningsih", noPeserta: "2024013", angkatan: "2024", ttl: "2011-02-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mkhairulrizal": { nama: "Muhammad Khairul Rizal", noPeserta: "2024014", angkatan: "2024", ttl: "2011-06-23", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nuririki": { nama: "Nuri Riki Arfin", noPeserta: "2024015", angkatan: "2024", ttl: "2010-08-12", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurulinayah": { nama: "Nurul Inayah", noPeserta: "2024016", angkatan: "2024", ttl: "2011-02-23", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "risqiramadan": { nama: "Risqi Ramadan", noPeserta: "2024017", angkatan: "2024", ttl: "2010-08-15", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rizkajulia": { nama: "Rizka Julia Azhari", noPeserta: "2024018", angkatan: "2024", ttl: "2011-11-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "saka": { nama: "Saka", noPeserta: "2024019", angkatan: "2024", ttl: "2011-04-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "silfipuspitasari": { nama: "Silfi Puspitasari", noPeserta: "2024020", angkatan: "2024", ttl: "2011-07-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mesamaulia": { nama: "Mesa Maulia Putri", noPeserta: "2024021", angkatan: "2024", ttl: "2011-05-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurhidayah": { nama: "Nur Hidayah", noPeserta: "2024022", angkatan: "2024", ttl: "2010-12-12", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rizkyputra": { nama: "Rizky Putra", noPeserta: "2024023", angkatan: "2024", ttl: "2011-02-18", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    
+    // ==================== ANGKATAN 2025 (LULUS MTs 2025) ====================
+    "ahmaddaniyal": { nama: "Ahmad Daniyal", noPeserta: "2025001", angkatan: "2025", ttl: "2012-09-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmaddavidsaputra": { nama: "Ahmad David Saputra", noPeserta: "2025002", angkatan: "2025", ttl: "2012-03-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmadfaizin": { nama: "Ahmad Faizin", noPeserta: "2025003", angkatan: "2025", ttl: "2012-06-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ahmadhisom": { nama: "Ahmad Hisom Syafa'at", noPeserta: "2025004", angkatan: "2025", ttl: "2012-07-24", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "asmanadiya": { nama: "Asma Nadiya", noPeserta: "2025005", angkatan: "2025", ttl: "2012-06-13", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "elfiniamah": { nama: "Elfi Ni'amah", noPeserta: "2025006", angkatan: "2025", ttl: "2012-09-20", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "kenzatrilia": { nama: "Kenza Trilia Gustina Dira", noPeserta: "2025007", angkatan: "2025", ttl: "2012-08-22", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "khoirulfahmi": { nama: "Khoirul Fahmi", noPeserta: "2025008", angkatan: "2025", ttl: "2012-11-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mohammadwildan": { nama: "Mohammad Wildan", noPeserta: "2025009", angkatan: "2025", ttl: "2011-10-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "muhalifirdaus": { nama: "Muhammad Ali Firdaus", noPeserta: "2025010", angkatan: "2025", ttl: "2012-05-24", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mfahmi": { nama: "Muhammad Fahmi", noPeserta: "2025011", angkatan: "2025", ttl: "2012-02-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mridwanabdulah": { nama: "Muhammad Ridwan Abdulah", noPeserta: "2025012", angkatan: "2025", ttl: "2012-10-07", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "mrifal": { nama: "Muhammad Rifal", noPeserta: "2025013", angkatan: "2025", ttl: "2012-04-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "msultonmahpud": { nama: "Muhammad Sulton Mahpud", noPeserta: "2025014", angkatan: "2025", ttl: "2012-08-16", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nadipatun": { nama: "Nadipatun Nashiroh", noPeserta: "2025015", angkatan: "2025", ttl: "2012-07-13", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nurimama": { nama: "Nur Imama", noPeserta: "2025016", angkatan: "2025", ttl: "2012-03-13", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "nursuryani": { nama: "Nur Suryani", noPeserta: "2025017", angkatan: "2025", ttl: "2012-11-23", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rafipadantya": { nama: "Rafi Padantya", noPeserta: "2025018", angkatan: "2025", ttl: "2012-12-04", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rianuriyatul": { nama: "Ria Nuriyatul Manahil", noPeserta: "2025019", angkatan: "2025", ttl: "2012-03-21", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "rifatulnisha": { nama: "Rifatul Nisha", noPeserta: "2025020", angkatan: "2025", ttl: "2012-11-17", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ruslanhasim": { nama: "Ruslan Hasim", noPeserta: "2025021", angkatan: "2025", ttl: "2012-11-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sandimaulana": { nama: "Sandi Maulana Putra", noPeserta: "2025022", angkatan: "2025", ttl: "2012-07-03", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "shivaqotrun": { nama: "Shiva Qotrun Nada", noPeserta: "2025023", angkatan: "2025", ttl: "2012-03-29", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "sifanaazka": { nama: "Sifana Azka Afkarina", noPeserta: "2025024", angkatan: "2025", ttl: "2012-08-08", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ainurriska": { nama: "Ainur Riska Ramadani", noPeserta: "2025025", angkatan: "2025", ttl: "2011-08-11", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "senjaayu": { nama: "Senja Ayu Ningsih", noPeserta: "2025026", angkatan: "2025", ttl: "2012-07-10", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "megafirly": { nama: "Mega Firly Aulia", noPeserta: "2025027", angkatan: "2025", ttl: "2012-09-19", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "ajengoktavia": { nama: "Ajeng Oktavia", noPeserta: "2025028", angkatan: "2022", ttl: "2010-10-05", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "serilnayla": { nama: "Seril Nayla Tasya", noPeserta: "2025029", angkatan: "2025", ttl: "2012-01-30", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    "finaselviana": { nama: "Fina Selviana Apriyanti", noPeserta: "2025030", angkatan: "2025", ttl: "2012-04-14", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+    
+    // ==================== PESERTA TAMBAHAN (TIDAK ADA DATA LENGKAP) ====================
+    "aldi": { nama: "Aldi", noPeserta: "9999001", angkatan: "2017", ttl: "2005-01-01", password: "123456", role: "peserta", riwayatUjian: [], nilaiPerMapel: {}, ujianSelesai: {} },
+};
 
   // SOAL UJIAN
   const soalMatematika = [
